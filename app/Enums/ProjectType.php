@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ProjectType:string
+enum ProjectType: string
 {
     case SOFTWARE = 'SOFTWARE';
     case SERVICE_DESK = 'SERVICE_DESK';

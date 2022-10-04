@@ -6,7 +6,7 @@ use App\Enums\ProjectType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class CreateProject extends FormRequest
+class UpdateProject extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,23 +20,17 @@ class CreateProject extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *php artisan ide-helper:meta
      *
      * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'name' => 'required|max:200',
-            'description' => 'max:1000',
-            'type' => ['required', new Enum(ProjectType::class)],
+            'name' => 'string',
+            'description' => 'string',
+            'type' => [new Enum(ProjectType::class)],
             'icon' => 'string',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'type.Illuminate\Validation\Rules\Enum' => 'Project type must be: SOFTWARE, SERVICE_DESK or BUSINESS.',
         ];
     }
 }
