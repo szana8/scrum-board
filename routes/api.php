@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::middleware(['client'])->prefix('v1')->group(function () {
+    Route::get('user', function () {
+        return auth()->user();
+    });
 
     Route::get('projects', [\App\Http\Controllers\Api\ProjectController::class, 'index']);
     Route::get('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'show']);
     Route::post('projects', [\App\Http\Controllers\Api\ProjectController::class, 'store']);
-
+    Route::put('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'update']);
+    Route::delete('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'destroy']);
 });
