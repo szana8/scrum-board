@@ -49,9 +49,10 @@ class CheckClientCredentials extends PassportClientCredentials
                 return Client::where('id', $clientID)->first()->user;
             });
 
-            if (! auth()->user()) {
+            if (!auth()->user()) {
                 \Auth::setUser($request->user());
             }
+
         } catch (OAuthServerException $e) {
             throw new AuthenticationException;
         }

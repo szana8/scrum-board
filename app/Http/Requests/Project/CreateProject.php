@@ -28,15 +28,14 @@ class CreateProject extends FormRequest
         return [
             'name' => 'required|max:200',
             'description' => 'max:1000',
-            'type' => ['required', new Enum(ProjectType::class)],
-            'icon' => 'string',
+            'type' => ['required', new Enum(ProjectType::class)]
         ];
     }
 
     public function messages()
     {
         return [
-            'type.Illuminate\Validation\Rules\Enum' => 'Project type must be: SOFTWARE, SERVICE_DESK or BUSINESS.',
+            'type.Illuminate\Validation\Rules\Enum' => "Project type must be: SOFTWARE, SERVICE_DESK or BUSINESS.",
         ];
     }
 }

@@ -21,16 +21,4 @@ class ProjectService
             )
         );
     }
-
-    public function update(Project $project, array $validatedRequest): Project
-    {
-        $project->update($validatedRequest);
-
-        return $project->refresh();
-    }
-
-    public function delete(Project $project): bool
-    {
-        return $project->delete();
-    }
 }
