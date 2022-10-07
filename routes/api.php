@@ -18,9 +18,9 @@ Route::middleware(['client'])->prefix('v1')->group(function () {
         return auth()->user();
     });
 
-    Route::get('projects', [\App\Http\Controllers\Api\ProjectController::class, 'index']);
-    Route::get('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'show']);
-    Route::post('projects', [\App\Http\Controllers\Api\ProjectController::class, 'store']);
-    Route::put('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'update']);
-    Route::delete('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'destroy']);
+    Route::get('projects', [\App\Http\Controllers\Api\ProjectController::class, 'index'])->name('project.index');
+    Route::get('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'show'])->name('project.show');
+    Route::post('projects', [\App\Http\Controllers\Api\ProjectController::class, 'store'])->name('project.store');
+    Route::put('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'update'])->name('project.update');
+    Route::delete('projects/{project:slug}', [\App\Http\Controllers\Api\ProjectController::class, 'destroy'])->name('project.destroy');
 });
