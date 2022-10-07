@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                     ->flow('clientCredentials', function (OAuthFlow $flow) {
                         $flow
                             ->authorizationUrl('http://scrum-board.test/oauth/token')
-                            ->addScope('place-orders', 'modify pets in your account');
+                            ->addScope('plamce-orders', 'modify pets in your account');
                     })
             );
         });

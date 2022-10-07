@@ -12,6 +12,34 @@
 
 namespace App\Models{
 /**
+ * App\Models\IssueType
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $icon
+ * @property string|null $description
+ * @property string $color_code
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\IssueTypeFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereColorCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereUpdatedAt($value)
+ */
+	class IssueType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Project
  *
  * @property int $id
