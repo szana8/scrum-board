@@ -18,11 +18,11 @@ class IssueTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-            'slug' => $this->faker->word,
+            'name' => $this->faker->unique()->word,
+            'slug' => $this->faker->unique()->word,
             'icon' => 'storage/icons/issue_types/bug.png',
             'color_code' => $this->faker->colorName,
-            'description' => '',
+            'description' => $this->faker->sentence,
         ];
     }
 }
