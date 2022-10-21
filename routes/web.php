@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return \Inertia\Inertia::render('Welcome');
+Route::middleware('auth:web')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
+    Route::get('/users', [DashboardController::class, 'users'])->name('users');
+
 });
