@@ -3,7 +3,7 @@
         <Head>
             <title>{{ $page.component }}</title>
         </Head>
-        <section class="w-1/5 bg-white min-h-screen border-r border-gray-200">
+        <section class="w-1/5 bg-white border-r border-gray-200">
             <Nav />
         </section>
 

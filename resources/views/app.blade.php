@@ -10,7 +10,7 @@
     @inertiaHead
 </head>
 
-<body>
+<body class=>
     @inertia
 </body>
 </html>

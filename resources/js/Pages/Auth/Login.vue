@@ -90,7 +90,6 @@
 <script>
 export default {
     layout: null
-
 }
 </script>
 
@@ -100,7 +99,6 @@ import {useForm} from "@inertiajs/inertia-vue3";
 let form = useForm({
     email: '',
     password: '',
-    _token: this.$page.props.csrf_token,
 });
 
 let submit = () => {
