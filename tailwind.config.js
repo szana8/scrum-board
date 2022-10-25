@@ -15,7 +15,10 @@ module.exports = {
     extend: {
         colors: {
             'custom-blue': '##2C3F59',
-        }
+        },
+        fontFamily: {
+            sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+        },
     },
   },
   plugins: [
