@@ -1,62 +1,92 @@
 <template>
-    <div class="min-h-screen">
-        <div class="h-16 border-b border-gray-100 w-full px-6 items-center flex">
-            <Logo />
+    <div class="min-h-screen grid content-between">
+        <div class="">
+            <div class="h-16 border-b border-gray-100 w-full px-6 items-center flex">
+                <Logo />
+            </div>
+
+            <div class="px-6">
+                <div class="py-6 border-b border-gray-100">
+                    <ul class="space-y-4 list-inside text-sm">
+                        <li>
+                            <nav-link href="/roadmap" :active="$page.component === 'Roadmap'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                                </svg>
+                                <div>Roadmap</div>
+                            </nav-link>
+                        </li>
+                        <li>
+                            <nav-link href="/backlog" :active="$page.component === 'Backlog'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+                                </svg>
+                                <div>Backlog</div>
+                            </nav-link>
+                        </li>
+                        <li>
+                            <nav-link href="/board" :active="$page.component === 'Board'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" />
+                                </svg>
+
+                                <div>Board</div>
+                            </nav-link>
+                        </li>
+                        <li>
+                            <nav-link href="/reports" :active="$page.component === 'Repors'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                                </svg>
+
+                                <div>Reports</div>
+                            </nav-link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex justify-between mt-3">
+                    <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
+                    <Link :href="`/project/create`" as="button" method="get" class="text-gray-400 border rounded border-gray-400 px-0.5 py-0.5 hover:shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 text-gray-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </Link>
+                </div>
+
+                <div class="mt-4">
+                    <div class="">
+                        <ul class="space-y-2 text-sm">
+                            <li v-for="project in projects" :id="project.id" :class="projectIcon(project.icon)">
+                                <a href="#" class="href text-sm text-gray-800 font-semibold w-full">
+                                    {{ project.name }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="px-6 py-6 border-b border-gray-100">
-            <ul class="space-y-4 list-inside text-sm">
-                <li>
-                    <nav-link href="/dashboard" :active="$page.component === 'Dashboard'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                        </svg>
-                        <div>Dashboard</div>
-                    </nav-link>
-                </li>
-                <li>
-                    <nav-link href="/settings" :active="$page.component === 'Settings'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                        <div>My Tasks</div>
-                    </nav-link>
-                </li>
-                <li>
-                    <nav-link href="/dashboard" :active="$page.component === 'Settings'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
-                        </svg>
-                        <div>Goals</div>
-                    </nav-link>
-                </li>
-                <li>
-                    <nav-link href="/dashboard" :active="$page.component === 'Settings'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                        </svg>
-                        <div>Members</div>
-                    </nav-link>
-                </li>
-            </ul>
-        </div>
-
-        <div class="flex justify-between px-6 mt-3">
-            <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
-            <button class="text-gray-400 border rounded border-gray-400 px-0.5 py-0.5 hover:shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 text-gray-400">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-            </button>
-        </div>
-
-        <div class="mt-4 px-4">
-            <div class="">
-                <ul class="space-y-2 text-sm">
-                    <li v-for="project in projects" :id="project.id" :class="projectIcon(project.icon)">
-                        <a href="#" class="href text-sm text-gray-800 font-semibold w-full">
-                            {{ project.name }}
-                        </a>
+        <div>
+            <div class="flex justify-between px-6 pb-12">
+                <ul class="space-y-4 list-inside text-sm">
+                    <li>
+                        <nav-link href="/settings" :active="$page.component === 'Settings'" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                            </svg>
+                            <div>Settings</div>
+                        </nav-link>
+                    </li>
+                    <li>
+                        <nav-link href="/logout" class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            </svg>
+                            <div>Logout</div>
+                        </nav-link>
                     </li>
                 </ul>
             </div>
@@ -67,20 +97,16 @@
 <script>
 import NavLink from "./NavLink";
 import Logo from "./Logo";
+import {Link} from "@inertiajs/inertia-vue3";
+
 export default {
     name: "Sidebar",
-    components: { NavLink, Logo },
+    components: { NavLink, Logo, Link },
     computed: {
         projects() {
             return this.$page.props.sidebar.projects;
         },
     },
-
-    methods: {
-        projectIcon(project) {
-            return "text-"+project+"-500 text-xl list-disc list-inside hover:bg-gray-100 px-2 rounded";
-        }
-    }
 }
 </script>
 

@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Roadmap');
     }
 
     public function settings()
@@ -17,8 +17,18 @@ class DashboardController extends Controller
         return Inertia::render('Settings', []);
     }
 
-    public function users()
+    public function reports()
     {
-        return Inertia::render('Users', []);
+        return Inertia::render('Reports', []);
+    }
+
+    public function backlog()
+    {
+        return Inertia::render('Backlog', []);
+    }
+
+    public function boards()
+    {
+        return Inertia::render('Boards', []);
     }
 }

@@ -3,16 +3,17 @@
         <Head>
             <title>{{ $page.component }}</title>
         </Head>
-        <section class="w-1/5 bg-white border-r border-gray-100">
+        <section class="w-1/6 bg-white border-r border-gray-100">
             <Sidebar />
         </section>
 
-        <section class="w-4/5">
+        <section class="w-5/6">
             <div class="h-16 border-b border-gray-100"></div>
             <slot />
         </section>
     </div>
 
+    <Modal />
 </template>
 
 <script>
@@ -29,4 +30,8 @@ export default {
         }
     }
 }
+</script>
+
+<script setup>
+import { Modal } from 'momentum-modal'
 </script>

@@ -1,6 +1,6 @@
 <template>
     <Link
-        :class="{'text-gray-700 cursor-default': active }"
+        :class="{'text-gray-800 cursor-default': active }"
     >
         <slot />
     </Link>
