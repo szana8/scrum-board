@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Project;
 use Auth;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -47,6 +48,9 @@ class HandleInertiaRequests extends Middleware
                 ]: null
             ],
             'csrf_token' => csrf_token(),
+            'sidebar' => [
+                'projects' => Project::all()
+            ],
         ]);
     }
 }

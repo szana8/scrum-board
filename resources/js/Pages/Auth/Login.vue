@@ -143,7 +143,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <button type="submit" class="w-full py-6 rounded-xl bg-indigo-400 shadow-md text-white uppercase font-bold hover:bg-indigo-600">
+                        <button type="submit" class="w-full py-6 px rounded-xl bg-indigo-400 shadow-md text-white uppercase font-bold hover:bg-indigo-600">
                             Sign In
                         </button>
                     </div>

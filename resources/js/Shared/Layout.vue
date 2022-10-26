@@ -1,13 +1,14 @@
 <template>
-    <div class="bg-gray-100 from-custom-purple to-custom-blue min-h-screen flex">
+    <div class="bg-white from-custom-purple to-custom-blue min-h-screen flex">
         <Head>
             <title>{{ $page.component }}</title>
         </Head>
-        <section class="w-1/5 bg-white border-r border-gray-200">
-            <Nav />
+        <section class="w-1/5 bg-white border-r border-gray-100">
+            <Sidebar />
         </section>
 
         <section class="w-4/5">
+            <div class="h-16 border-b border-gray-100"></div>
             <slot />
         </section>
     </div>
@@ -15,12 +16,12 @@
 </template>
 
 <script>
-import Nav from "./Nav";
 import {Head} from "@inertiajs/inertia-vue3";
+import Sidebar from "./Sidebar";
 
 export default {
     name: "Layout",
-    components: { Nav, Head },
+    components: {Sidebar, Head },
 
     computed: {
         username() {
