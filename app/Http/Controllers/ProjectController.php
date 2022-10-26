@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Project\CreateProject;
+use App\Http\Resources\Project\ProjectResource;
+use App\Models\Project;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Momentum\Modal\Modal;
 
 class ProjectController extends Controller
 {
+    public function __construct(readonly private ProjectService $projectService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,12 +42,12 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return Response
+     * @param CreateProject $request
+     * @return ProjectResource
      */
-    public function store(Request $request)
+    public function store(CreateProject $request)
     {
-        //
+        $this->projectService->create($request->validated());
     }
 
     /**

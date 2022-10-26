@@ -54,7 +54,7 @@
                     </Link>
                 </div>
 
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                     <div class="">
                         <ul class="space-y-2 text-sm">
                             <li v-for="project in projects" :id="project.id" :class="projectIcon(project.icon)">
@@ -65,6 +65,7 @@
                         </ul>
                     </div>
                 </div>
+                 -->
             </div>
 
         </div>

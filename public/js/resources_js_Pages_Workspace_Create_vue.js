@@ -21,15 +21,17 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-      first_name: 'test',
-      last_name: 'test'
+      name: null,
+      description: null,
+      icon: 'test',
+      type: 'SOFTWARE'
     });
-    var update = function update() {
-      return form.put("/contacts/2");
+    var create = function create() {
+      return form.post('/projects');
     };
     var __returned__ = {
       form: form,
-      update: update,
+      create: create,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm,
       Modal: _Shared_Modal__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
@@ -100,18 +102,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Edit Contact ");
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Create Project");
 var _hoisted_2 = ["onSubmit"];
-var _hoisted_3 = {
-  "class": "grid grid-cols-2 gap-x-6 gap-y-8"
-};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "p-0.5 text-gray-500 font-semibold"
+}, "Name", -1 /* HOISTED */);
 var _hoisted_4 = {
-  "class": "mt-6 flex justify-between"
+  "class": "rounded-xl p-0.5 border-2 border-gray-300"
 };
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update Contact");
+var _hoisted_5 = ["textContent"];
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "p-0.5 text-gray-500 font-semibold"
+}, "Description", -1 /* HOISTED */);
+var _hoisted_7 = {
+  "class": "rounded-xl p-0.5 border-2 border-gray-300"
+};
+var _hoisted_8 = ["textContent"];
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "mt-6 flex justify-between"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "ml-auto py-2 px-2 text-sm rounded-xl bg-indigo-400 shadow-md text-white font-bold hover:bg-indigo-600",
+  type: "submit"
+}, "Create")], -1 /* HOISTED */);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_text_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("text-input");
-  var _component_loading_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("loading-button");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Modal"], null, {
     title: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1];
@@ -119,31 +133,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
         "class": "mt-6",
-        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.update, ["prevent"])
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
-        modelValue: $setup.form.first_name,
+        onSubmit: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.create, ["prevent"])
+      }, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "class": "w-11/12 bg-white py-3 px-4 border-0 focus:border-transparent focus:ring-0 placeholder:text-gray-400",
+        type: "text",
+        placeholder: "Project name",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return $setup.form.first_name = $event;
-        }),
-        error: $setup.form.errors.first_name,
-        label: "First name"
-      }, null, 8 /* PROPS */, ["modelValue", "error"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_text_input, {
-        modelValue: $setup.form.last_name,
+          return $setup.form.name = $event;
+        })
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.name]])]), $setup.form.errors.name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
+        key: 0,
+        "class": "mt-2 ml-2 text-red-400 text-xs font-semibold italic",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.errors.name)
+      }, null, 8 /* PROPS */, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+        "class": "w-11/12 bg-white py-3 px-4 border-0 focus:border-transparent focus:ring-0 placeholder:text-gray-400",
+        type: "text",
+        placeholder: "Project name",
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return $setup.form.last_name = $event;
-        }),
-        error: $setup.form.errors.last_name,
-        label: "Last name"
-      }, null, 8 /* PROPS */, ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_loading_button, {
-        loading: $setup.form.processing,
-        "class": "btn-indigo ml-auto",
-        type: "submit"
-      }, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_5];
-        }),
-        _: 1 /* STABLE */
-      }, 8 /* PROPS */, ["loading"])])], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_2)];
+          return $setup.form.description = $event;
+        })
+      }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.description]])]), $setup.form.errors.description ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
+        key: 1,
+        "class": "mt-2 ml-2 text-red-400 text-xs font-semibold italic",
+        textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.errors.description)
+      }, null, 8 /* PROPS */, _hoisted_8)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_9], 40 /* PROPS, HYDRATE_EVENTS */, _hoisted_2)];
     }),
     _: 1 /* STABLE */
   });

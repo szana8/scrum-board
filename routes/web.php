@@ -23,5 +23,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/reports', [DashboardController::class, 'reports'])->name('reports');
 
     Route::get('/project/create', [\App\Http\Controllers\ProjectController::class, 'create']);
+    Route::post('projects', [\App\Http\Controllers\ProjectController::class, 'store']);
 
 });
