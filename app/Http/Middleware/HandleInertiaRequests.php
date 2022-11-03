@@ -45,6 +45,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => Auth::user() ?[
                     'username' => Auth::user()->name,
+                    'avatar' => Auth::user()->avatar()
                 ]: null
             ],
             'csrf_token' => csrf_token(),

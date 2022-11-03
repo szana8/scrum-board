@@ -194,8 +194,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Dialog"], {
         as: "div",
-        "class": "relative z-10",
-        onClose: $setup.close
+        "class": "relative z-10"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TransitionChild"], {
@@ -245,8 +244,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
 
         _: 3 /* FORWARDED */
-      }, 8 /* PROPS */, ["onClose"])];
+      })];
     }),
+
     _: 3 /* FORWARDED */
   }, 8 /* PROPS */, ["show"]);
 }
