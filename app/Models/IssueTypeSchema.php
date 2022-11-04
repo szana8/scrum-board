@@ -21,7 +21,6 @@ class IssueTypeSchema extends Model
 
     /**
      * A schema belongs to many types.
-     *
      */
     public function types(): BelongsToMany
     {
