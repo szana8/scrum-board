@@ -1,6 +1,6 @@
 <template>
     <Link
-        :class="{'bg-gray-50': active, 'bg-white shadow hover:shadow-xl': !active }"
+        :class="{'bg-gray-50 cursor-not-allowed': active, 'bg-white shadow hover:shadow-xl': !active }"
     >
         <slot />
     </Link>
