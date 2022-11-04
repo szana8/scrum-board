@@ -1837,6 +1837,14 @@ var map = {
 		"./resources/js/Pages/Settings/GitIntegration.vue",
 		"resources_js_Pages_Settings_GitIntegration_vue"
 	],
+	"./Settings/IssueTypeSchemes": [
+		"./resources/js/Pages/Settings/IssueTypeSchemes.vue",
+		"resources_js_Pages_Settings_IssueTypeSchemes_vue"
+	],
+	"./Settings/IssueTypeSchemes.vue": [
+		"./resources/js/Pages/Settings/IssueTypeSchemes.vue",
+		"resources_js_Pages_Settings_IssueTypeSchemes_vue"
+	],
 	"./Settings/IssueTypes": [
 		"./resources/js/Pages/Settings/IssueTypes.vue",
 		"resources_js_Pages_Settings_IssueTypes_vue"

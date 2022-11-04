@@ -4,9 +4,10 @@
             <div class="flex">
 
                 <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Create Issue Types</h4>
+                    <h4 class="text-xl antialiased capitalized">Create Issue Type Schema</h4>
                     <p class="text-gray-400 text-sm mt-4 mr-6">
-                        Since <b>Tassking.io</b> tracks all the tasks, the sub-tasks or even a work as an Issue, there are several types of Issues to identify the work and categorize the similar issues.
+                        As an administrator, you can group issue types into issue type schemes to make it easier for your team to select the right type when creating issues in their project.
+                        Issue type schemes can also minimize the maintenance work required when administering several projects.
                     </p>
                 </div>
 
@@ -49,17 +50,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="(this.searchString && !issueTypeForm.icon) || this.openPopup">
+                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="this.searchString || this.openPopup">
                                                         <div class="flex flex-col w-full">
-                                                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100" v-for="icon in this.filteredArray" @click="selectIcon(icon)">
+                                                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b" v-for="issueType in this.filteredArray" :class="calculateActiveClass(issueType.id)" @click="selectIcon(issueType)">
                                                                 <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                                                     <div class="w-6 flex flex-col items-center">
-                                                                        <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
-                                                                            <img class="rounded-full" alt="A" :src="icon.replace('public', '../storage')">
+                                                                        <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
+                                                                            <img class="" alt="" :src="'../'+issueType.icon">
                                                                         </div>
                                                                     </div>
                                                                     <div class="w-full items-center flex">
-                                                                        <div class="mx-2 -mt-1  "> {{ icon.match(/.*\/(.*)$/)[1] }}
+                                                                        <div class="mx-2 -mt-1  "> {{ issueType.name }}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -84,31 +85,30 @@
 
             <div class="flex py-12">
                 <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Manage Issue Types</h4>
+                    <h4 class="text-xl antialiased capitalized">Manage Issue Type Schema</h4>
                     <p class="text-gray-400 text-sm mt-4">
-                        You may delete any of your existing issue types if they are no longer needed
+                        You may delete any of your existing issue type schema if they are no longer needed
                     </p>
                 </div>
 
                 <div class="w-2/3">
                     <div class="border border-gray-100 shadow-xl rounded-xl">
                         <div class="p-12">
-                            <ul class="list-inside" v-if="this.issueTypes.length">
-                                <li v-for="issueType in this.issueTypes" :id="issueType.id" class="w-full flex justify-between space-y-2">
+                            <ul class="list-inside" v-if="this.issueTypeSchemes.length">
+                                <li v-for="issueTypeSchema in this.issueTypeSchemes" :id="issueTypeSchema.id" class="w-full flex justify-between space-y-2">
                                     <div class="flex items-center space-x-2">
-                                        <img :src="'../'+issueType.icon" alt="" class="w-4 h-4">
-                                        <div>{{ issueType.name }}</div>
-                                        <div class="text-xs text-gray-400">{{issueType.description}}</div>
+                                        <div>{{ issueTypeSchema.name }}</div>
+                                        <div class="text-xs text-gray-400">{{issueTypeSchema.description}}</div>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <Link :href="route('web.issue-type.destroy', [issueType.id])" as="button" method="delete" preserve-scroll class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                        <Link :href="route('web.issue-type-schema.destroy', [issueTypeSchema.id])" as="button" method="delete" preserve-scroll class="href text-red-600 font-semibold text-sm">Delete</Link>
                                     </div>
 
                                 </li>
                             </ul>
                             <div v-else>
                                 <div class="bg-blue-100 text-blue-600 p-4 rounded border border-blue-200 font-semibold">
-                                    There is no Issue Type(s) created yet for your user.
+                                    There is no Issue Type Schema created yet for your user.
                                 </div>
                             </div>
                         </div>
@@ -126,8 +126,8 @@ import {Link} from "@inertiajs/inertia-vue3";
 
 export default {
     props: {
-        icons: Array,
         issueTypes: Array,
+        issueTypeSchemes: Array,
     },
 
     components: {
@@ -142,44 +142,58 @@ export default {
             issueTypeForm: useForm({
                 name: '',
                 description: '',
-                icon: null,
+                issueTypes: []
             }),
             openPopup: false,
         }
     },
 
     mounted() {
-        this.filteredArray = this.icons;
-        this.issueTypeForm.icon = null;
+        this.filteredArray = this.issueTypes;
         this.searchString = null;
     },
 
     methods: {
         searchStringInArray: function () {
             this.filteredArray = [];
-            this.issueTypeForm.icon = null;
-            this.icons.filter(element =>{
-                if (element.includes(this.searchString)) {
+            this.issueTypes.filter(element =>{
+                if (element.name.toLowerCase().includes(this.searchString.toLowerCase())) {
                     this.filteredArray.push(element);
                     return true;
                 }
             });
         },
 
-        selectIcon: function (icon) {
-            this.searchString = icon.match(/.*\/(.*)$/)[1];
-            this.issueTypeForm.icon = icon.replace('public', 'storage');
+        selectIcon: function (issueType) {
+            this.searchString = null
+            const index = this.issueTypeForm.issueTypes.indexOf(issueType.id);
+
+            if (index === -1) {
+                this.issueTypeForm.issueTypes.push(issueType.id);
+            } else {
+                this.issueTypeForm.issueTypes.splice(index, 1);
+            }
+
             this.openPopup = false;
         },
 
         submit: function () {
-            this.issueTypeForm.submit('post', route('web.issue-type.store'), {
+            this.issueTypeForm.post(route('web.issue-type-schema.store'), {
                 onSuccess: () => {
                     this.issueTypeForm.reset();
-                    this.issueTypeForm.icon = null;
                     this.searchString = null;
                 }
-            });
+            })
+        },
+
+        calculateActiveClass: function(issueType) {
+            const index = this.issueTypeForm.issueTypes.indexOf(issueType);
+
+            if (index === -1) {
+                return 'bg-white hover:bg-teal-100';
+            } else {
+                return 'bg-blue-300 hover:bg-blue-100';
+            }
         }
     }
 }

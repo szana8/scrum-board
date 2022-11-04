@@ -19,4 +19,9 @@ class IssueType extends Model
             $attributes->slug = \Str::slug($attributes->name);
         });
     }
+
+    public function schemas()
+    {
+        return $this->belongsToMany(IssueTypeSchema::class);
+    }
 }

@@ -27,6 +27,23 @@
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Issue Types
                         </SettingsLink>
+
+                    </li>
+                    <li class="">
+                        <SettingsLink :href="route('web.issue-type-schema.index')"
+                                      method="get"
+                                      :active="$page.component === 'Settings/IssueTypeSchemes'"
+                                      class="px-3 py-2 rounded border border-gray-200 text-gray-600">
+                            Issue Types Schemes
+                        </SettingsLink>
+                    </li>
+                    <li class="">
+                        <SettingsLink :href="route('web.issue-type.index')"
+                                      method="get"
+                                      :active="$page.component === 'Settings/Teams'"
+                                      class="px-3 py-2 rounded border border-gray-200 text-gray-600">
+                            Teams
+                        </SettingsLink>
                     </li>
                 </ul>
             </div>

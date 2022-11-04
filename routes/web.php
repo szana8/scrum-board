@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Settings\ClientCredentialController;
 use App\Http\Controllers\Settings\GitTokenController;
 use App\Http\Controllers\Settings\IssueTypeController;
+use App\Http\Controllers\Settings\IssueTypeSchemaController;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +52,12 @@ Route::middleware('auth:web')->group(function () {
             Route::get('', [IssueTypeController::class, 'index'])->name('web.issue-type.index');
             Route::post('', [IssueTypeController::class, 'store'])->name('web.issue-type.store');
             Route::delete('/{issueType}', [IssueTypeController::class, 'destroy'])->name('web.issue-type.destroy');
+        });
+
+        Route::prefix('issue-type-schema')->group(function () {
+            Route::get('', [IssueTypeSchemaController::class, 'index'])->name('web.issue-type-schema.index');
+            Route::post('', [IssueTypeSchemaController::class, 'store'])->name('web.issue-type-schema.store');
+            Route::delete('/{issueTypeSchema}', [IssueTypeSchemaController::class, 'destroy'])->name('web.issue-type-schema.destroy');
         });
     });
 
