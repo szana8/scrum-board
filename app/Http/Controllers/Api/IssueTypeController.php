@@ -8,9 +8,7 @@ use App\Http\Requests\IssueType\UpdateIssueType;
 use App\Http\Resources\IssueType\IssueTypeResource;
 use App\Models\IssueType;
 use App\Services\IssueTypeService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 
 class IssueTypeController extends Controller
 {
@@ -31,7 +29,7 @@ class IssueTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateIssueType $request
+     * @param  CreateIssueType  $request
      * @return IssueTypeResource
      */
     public function store(CreateIssueType $request): IssueTypeResource
@@ -42,7 +40,7 @@ class IssueTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param IssueType $issueType
+     * @param  IssueType  $issueType
      * @return IssueTypeResource
      */
     public function show(IssueType $issueType): IssueTypeResource
@@ -53,8 +51,8 @@ class IssueTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateIssueType $request
-     * @param IssueType $issueType
+     * @param  UpdateIssueType  $request
+     * @param  IssueType  $issueType
      * @return IssueTypeResource
      */
     public function update(UpdateIssueType $request, IssueType $issueType)
@@ -65,7 +63,7 @@ class IssueTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param IssueType $issueType
+     * @param  IssueType  $issueType
      * @return bool
      */
     public function destroy(IssueType $issueType)

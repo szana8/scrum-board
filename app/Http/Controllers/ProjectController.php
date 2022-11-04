@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\CreateProject;
 use App\Http\Resources\Project\ProjectResource;
-use App\Models\Project;
 use App\Services\ProjectService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Momentum\Modal\Modal;
 
@@ -42,7 +40,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateProject $request
+     * @param  CreateProject  $request
      * @return ProjectResource
      */
     public function store(CreateProject $request)
@@ -75,7 +73,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @param  int  $id
      * @return Response
      */

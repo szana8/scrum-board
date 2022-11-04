@@ -29,5 +29,4 @@ Route::middleware(['client'])->prefix('v1')->group(function () {
     Route::post('issue-types', [\App\Http\Controllers\Api\IssueTypeController::class, 'store'])->name('issue-type.store');
     Route::put('issue-types/{issueType:slug}', [\App\Http\Controllers\Api\IssueTypeController::class, 'update'])->name('issue-type.update');
     Route::delete('issue-types/{issueType:slug}', [\App\Http\Controllers\Api\IssueTypeController::class, 'destroy'])->name('issue-type.destroy');
-
 });

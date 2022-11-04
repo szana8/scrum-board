@@ -23,7 +23,7 @@ class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/asset-versioning
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return string|null
      */
     public function version(Request $request): ?string
@@ -36,21 +36,21 @@ class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/shared-data
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return array
      */
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => Auth::user() ?[
+                'user' => Auth::user() ? [
                     'username' => Auth::user()->name,
-                    'avatar' => Auth::user()->avatar()
-                ]: null
+                    'avatar' => Auth::user()->avatar(),
+                ] : null,
             ],
             'csrf_token' => csrf_token(),
             'sidebar' => [
-                'projects' => Project::all()
+                'projects' => Project::all(),
             ],
         ]);
     }

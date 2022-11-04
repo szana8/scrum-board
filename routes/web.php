@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Settings\ClientCredentialController;
+use App\Http\Controllers\Settings\GitTokenController;
+use App\Http\Controllers\Settings\IssueTypeController;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,10 +30,8 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/project/create', [ProjectController::class, 'create']);
     Route::post('projects', [ProjectController::class, 'store']);
 
-
-    Route::prefix('settings')->group(function() {
-
-        Route::prefix('client-credential')->group(function() {
+    Route::prefix('settings')->group(function () {
+        Route::prefix('client-credential')->group(function () {
             Route::get('', [ClientCredentialController::class, 'index'])->name('client-credential.index');
             Route::post('', [ClientCredentialController::class, 'store'])->name('client-credential.store');
             Route::get('popup/{client}', [ClientCredentialController::class, 'popup'])->name('client-credential.popup');
@@ -41,10 +41,20 @@ Route::middleware('auth:web')->group(function () {
             })->name('client-credential.close');
         });
 
+        Route::prefix('git-token')->group(function () {
+            Route::get('', [GitTokenController::class, 'index'])->name('web.git-token.index');
+            Route::post('', [GitTokenController::class, 'store'])->name('web.git-token.store');
+            Route::delete('/{token}', [GitTokenController::class, 'destroy'])->name('web.git-token.destroy');
+        });
+
+        Route::prefix('issue-type')->group(function () {
+            Route::get('', [IssueTypeController::class, 'index'])->name('web.issue-type.index');
+            Route::post('', [IssueTypeController::class, 'store'])->name('web.issue-type.store');
+            Route::delete('/{issueType}', [IssueTypeController::class, 'destroy'])->name('web.issue-type.destroy');
+        });
     });
 
-    Route::get('github', function() {
-       dd(GitHub::connection('main')->repo()->branches('szana8', 'larascrum'));
+    Route::get('github', function () {
+        dd(GitHub::connection('main')->me()->show());
     });
-
 });

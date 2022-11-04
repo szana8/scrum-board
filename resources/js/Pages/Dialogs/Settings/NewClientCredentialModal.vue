@@ -24,17 +24,19 @@
     </Modal>
 </template>
 
-<script setup>
+<script>
 import Modal from "../../../Shared/Modal"
 import { Link } from '@inertiajs/inertia-vue3'
 
-</script>
-
-<script>
 export default {
     props: {
         clientId: '',
         clientSecret: '',
+    },
+
+    components: {
+        Link,
+        Modal,
     }
 }
 </script>

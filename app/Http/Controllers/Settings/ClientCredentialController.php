@@ -14,6 +14,7 @@ class ClientCredentialController extends Controller
     public function index(ClientRepository $clientRepository)
     {
         $clients = $clientRepository->forUser(Auth::id());
+
         return Inertia::render('Settings/ClientCredentials', [
             'clientCredentials' => $clients,
         ]);
@@ -33,7 +34,7 @@ class ClientCredentialController extends Controller
 
     public function popup($clientId)
     {
-        return Inertia::dialog('Dialogs/Settings/ConfirmClientCredentialDeleteModal',[
+        return Inertia::dialog('Dialogs/Settings/ConfirmClientCredentialDeleteModal', [
             'clientId' => $clientId,
         ])->baseRoute('client-credential.index')->basePageRoute('client-credential.index');
     }
@@ -42,6 +43,6 @@ class ClientCredentialController extends Controller
     {
         $client->delete();
 
-        return back(303);
+        return Inertia::location(route('client-credential.index'));
     }
 }

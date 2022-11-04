@@ -7,16 +7,26 @@
 
         <div class="flex justify-end space-x-2">
             <Link :href="route('client-credential.index')" class="bg-gray-100 rounded px-3 py-1 uppercase antialiased">No</Link>
-            <Link :href="groute('client-credential.destroy', [clientId])" method="delete" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Yes</Link>
+            <Link :href="route('client-credential.destroy', [clientId])" method="delete" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Yes</Link>
         </div>
 
     </Modal>
 </template>
 
-<script setup>
+<script>
 import Modal from "../../../Shared/Modal"
 import { Link } from '@inertiajs/inertia-vue3'
-defineProps({
-    clientId: String,
-})
+
+export default {
+    props: {
+        clientId: null,
+    },
+
+    components: {
+        Link,
+        Modal,
+    }
+
+}
+
 </script>

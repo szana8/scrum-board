@@ -1829,6 +1829,30 @@ var map = {
 		"./resources/js/Pages/Settings/ClientCredentials.vue",
 		"resources_js_Pages_Settings_ClientCredentials_vue"
 	],
+	"./Settings/GitIntegration": [
+		"./resources/js/Pages/Settings/GitIntegration.vue",
+		"resources_js_Pages_Settings_GitIntegration_vue"
+	],
+	"./Settings/GitIntegration.vue": [
+		"./resources/js/Pages/Settings/GitIntegration.vue",
+		"resources_js_Pages_Settings_GitIntegration_vue"
+	],
+	"./Settings/IssueTypes": [
+		"./resources/js/Pages/Settings/IssueTypes.vue",
+		"resources_js_Pages_Settings_IssueTypes_vue"
+	],
+	"./Settings/IssueTypes.vue": [
+		"./resources/js/Pages/Settings/IssueTypes.vue",
+		"resources_js_Pages_Settings_IssueTypes_vue"
+	],
+	"./Settings/Shared/SettingsLink": [
+		"./resources/js/Pages/Settings/Shared/SettingsLink.vue",
+		"resources_js_Pages_Settings_Shared_SettingsLink_vue"
+	],
+	"./Settings/Shared/SettingsLink.vue": [
+		"./resources/js/Pages/Settings/Shared/SettingsLink.vue",
+		"resources_js_Pages_Settings_Shared_SettingsLink_vue"
+	],
 	"./Workspace/Create": [
 		"./resources/js/Pages/Workspace/Create.vue",
 		"/js/vendor",

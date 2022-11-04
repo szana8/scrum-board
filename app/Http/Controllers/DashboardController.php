@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Auth;
 use Inertia\Inertia;
-use Laravel\Passport\ClientRepository;
 
 class DashboardController extends Controller
 {

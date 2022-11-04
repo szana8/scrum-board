@@ -10,15 +10,15 @@
                 </div>
 
                 <div class="w-2/3">
-                    <form class="mt-8" method="POST" @submit.prevent="submit">
+                    <form class="mt-8" method="POST" @submit.prevent="this.submit">
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">What should we name the client?</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Client Name" v-model="clientCredentialForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Client Name" v-model="this.clientCredentialForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="clientCredentialForm.errors.name" v-text="clientCredentialForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="this.clientCredentialForm.errors.name" v-text="this.clientCredentialForm.errors.name"></p>
                                 </div>
 
                                 <div>
@@ -26,7 +26,7 @@
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
                                         <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="http://localhost/auth/callback" v-model="clientCredentialForm.uri" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="clientCredentialForm.errors.uri" v-text="clientCredentialForm.errors.uri"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="this.clientCredentialForm.errors.uri" v-text="this.clientCredentialForm.errors.uri"></p>
                                 </div>
                             </div>
 
@@ -50,13 +50,13 @@
                 <div class="w-2/3">
                     <div class="border border-gray-100 shadow-xl rounded-xl">
                         <div class="p-12">
-                            <ul class="list-inside" v-if="clientCredentials.length">
-                                <li v-for="clientCredential in clientCredentials" :id="clientCredential.id" class="w-full flex justify-between space-y-2">
+                            <ul class="list-inside" v-if="this.clientCredentials.length > 0">
+                                <li v-for="clientCredential in this.clientCredentials" :id="clientCredential.id" class="w-full flex justify-between space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <div>{{ clientCredential.name }}</div>
                                         <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
                                     </div>
-                                    <Link :href="route('client-credential.destroy', [clientCredential.id])" method="delete" preserve-scroll class="href text-red-600">Delete</Link>
+                                    <Link :href="route('client-credential.popup', [clientCredential.id])" method="get" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
                                 </li>
                             </ul>
                             <div v-else>
@@ -73,26 +73,42 @@
     </settings>
 </template>
 
-<script setup>
+<script>
 import {useForm} from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3'
 import Settings from "../Settings";
 
-const clientCredentialForm = useForm({
-    name: '',
-    uri: '',
-});
+export default {
 
-const submit = () => {
-    clientCredentialForm.post(route('client-credential.store'), {
-        onSuccess: () => {
-            clientCredentialForm.reset();
+    props: {
+        clientCredentials: Array,
+    },
+
+    components: {
+        Settings,
+        Link,
+    },
+
+    data() {
+        return {
+            clientCredentialForm: useForm({
+                name: '',
+                uri: '',
+            }),
+
+            deleteCredentialForm: useForm({}),
         }
-    });
-};
+    },
 
-defineProps({
-    clientCredentials: Array,
-})
+    methods: {
+        submit: function () {
+            this.clientCredentialForm.post(route('client-credential.store'), {
+                onSuccess: () => {
+                    //this.clientCredentialForm.reset();
+                }
+            });
+        },
+    }
+}
 </script>
 

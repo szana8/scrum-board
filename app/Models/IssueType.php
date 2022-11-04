@@ -19,5 +19,4 @@ class IssueType extends Model
             $attributes->slug = \Str::slug($attributes->name);
         });
     }
-
 }
