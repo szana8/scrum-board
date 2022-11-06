@@ -18,17 +18,17 @@
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Name</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="issueTypeForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="issueTypeSchemaForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeForm.errors.name" v-text="issueTypeForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeSchemaForm.errors.name" v-text="issueTypeSchemaForm.errors.name"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Description</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="issueTypeForm.description"></textarea>
+                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="issueTypeSchemaForm.description"></textarea>
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeForm.errors.description" v-text="issueTypeForm.errors.description"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeSchemaForm.errors.description" v-text="issueTypeSchemaForm.errors.description"></p>
                                 </div>
 
                                 <div class="w-2/3">
@@ -37,7 +37,7 @@
                                             <div class="w-full">
                                                 <div class="flex flex-col items-center relative">
                                                     <div class="w-full">
-                                                        <div class="p-0.5 text-gray-500 font-semibold">Icon</div>
+                                                        <div class="p-0.5 text-gray-500 font-semibold">Issue Type</div>
                                                         <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
                                                             <div class="flex flex-auto flex-wrap"></div>
                                                             <input placeholder="Search by name" class="p-1 px-2 appearance-none outline-none w-full text-gray-800" v-model="searchString" v-on:keyup="this.searchStringInArray()">
@@ -50,8 +50,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="this.searchString || this.openPopup">
-                                                        <div class="flex flex-col w-full">
+                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="this.openPopup">
+                                                        <div class="flex flex-col w-full py-3">
                                                             <div class="cursor-pointer w-full border-gray-100 rounded-t border-b" v-for="issueType in this.filteredArray" :class="calculateActiveClass(issueType.id)" @click="selectIcon(issueType)">
                                                                 <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                                                     <div class="w-6 flex flex-col items-center">
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Create</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{ this.buttonText }}</button>
                             </div>
                         </div>
                     </form>
@@ -101,7 +101,8 @@
                                         <div class="text-xs text-gray-400">{{issueTypeSchema.description}}</div>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <Link :href="route('web.issue-type-schema.destroy', [issueTypeSchema.id])" as="button" method="delete" preserve-scroll class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                        <a href="#" class="href text-gray-400 font-semibold text-sm hover:text-gray-300" @click="edit(issueTypeSchema)">Edit</a>
+                                        <Link :href="route('web.issue-type-schema.destroy', [issueTypeSchema.id])" as="button" method="delete" preserve-scroll class="href text-red-600 hover:text-red-400 font-semibold text-sm">Delete</Link>
                                     </div>
 
                                 </li>
@@ -139,7 +140,10 @@ export default {
         return {
             filteredArray: [],
             searchString: null,
-            issueTypeForm: useForm({
+            formAction: route('web.issue-type-schema.store'),
+            formMethod: 'post',
+            buttonText: 'Create',
+            issueTypeSchemaForm: useForm({
                 name: '',
                 description: '',
                 issueTypes: []
@@ -166,28 +170,39 @@ export default {
 
         selectIcon: function (issueType) {
             this.searchString = null
-            const index = this.issueTypeForm.issueTypes.indexOf(issueType.id);
+            const index = this.issueTypeSchemaForm.issueTypes.indexOf(issueType.id);
 
             if (index === -1) {
-                this.issueTypeForm.issueTypes.push(issueType.id);
+                this.issueTypeSchemaForm.issueTypes.push(issueType.id);
             } else {
-                this.issueTypeForm.issueTypes.splice(index, 1);
+                this.issueTypeSchemaForm.issueTypes.splice(index, 1);
             }
+        },
 
-            this.openPopup = false;
+        edit: function (issueTypeSchema) {
+            this.issueTypeSchemaForm.name = issueTypeSchema.name;
+            this.issueTypeSchemaForm.description = issueTypeSchema.description;
+            this.issueTypeSchemaForm.issueTypes = issueTypeSchema.type_ids;
+            this.formAction = route('web.issue-type-schema.update', issueTypeSchema.id);
+            this.buttonText = 'Update';
+            this.formMethod = 'put';
         },
 
         submit: function () {
-            this.issueTypeForm.post(route('web.issue-type-schema.store'), {
+            this.issueTypeSchemaForm.submit(this.formMethod, this.formAction, {
                 onSuccess: () => {
-                    this.issueTypeForm.reset();
+                    this.issueTypeSchemaForm.reset();
                     this.searchString = null;
+                    this.openPopup = false;
+                    this.formAction = route('web.issue-type-schema.store');
+                    this.buttonText = 'Create';
+                    this.formMethod = 'post';
                 }
             })
         },
 
         calculateActiveClass: function(issueType) {
-            const index = this.issueTypeForm.issueTypes.indexOf(issueType);
+            const index = this.issueTypeSchemaForm.issueTypes.indexOf(issueType);
 
             if (index === -1) {
                 return 'bg-white hover:bg-teal-100';

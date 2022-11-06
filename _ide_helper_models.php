@@ -12,6 +12,30 @@
 
 namespace App\Models{
 /**
+ * App\Models\GitToken
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $token
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\GitTokenFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GitToken whereUserId($value)
+ */
+	class GitToken extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\IssueType
  *
  * @property int $id
@@ -22,6 +46,8 @@ namespace App\Models{
  * @property string $color_code
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\IssueTypeSchema[] $schemas
+ * @property-read int|null $schemas_count
  * @method static \Database\Factories\IssueTypeFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|IssueType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|IssueType newQuery()
@@ -36,6 +62,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|IssueType whereUpdatedAt($value)
  */
 	class IssueType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\IssueTypeSchema
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\IssueType[] $types
+ * @property-read int|null $types_count
+ * @method static \Database\Factories\IssueTypeSchemaFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema query()
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|IssueTypeSchema whereUpdatedAt($value)
+ */
+	class IssueTypeSchema extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateClientCredential;
 use Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Passport\Client;
 use Laravel\Passport\ClientRepository;
@@ -15,7 +16,7 @@ class ClientCredentialController extends Controller
     {
         $clients = $clientRepository->forUser(Auth::id());
 
-        return Inertia::render('Settings/ClientCredentials', [
+        return Inertia::render('Settings/Tabs/ClientCredentials', [
             'clientCredentials' => $clients,
         ]);
     }
@@ -26,23 +27,18 @@ class ClientCredentialController extends Controller
             Auth::id(), $request->name, $request->get('uri') ?? ''
         );
 
-        return Inertia::dialog('Dialogs/Settings/NewClientCredentialModal', [
-            'clientId' => $client->getAttribute('id'),
-            'clientSecret' => $client->getAttribute('secret'),
-        ])->baseRoute('client-credential.index')->basePageRoute('client-credential.index');
-    }
-
-    public function popup($clientId)
-    {
-        return Inertia::dialog('Dialogs/Settings/ConfirmClientCredentialDeleteModal', [
-            'clientId' => $clientId,
-        ])->baseRoute('client-credential.index')->basePageRoute('client-credential.index');
+        return Redirect::route('client-credential.index')->with('flash', [
+            'success' => [
+                'clientId' => $client->getAttribute('id'),
+                'clientSecret' => $client->getAttribute('secret'),
+            ],
+        ]);
     }
 
     public function destroy(Client $client)
     {
         $client->delete();
 
-        return Inertia::location(route('client-credential.index'));
+        return back(303);
     }
 }

@@ -13,6 +13,11 @@
                     <form class="mt-8" method="POST" @submit.prevent="this.submit">
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
+                                <NewClientCredential class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200" v-if="this.$page.props.flash.success"
+                                                     :client-id="this.$page.props.flash.success.clientId"
+                                                     :client-secret="this.$page.props.flash.success.clientSecret"
+                                />
+
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">What should we name the client?</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
@@ -29,7 +34,6 @@
                                     <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="this.clientCredentialForm.errors.uri" v-text="this.clientCredentialForm.errors.uri"></p>
                                 </div>
                             </div>
-
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
                                 <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Create</button>
@@ -56,7 +60,7 @@
                                         <div>{{ clientCredential.name }}</div>
                                         <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
                                     </div>
-                                    <Link :href="route('client-credential.popup', [clientCredential.id])" method="get" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                    <Link :href="route('client-credential.destroy', [clientCredential.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
                                 </li>
                             </ul>
                             <div v-else>
@@ -77,6 +81,7 @@
 import {useForm} from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3'
 import Settings from "../Settings";
+import NewClientCredential from "../Shared/NewClientCredential";
 
 export default {
 
@@ -87,6 +92,7 @@ export default {
     components: {
         Settings,
         Link,
+        NewClientCredential
     },
 
     data() {
@@ -104,7 +110,7 @@ export default {
         submit: function () {
             this.clientCredentialForm.post(route('client-credential.store'), {
                 onSuccess: () => {
-                    //this.clientCredentialForm.reset();
+                    this.clientCredentialForm.reset();
                 }
             });
         },

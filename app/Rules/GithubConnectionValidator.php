@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Http\Requests\Git\UpdateGitToken;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Contracts\Validation\Rule;
 
@@ -12,7 +13,7 @@ class GithubConnectionValidator implements Rule
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private string $mode)
     {
         //
     }
@@ -24,8 +25,12 @@ class GithubConnectionValidator implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
+        if ($this->mode === UpdateGitToken::MODE && is_null($value)) {
+            return true;
+        }
+
         try {
             \Config::set('github.connections.main.token', $value);
             GitHub::connection('main')->me()->show();

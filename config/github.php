@@ -42,7 +42,7 @@ return [
 
         'main' => [
             'method' => 'token',
-            'token' => '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',
+            'token' => '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',
             // 'backoff'    => false,
             // 'cache'      => false,
             // 'version'    => 'v3',

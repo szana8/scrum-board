@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Create</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{this.buttonText}}</button>
                             </div>
                         </div>
                     </form>
@@ -101,6 +101,7 @@
                                         <div class="text-xs text-gray-400">{{issueType.description}}</div>
                                     </div>
                                     <div class="flex space-x-2">
+                                        <a href="#" class="href text-gray-400 font-semibold text-sm hover:text-gray-300" @click="edit(issueType)">Edit</a>
                                         <Link :href="route('web.issue-type.destroy', [issueType.id])" as="button" method="delete" preserve-scroll class="href text-red-600 font-semibold text-sm">Delete</Link>
                                     </div>
 
@@ -139,6 +140,9 @@ export default {
         return {
             filteredArray: [],
             searchString: null,
+            formAction: route('web.issue-type.store'),
+            formMethod: 'post',
+            buttonText: 'Create',
             issueTypeForm: useForm({
                 name: '',
                 description: '',
@@ -173,13 +177,26 @@ export default {
         },
 
         submit: function () {
-            this.issueTypeForm.submit('post', route('web.issue-type.store'), {
+            this.issueTypeForm.submit(this.formMethod, this.formAction, {
                 onSuccess: () => {
                     this.issueTypeForm.reset();
                     this.issueTypeForm.icon = null;
                     this.searchString = null;
+                    this.formAction = route('web.issue-type.store');
+                    this.buttonText = 'Create';
+                    this.formMethod = 'post';
                 }
             });
+        },
+
+        edit(issueType) {
+            this.issueTypeForm.name = issueType.name;
+            this.issueTypeForm.description = issueType.description;
+            this.issueTypeForm.icon = issueType.icon.replace('public', 'storage');
+            this.searchString = issueType.icon.match(/.*\/(.*)$/)[1];
+            this.formAction = route('web.issue-type.update', issueType.id);
+            this.buttonText = 'Update';
+            this.formMethod = 'put';
         }
     }
 }

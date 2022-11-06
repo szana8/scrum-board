@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\IssueType;
+namespace App\Http\Requests\IssueTypeSchema;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateIssueType extends FormRequest
+class UpdateIssueTypeSchema extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,9 @@ class UpdateIssueType extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string',
+            'name' => 'required|exists:issue_type_schemas,name',
             'description' => 'string',
-            'icon' => 'string',
-            'color_code' => 'nullable',
+            'issueTypes' => 'array',
         ];
     }
 }

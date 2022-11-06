@@ -19,11 +19,11 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        return Inertia::render('Settings/Tabs/Projects', []);
     }
 
     /**

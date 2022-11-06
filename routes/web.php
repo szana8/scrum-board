@@ -45,19 +45,26 @@ Route::middleware('auth:web')->group(function () {
         Route::prefix('git-token')->group(function () {
             Route::get('', [GitTokenController::class, 'index'])->name('web.git-token.index');
             Route::post('', [GitTokenController::class, 'store'])->name('web.git-token.store');
+            Route::put('/{token}', [GitTokenController::class, 'update'])->name('web.git-token.update');
             Route::delete('/{token}', [GitTokenController::class, 'destroy'])->name('web.git-token.destroy');
         });
 
         Route::prefix('issue-type')->group(function () {
             Route::get('', [IssueTypeController::class, 'index'])->name('web.issue-type.index');
             Route::post('', [IssueTypeController::class, 'store'])->name('web.issue-type.store');
+            Route::put('/{issueType}', [IssueTypeController::class, 'update'])->name('web.issue-type.update');
             Route::delete('/{issueType}', [IssueTypeController::class, 'destroy'])->name('web.issue-type.destroy');
         });
 
         Route::prefix('issue-type-schema')->group(function () {
             Route::get('', [IssueTypeSchemaController::class, 'index'])->name('web.issue-type-schema.index');
             Route::post('', [IssueTypeSchemaController::class, 'store'])->name('web.issue-type-schema.store');
+            Route::put('/{issueTypeSchema}', [IssueTypeSchemaController::class, 'update'])->name('web.issue-type-schema.update');
             Route::delete('/{issueTypeSchema}', [IssueTypeSchemaController::class, 'destroy'])->name('web.issue-type-schema.destroy');
+        });
+
+        Route::prefix('projects')->group(function () {
+            Route::get('', [ProjectController::class, 'index'])->name('web.projects.index');
         });
     });
 

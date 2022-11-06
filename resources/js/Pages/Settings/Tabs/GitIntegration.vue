@@ -34,7 +34,7 @@
 
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Create</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{this.buttonText}}</button>
                             </div>
                         </div>
                     </form>
@@ -57,7 +57,11 @@
                                     <div class="flex items-center space-x-2">
                                         <div>{{ token.name }}</div>
                                     </div>
-                                    <Link :href="route('web.git-token.destroy', [token.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                    <div class="flex space-x-2">
+                                        <a href="#" class="href text-gray-400 font-semibold text-sm hover:text-gray-300" @click="edit(token)">Edit</a>
+                                        <Link :href="route('web.git-token.destroy', [token.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                    </div>
+
                                 </li>
                             </ul>
                             <div v-else>
@@ -92,6 +96,9 @@ export default {
 
     data() {
         return {
+            formAction: route('web.git-token.store'),
+            formMethod: 'post',
+            buttonText: 'Create',
             gitForm: useForm({
                 name: null,
                 token: null,
@@ -101,12 +108,22 @@ export default {
 
     methods: {
         submit: function () {
-            this.gitForm.post(route('web.git-token.store'), {
+            this.gitForm.submit(this.formMethod, this.formAction, {
                 onSuccess: () => {
                     this.gitForm.reset();
+                    this.formAction = route('web.git-token.store');
+                    this.buttonText = 'Create';
+                    this.formMethod = 'post';
                 }
             });
         },
+
+        edit: function (token) {
+            this.gitForm.name = token.name
+            this.formAction = route('web.git-token.update', token.id);
+            this.buttonText = 'Update';
+            this.formMethod = 'put';
+        }
     }
 }
 </script>

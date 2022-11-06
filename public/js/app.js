@@ -1777,26 +1777,6 @@ var map = {
 		"./resources/js/Pages/Boards.vue",
 		"resources_js_Pages_Boards_vue"
 	],
-	"./Dialogs/Settings/ConfirmClientCredentialDeleteModal": [
-		"./resources/js/Pages/Dialogs/Settings/ConfirmClientCredentialDeleteModal.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dialogs_Settings_ConfirmClientCredentialDeleteModal_vue"
-	],
-	"./Dialogs/Settings/ConfirmClientCredentialDeleteModal.vue": [
-		"./resources/js/Pages/Dialogs/Settings/ConfirmClientCredentialDeleteModal.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dialogs_Settings_ConfirmClientCredentialDeleteModal_vue"
-	],
-	"./Dialogs/Settings/NewClientCredentialModal": [
-		"./resources/js/Pages/Dialogs/Settings/NewClientCredentialModal.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dialogs_Settings_NewClientCredentialModal_vue"
-	],
-	"./Dialogs/Settings/NewClientCredentialModal.vue": [
-		"./resources/js/Pages/Dialogs/Settings/NewClientCredentialModal.vue",
-		"/js/vendor",
-		"resources_js_Pages_Dialogs_Settings_NewClientCredentialModal_vue"
-	],
 	"./Reports": [
 		"./resources/js/Pages/Reports.vue",
 		"resources_js_Pages_Reports_vue"
@@ -1813,45 +1793,21 @@ var map = {
 		"./resources/js/Pages/Roadmap.vue",
 		"resources_js_Pages_Roadmap_vue"
 	],
-	"./Settings": [
-		"./resources/js/Pages/Settings.vue",
-		"resources_js_Pages_Settings_vue"
+	"./Settings/Settings": [
+		"./resources/js/Pages/Settings/Settings.vue",
+		"resources_js_Pages_Settings_Settings_vue"
 	],
-	"./Settings.vue": [
-		"./resources/js/Pages/Settings.vue",
-		"resources_js_Pages_Settings_vue"
+	"./Settings/Settings.vue": [
+		"./resources/js/Pages/Settings/Settings.vue",
+		"resources_js_Pages_Settings_Settings_vue"
 	],
-	"./Settings/ClientCredentials": [
-		"./resources/js/Pages/Settings/ClientCredentials.vue",
-		"resources_js_Pages_Settings_ClientCredentials_vue"
+	"./Settings/Shared/NewClientCredential": [
+		"./resources/js/Pages/Settings/Shared/NewClientCredential.vue",
+		"resources_js_Pages_Settings_Shared_NewClientCredential_vue"
 	],
-	"./Settings/ClientCredentials.vue": [
-		"./resources/js/Pages/Settings/ClientCredentials.vue",
-		"resources_js_Pages_Settings_ClientCredentials_vue"
-	],
-	"./Settings/GitIntegration": [
-		"./resources/js/Pages/Settings/GitIntegration.vue",
-		"resources_js_Pages_Settings_GitIntegration_vue"
-	],
-	"./Settings/GitIntegration.vue": [
-		"./resources/js/Pages/Settings/GitIntegration.vue",
-		"resources_js_Pages_Settings_GitIntegration_vue"
-	],
-	"./Settings/IssueTypeSchemes": [
-		"./resources/js/Pages/Settings/IssueTypeSchemes.vue",
-		"resources_js_Pages_Settings_IssueTypeSchemes_vue"
-	],
-	"./Settings/IssueTypeSchemes.vue": [
-		"./resources/js/Pages/Settings/IssueTypeSchemes.vue",
-		"resources_js_Pages_Settings_IssueTypeSchemes_vue"
-	],
-	"./Settings/IssueTypes": [
-		"./resources/js/Pages/Settings/IssueTypes.vue",
-		"resources_js_Pages_Settings_IssueTypes_vue"
-	],
-	"./Settings/IssueTypes.vue": [
-		"./resources/js/Pages/Settings/IssueTypes.vue",
-		"resources_js_Pages_Settings_IssueTypes_vue"
+	"./Settings/Shared/NewClientCredential.vue": [
+		"./resources/js/Pages/Settings/Shared/NewClientCredential.vue",
+		"resources_js_Pages_Settings_Shared_NewClientCredential_vue"
 	],
 	"./Settings/Shared/SettingsLink": [
 		"./resources/js/Pages/Settings/Shared/SettingsLink.vue",
@@ -1860,6 +1816,46 @@ var map = {
 	"./Settings/Shared/SettingsLink.vue": [
 		"./resources/js/Pages/Settings/Shared/SettingsLink.vue",
 		"resources_js_Pages_Settings_Shared_SettingsLink_vue"
+	],
+	"./Settings/Tabs/ClientCredentials": [
+		"./resources/js/Pages/Settings/Tabs/ClientCredentials.vue",
+		"resources_js_Pages_Settings_Tabs_ClientCredentials_vue"
+	],
+	"./Settings/Tabs/ClientCredentials.vue": [
+		"./resources/js/Pages/Settings/Tabs/ClientCredentials.vue",
+		"resources_js_Pages_Settings_Tabs_ClientCredentials_vue"
+	],
+	"./Settings/Tabs/GitIntegration": [
+		"./resources/js/Pages/Settings/Tabs/GitIntegration.vue",
+		"resources_js_Pages_Settings_Tabs_GitIntegration_vue"
+	],
+	"./Settings/Tabs/GitIntegration.vue": [
+		"./resources/js/Pages/Settings/Tabs/GitIntegration.vue",
+		"resources_js_Pages_Settings_Tabs_GitIntegration_vue"
+	],
+	"./Settings/Tabs/IssueTypeSchemes": [
+		"./resources/js/Pages/Settings/Tabs/IssueTypeSchemes.vue",
+		"resources_js_Pages_Settings_Tabs_IssueTypeSchemes_vue"
+	],
+	"./Settings/Tabs/IssueTypeSchemes.vue": [
+		"./resources/js/Pages/Settings/Tabs/IssueTypeSchemes.vue",
+		"resources_js_Pages_Settings_Tabs_IssueTypeSchemes_vue"
+	],
+	"./Settings/Tabs/IssueTypes": [
+		"./resources/js/Pages/Settings/Tabs/IssueTypes.vue",
+		"resources_js_Pages_Settings_Tabs_IssueTypes_vue"
+	],
+	"./Settings/Tabs/IssueTypes.vue": [
+		"./resources/js/Pages/Settings/Tabs/IssueTypes.vue",
+		"resources_js_Pages_Settings_Tabs_IssueTypes_vue"
+	],
+	"./Settings/Tabs/Projects": [
+		"./resources/js/Pages/Settings/Tabs/Projects.vue",
+		"resources_js_Pages_Settings_Tabs_Projects_vue"
+	],
+	"./Settings/Tabs/Projects.vue": [
+		"./resources/js/Pages/Settings/Tabs/Projects.vue",
+		"resources_js_Pages_Settings_Tabs_Projects_vue"
 	],
 	"./Workspace/Create": [
 		"./resources/js/Pages/Workspace/Create.vue",
