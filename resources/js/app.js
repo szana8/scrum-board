@@ -22,7 +22,7 @@ createInertiaApp({
                 resolve: (name) => import(`./Pages/${name}`),
             })
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
+            .use(ZiggyVue)
             .mount(el)
     },
 })

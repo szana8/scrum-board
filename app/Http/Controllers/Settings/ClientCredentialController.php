@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateClientCredential;
+use App\Http\Resources\Project\ProjectResource;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -27,7 +28,7 @@ class ClientCredentialController extends Controller
             Auth::id(), $request->name, $request->get('uri') ?? ''
         );
 
-        return Redirect::route('client-credential.index')->with('flash', [
+        return Redirect::route('web.client-credential.index')->with('flash', [
             'success' => [
                 'clientId' => $client->getAttribute('id'),
                 'clientSecret' => $client->getAttribute('secret'),

@@ -20,7 +20,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
         "barryvdh/laravel-ide-helper": "^2.12",
-        "dedoc/scramble": "^0.5.0",
+        "dedoc/scramble": "dev-main",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.2",
         "laravel/sail": "^1.0.1",

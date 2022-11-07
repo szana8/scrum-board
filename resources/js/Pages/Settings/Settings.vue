@@ -5,7 +5,7 @@
             <div class="py-12">
                 <ul class="space-x-2 flex text-xs font-bold">
                     <li class="">
-                        <SettingsLink :href="route('client-credential.index')"
+                        <SettingsLink :href="route('web.client-credential.index')"
                                       :active="$page.component === 'Settings/Tabs/ClientCredentials'"
                                       method="get"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">

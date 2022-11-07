@@ -8,7 +8,9 @@ use App\Http\Requests\Project\UpdateProject;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use App\Services\ProjectService;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Validation\ValidationException;
 
 class ProjectController extends Controller
 {

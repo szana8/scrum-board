@@ -60,7 +60,7 @@
                                         <div>{{ clientCredential.name }}</div>
                                         <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
                                     </div>
-                                    <Link :href="route('client-credential.destroy', [clientCredential.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
+                                    <Link :href="route('web.client-credential.destroy', [clientCredential.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
                                 </li>
                             </ul>
                             <div v-else>
@@ -108,7 +108,7 @@ export default {
 
     methods: {
         submit: function () {
-            this.clientCredentialForm.post(route('client-credential.store'), {
+            this.clientCredentialForm.post(route('web.client-credential.store'), {
                 onSuccess: () => {
                     this.clientCredentialForm.reset();
                 }

@@ -13,7 +13,7 @@ class GithubConnectionValidator implements Rule
      *
      * @return void
      */
-    public function __construct(private string $mode)
+    public function __construct(private ?string $mode = null)
     {
         //
     }

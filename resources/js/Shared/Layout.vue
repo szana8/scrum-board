@@ -33,7 +33,7 @@ export default {
         username() {
             return this.$page.props.auth.user.username;
         }
-    }
+    },
 }
 </script>
 
