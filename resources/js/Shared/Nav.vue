@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import NavLink from "./NavLink";
-import Logo from "./Logo";
+import NavLink from "../Components/NavLink";
+import Logo from "../Components/Logo";
 export default {
     name: "Nav",
     components: { NavLink, Logo },

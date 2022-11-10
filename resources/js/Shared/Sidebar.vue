@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import SideLink from "./SideLink";
-import Logo from "./Logo";
+import SideLink from "../Components/SideLink";
+import Logo from "../Components/Logo";
 import {Link} from "@inertiajs/inertia-vue3";
 
 export default {
