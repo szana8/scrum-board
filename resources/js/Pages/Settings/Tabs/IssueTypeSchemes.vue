@@ -37,7 +37,9 @@
                                             <div class="w-full">
                                                 <div class="flex flex-col items-center relative">
                                                     <div class="w-full">
-                                                        <div class="p-0.5 text-gray-500 font-semibold">Issue Type</div>
+                                                        <div class="p-0.5 text-gray-500 font-semibold">
+                                                            <slot name="icon" />
+                                                        </div>
                                                         <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
                                                             <div class="flex flex-auto flex-wrap"></div>
                                                             <input placeholder="Search by name" class="p-1 px-2 appearance-none outline-none w-full text-gray-800" v-model="searchString" v-on:keyup="this.searchStringInArray()">
