@@ -56,6 +56,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/dashboard');
+        return redirect()->route('web.roadmap.index');
     }
 }

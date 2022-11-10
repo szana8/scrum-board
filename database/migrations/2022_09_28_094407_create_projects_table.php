@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('type', array_map(fn ($type) => $type->name, \App\Enums\ProjectType::cases()))->index();
             $table->string('icon')->nullable();
             $table->foreignIdFor(\App\Models\User::class, 'owner_id');
+            $table->foreignIdFor(\App\Models\User::class, 'default_assignee_id')->nullable();
             $table->timestamps();
         });
     }

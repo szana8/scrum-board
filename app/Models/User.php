@@ -41,8 +41,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function avatar()
+    /**
+     * Adding the appends value will call the accessor in the JSON response
+     *
+     * @var string[]
+     */
+    protected $appends = ['avatar'];
+
+    public function avatar(): string
     {
-        return asset('storage/avatars/2/avatar.png');
+        return asset("storage/avatars/$this->id/avatar.png");
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        return asset("storage/avatars/$this->id/avatar.png");
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Settings\ClientCredentialController;
 use App\Http\Controllers\Settings\GitTokenController;
 use App\Http\Controllers\Settings\IssueTypeController;
 use App\Http\Controllers\Settings\IssueTypeSchemaController;
+use App\Http\Controllers\Settings\ProjectController;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

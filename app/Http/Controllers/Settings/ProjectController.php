@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Settings;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\CreateProject;
 use App\Http\Resources\Project\ProjectResource;
+use App\Models\User;
 use App\Services\ProjectService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Momentum\Modal\Modal;
 
@@ -23,7 +26,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Settings/Tabs/Projects', []);
+        return Inertia::render('Settings/Tabs/Projects', [
+            'users' => User::all(),
+            'avatars' => Storage::allFiles('public/icons/project/avatars'),
+        ]);
     }
 
     /**
@@ -33,8 +39,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return Inertia::modal('Workspace/Create')
-            ->baseRoute('dashboard.index');
+        //
     }
 
     /**
