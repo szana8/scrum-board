@@ -44,34 +44,23 @@
             </div>
 
             <div class="flex py-12">
-                <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Manage Client Credentials</h4>
-                    <p class="text-gray-400 text-sm mt-4">
-                        You may delete any of your existing client credentials if they are no longer needed
-                    </p>
-                </div>
+                <ListOfItems :items="this.clientCredentials">
+                    <template #header>Manage Client Credentials</template>
+                    <template #description>You may delete any of your existing client credentials if they are no longer needed</template>
+                    <template #emptyListDescription>There is no Client Credential(s) created yet for your user.</template>
 
-                <div class="w-2/3">
-                    <div class="border border-gray-100 shadow-xl rounded-xl">
-                        <div class="p-12">
-                            <ul class="list-inside" v-if="this.clientCredentials.length > 0">
-                                <li v-for="clientCredential in this.clientCredentials" :id="clientCredential.id" class="w-full flex justify-between space-y-2">
-                                    <div class="flex items-center space-x-2">
-                                        <div>{{ clientCredential.name }}</div>
-                                        <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
-                                    </div>
-                                    <Link :href="route('web.client-credential.destroy', [clientCredential.id])" method="delete" as="button" class="href text-red-600 font-semibold text-sm">Delete</Link>
-                                </li>
-                            </ul>
-                            <div v-else>
-                                <div class="bg-blue-100 text-blue-600 p-4 rounded border border-blue-200 font-semibold">
-                                    There is no Client Credential(s) created yet for your user.
-                                </div>
-                            </div>
+                    <ListOfItem v-for="clientCredential in this.clientCredentials"
+                                :id="clientCredential.id"
+                                class="w-full flex justify-between space-y-2"
+                                :delete-link="route('web.client-credential.destroy', [clientCredential.id])"
+                    >
+                        <div class="flex items-center space-x-2">
+                            <div>{{ clientCredential.name }}</div>
+                            <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
                         </div>
-                    </div>
+                    </ListOfItem>
 
-                </div>
+                </ListOfItems>
             </div>
         </div>
     </settings>
@@ -82,6 +71,8 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3'
 import Settings from "../Settings";
 import NewClientCredential from "../Shared/NewClientCredential";
+import ListOfItems from "../../../Components/ListOfItems";
+import ListOfItem from "../../../Components/ListOfItem";
 
 export default {
 
@@ -92,7 +83,9 @@ export default {
     components: {
         Settings,
         Link,
-        NewClientCredential
+        NewClientCredential,
+        ListOfItems,
+        ListOfItem
     },
 
     data() {

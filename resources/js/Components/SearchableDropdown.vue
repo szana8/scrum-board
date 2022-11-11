@@ -35,7 +35,7 @@ export default {
     props: {
         label: null,
         items: Array,
-        searchString: null,
+        searchString: String,
     },
 
     emits: ['select'],
@@ -56,7 +56,7 @@ export default {
         searchStringInArray: function () {
             this.filteredItems = [];
             this.openPopup = true;
-            this.items.filter(element =>{
+            this.items.filter(element => {
                 if (element.includes(this.searchString)) {
                     this.filteredItems.push(element);
                     return true;
@@ -67,9 +67,6 @@ export default {
         select: function (item) {
             this.openPopup = false;
             this.$emit('select', item);
-            this.$nextTick((item) => {
-                this.searchString = this.selectedString;
-            });
             this.openPopup = false;
         },
     }
