@@ -32,13 +32,35 @@
                                 </div>
 
                                 <div class="w-2/3">
-                                    <div class="flex flex-col items-center">
+                                    <SearchableDropdown :label="'Icon'"
+                                                        :items="issueTypes"
+                                                        @select="selectIcon"
+                                                        v-slot="iconProps"
+                                                        :searchString="this.searchString"
+                                                        :multiple-select="true"
+                                                        ref="searchComponent"
+                                    >
+                                        <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                            <div class="w-6 flex flex-col items-center">
+                                                <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
+                                                    <img class="" alt="" :src="'../'+iconProps.item.icon">
+                                                </div>
+                                            </div>
+                                            <div class="w-full items-center flex">
+                                                <div class="mx-2 -mt-1  "> {{ iconProps.item.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </SearchableDropdown>
+
+
+                                    <!-- <div class="flex flex-col items-center">
                                         <div class="w-full flex flex-col items-center">
                                             <div class="w-full">
                                                 <div class="flex flex-col items-center relative">
                                                     <div class="w-full">
                                                         <div class="p-0.5 text-gray-500 font-semibold">
-                                                            <slot name="icon" />
+                                                            Icons
                                                         </div>
                                                         <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
                                                             <div class="flex flex-auto flex-wrap"></div>
@@ -72,7 +94,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 
@@ -126,6 +148,7 @@
 import {useForm} from "@inertiajs/inertia-vue3";
 import Settings from "../Settings";
 import {Link} from "@inertiajs/inertia-vue3";
+import SearchableDropdown from "../../../Components/SearchableDropdown";
 
 export default {
     props: {
@@ -136,6 +159,7 @@ export default {
     components: {
         Settings,
         Link,
+        SearchableDropdown,
     },
 
     data() {
@@ -179,12 +203,15 @@ export default {
             } else {
                 this.issueTypeSchemaForm.issueTypes.splice(index, 1);
             }
+
+            this.$refs.searchComponent.selectedItems = this.issueTypeSchemaForm.issueTypes;
         },
 
         edit: function (issueTypeSchema) {
             this.issueTypeSchemaForm.name = issueTypeSchema.name;
             this.issueTypeSchemaForm.description = issueTypeSchema.description;
             this.issueTypeSchemaForm.issueTypes = issueTypeSchema.type_ids;
+            this.$emit.selectedItems = this.issueTypeSchemaForm.issueTypes;
             this.formAction = route('web.issue-type-schema.update', issueTypeSchema.id);
             this.buttonText = 'Update';
             this.formMethod = 'put';
@@ -199,6 +226,8 @@ export default {
                     this.formAction = route('web.issue-type-schema.store');
                     this.buttonText = 'Create';
                     this.formMethod = 'post';
+                    this.$emit.selectedItems = [];
+                    this.$emit.openPopup = false;
                 }
             })
         },
