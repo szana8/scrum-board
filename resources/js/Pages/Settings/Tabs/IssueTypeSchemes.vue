@@ -32,7 +32,7 @@
                                 </div>
 
                                 <div class="w-2/3">
-                                    <SearchableDropdown :label="'Icon'"
+                                    <SearchableDropdown :label="'Issue Types'"
                                                         :items="issueTypes"
                                                         @select="selectIcon"
                                                         v-slot="iconProps"
