@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.1-fpm-alpine
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
@@ -6,42 +6,64 @@ COPY composer.lock composer.json /var/www/
 # Set working directory
 WORKDIR /var/www
 
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions mbstring pdo_mysql zip exif pcntl gd pgsql pdo_pgsql
+RUN apk add --no-cache \
+  icu-dev \
+  libxml2-dev \
+  libssh2-dev \
+  bash \
+  libpq-dev \
+  libzip-dev \
+  libpng-dev \
+  g++ \
+  $PHPIZE_DEPS \
+  rabbitmq-c-dev && \
+  docker-php-ext-configure intl && docker-php-ext-install \
+  pdo \
+  pgsql \
+  pdo_pgsql \
+  intl \
+  opcache \
+  bcmath \
+  gd \
+  sockets \
+  zip && \
+  pecl install amqp-1.11.0beta && docker-php-ext-enable amqp && \
+  pecl install ssh2-1.3.1 && docker-php-ext-enable ssh2 && \
+  apk del g++ \
+    $PHPIZE_DEPS && \
+  rm -rf /var/cache/apk/* /tmp/pear/* /usr/src/*
 
-#previous code
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
-    unzip \
+
+RUN apk add --no-cache \
+    $PHPIZE_DEPS \
+    tzdata \
     git \
-    curl \
-    redis-tools \
+    bash-completion \
+    unzip \
+    gnupg \
     nodejs \
-    npm
+    npm && \
+  echo -e "source /etc/profile.d/bash_completion.sh\nPS1='\u@\h:\w\$ '\n" > /root/.bashrc && \
+  echo "------NODEJS VERSION------" && \
+  node --version && \
+  echo "------NPM VERSION------" && \
+  npm -v && \
+  curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+  echo "------COMPOSER VERSION------" && \
+  composer --version && \
+  npm install yarn@1.22.10 -g && \
+  echo "------YARN VERSION------" && \
+  yarn --version && \
+  pecl install pcov && \
+  docker-php-ext-enable pcov && \
+  apk del $PHPIZE_DEPS \
+    tzdata && \
+  rm -rf /tmp/pear /var/cache/apk/* /usr/src/*
 
-RUN pecl install -o -f redis \
-    && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# Copy php settings into image
+# COPY ./docker/php/php-ini-overrides.ini /usr/local/etc/php/conf.d/99-base-overrides.ini
 
 # Copy existing application directory contents
 COPY . /var/www
@@ -50,7 +72,7 @@ COPY . /var/www
 COPY --chown=www:www . /var/www
 
 # Change current user to www
-USER www
+# USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
