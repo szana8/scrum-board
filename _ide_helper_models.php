@@ -73,6 +73,7 @@ namespace App\Models{
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Support\Collection $type_ids
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\IssueType[] $types
  * @property-read int|null $types_count
  * @method static \Database\Factories\IssueTypeSchemaFactory factory(...$parameters)
@@ -99,6 +100,7 @@ namespace App\Models{
  * @property string $type
  * @property string|null $icon
  * @property int $owner_id
+ * @property int|null $default_assignee_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User|null $owner
@@ -107,6 +109,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDefaultAssigneeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereIcon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
@@ -133,6 +136,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
  * @property-read int|null $clients_count
+ * @property-read string $avatar
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
