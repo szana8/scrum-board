@@ -53,9 +53,23 @@
                     </nav-link>
                 </li>
                 <li>
-                    <nav-link href="/calendar" :active="$page.component === 'Calendar'" class="flex space-x-2 px-2 pb-4 mt-6 border-b-2 text-gray-400 font-semibold hover:text-gray-600">
-                        <img :src="avatar" alt="" class="rounded-full w-7 h-7">
-                    </nav-link>
+                    <Dropdown placement="right">
+                        <!-- Button content -->
+                        <template v-slot:button class="flex space-x-2 px-2 pb-4 mt-6 border-b-2 text-gray-400 font-semibold hover:text-gray-600">
+                            <img :src="avatar" alt="" class="rounded-full w-7 h-7">
+                        </template>
+
+                        <!-- Opened dropdown content -->
+                        <template v-slot:content>
+                            <a class="flex w-full justify-between items-center rounded px-2 py-1 my-1 hover:bg-indigo-600 hover:text-white" :href="route('profile.index')">Profile</a>
+                            <a class="flex w-full justify-between items-center rounded px-2 py-1 my-1 hover:bg-indigo-600 hover:text-white" href="#">Settings</a>
+                            <a class="flex w-full justify-between items-center rounded px-2 py-1 my-1 hover:bg-indigo-600 hover:text-white" href="#">Help</a>
+
+                            <hr />
+
+                            <a class="flex w-full justify-between items-center rounded px-2 py-1 my-1 hover:bg-red-600 hover:text-white" href="#">Logout</a>
+                        </template>
+                    </Dropdown>
                 </li>
             </ul>
 
@@ -66,9 +80,11 @@
 <script>
 import NavLink from "../Components/NavLink";
 import Logo from "../Components/Logo";
+import Dropdown from "../Components/Dropdown";
+
 export default {
     name: "Nav",
-    components: { NavLink, Logo },
+    components: { NavLink, Logo, Dropdown },
     computed: {
         avatar() {
             return this.$page.props.auth.user.avatar;

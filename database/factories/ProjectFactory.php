@@ -22,7 +22,7 @@ class ProjectFactory extends Factory
 
         return [
             'name' => $name,
-            'slug' => \Illuminate\Support\Str::slug($name),
+            'key' => \Illuminate\Support\Str::slug($name),
             'description' => $this->faker->paragraph,
             'type' => $type,
             'icon' => function () use ($type) {

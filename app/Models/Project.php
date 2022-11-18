@@ -12,15 +12,6 @@ class Project extends Model
 
     protected $guarded = [];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($attributes) {
-            $attributes->slug = \Str::slug($attributes->name);
-        });
-    }
-
     public function owner(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'owner_id');

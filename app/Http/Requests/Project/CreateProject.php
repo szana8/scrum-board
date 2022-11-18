@@ -29,6 +29,7 @@ class CreateProject extends FormRequest
             'name' => 'required|max:200',
             'description' => 'max:1000',
             'type' => ['required', new Enum(ProjectType::class)],
+            'key' => 'string|unique:projects,key',
             'icon' => 'string',
             'default_assignee_id' => 'exists:users,id',
         ];

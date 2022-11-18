@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('key')->unique();
             $table->text('description')->nullable();
             $table->enum('type', array_map(fn ($type) => $type->name, \App\Enums\ProjectType::cases()))->index();
             $table->string('icon')->nullable();

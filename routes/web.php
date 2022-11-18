@@ -28,9 +28,6 @@ Route::middleware('auth:web')->group(function () {
     Route::get('/backlog', [DashboardController::class, 'backlog'])->name('web.backlog.index');
     Route::get('/reports', [DashboardController::class, 'reports'])->name('web.reports.index');
 
-    Route::get('/project/create', [ProjectController::class, 'create'])->name('web.project.create');
-    Route::post('projects', [ProjectController::class, 'store'])->name('web.project.store');
-
     Route::prefix('settings')->group(function () {
         Route::prefix('client-credential')->group(function () {
             Route::get('', [ClientCredentialController::class, 'index'])->name('web.client-credential.index');
@@ -63,12 +60,22 @@ Route::middleware('auth:web')->group(function () {
             Route::delete('/{issueTypeSchema}', [IssueTypeSchemaController::class, 'destroy'])->name('web.issue-type-schema.destroy');
         });
 
-        Route::prefix('projects')->group(function () {
-            Route::get('', [ProjectController::class, 'index'])->name('web.projects.index');
+        Route::prefix('project')->group(function () {
+            Route::get('', [ProjectController::class, 'index'])->name('web.project.index');
+            Route::post('', [ProjectController::class, 'store'])->name('web.project.store');
+            Route::delete('/{project}', [ProjectController::class, 'destroy'])->name('web.project.destroy');
+        });
+
+        Route::prefix('profile')->group(function () {
+            // Route::get('two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthenticationController::class, 'index']);
         });
     });
 
     Route::get('github', function () {
-        dd(GitHub::connection('main')->me()->show());
+
+        //$qr = new PragmaRX\Google2FA\Google2FA();
+        //return $qr->getQRCodeUrl(1,2,3);
     });
+
+
 });

@@ -45,11 +45,7 @@
 
                 <div class="flex justify-between mt-3">
                     <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
-                    <Link :href="route('web.project.create')" as="button" method="get" class="text-gray-400 border rounded border-gray-400 px-0.5 py-0.5 hover:shadow-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 text-gray-400">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </Link>
+
                 </div>
 
             </div>

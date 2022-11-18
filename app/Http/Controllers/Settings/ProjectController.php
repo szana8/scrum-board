@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\CreateProject;
 use App\Http\Resources\Project\ProjectResource;
+use App\Models\Project;
 use App\Models\User;
 use App\Services\ProjectService;
 use Illuminate\Http\Request;
@@ -29,28 +30,20 @@ class ProjectController extends Controller
         return Inertia::render('Settings/Tabs/Projects', [
             'users' => User::all(),
             'avatars' => Storage::allFiles('public/icons/project/avatars'),
+            'projects' => Project::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Modal
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  CreateProject  $request
-     * @return ProjectResource
      */
     public function store(CreateProject $request)
     {
         $this->projectService->create($request->validated());
+
+        return back(303);
     }
 
     /**
@@ -90,11 +83,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return back(303);
     }
 }

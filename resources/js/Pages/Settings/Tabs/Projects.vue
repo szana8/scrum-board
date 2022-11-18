@@ -56,7 +56,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="(this.searchAvatarString && !projectForm.avatar) || this.openAvatarPopup">
+                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="(this.searchAvatarString && !projectForm.icon) || this.openAvatarPopup">
                                                         <div class="flex flex-col w-full">
                                                             <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100" v-for="avatar in this.filteredAvatarArray" @click="selectAvatar(avatar)">
                                                                 <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
@@ -130,21 +130,23 @@
             </div>
 
             <div class="flex py-12">
-                <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Manage projects</h4>
-                    <p class="text-gray-400 text-sm mt-4">
-                        You may delete any of your existing project if they are no longer needed
-                    </p>
-                </div>
+                <ListOfItems :items="this.projects">
+                    <template #header>Manage Projects</template>
+                    <template #description>You may delete any of your existing projects if they are no longer needed</template>
+                    <template #emptyListDescription>There is no Project(s) created yet for your user.</template>
 
-                <div class="w-2/3">
-                    <div class="border border-gray-100 shadow-xl rounded-xl">
-                        <div class="p-12">
-
+                    <ListOfItem v-for="project in this.projects"
+                                :id="project.id"
+                                class="w-full flex justify-between space-y-2"
+                                :delete-link="route('web.project.destroy', [project.id])"
+                    >
+                        <div class="flex items-center space-x-2">
+                            <div>{{ project.name }}</div>
+                            <div class="text-xs text-gray-400">{{project.description}}</div>
                         </div>
-                    </div>
+                    </ListOfItem>
 
-                </div>
+                </ListOfItems>
             </div>
         </div>
     </settings>
@@ -154,17 +156,22 @@
 import Settings from "../Settings";
 import { Link } from '@inertiajs/inertia-vue3'
 import {useForm} from "@inertiajs/inertia-vue3";
+import ListOfItems from "../../../Components/ListOfItems";
+import ListOfItem from "../../../Components/ListOfItem";
 
 export default {
 
     props: {
         users: Array,
         avatars: Array,
+        projects: Array,
     },
 
     components: {
         Settings,
         Link,
+        ListOfItem,
+        ListOfItems,
     },
 
     data() {
@@ -181,7 +188,7 @@ export default {
                 description: null,
                 type: 'SOFTWARE',
                 default_assignee_id: null,
-                avatar: null,
+                icon: null,
             }),
             buttonText: 'Create',
             openPopup: false,
@@ -211,7 +218,7 @@ export default {
 
         searchAvatarInArray: function () {
             this.filteredAvatarArray = [];
-            this.projectForm.avatar = null;
+            this.projectForm.icon = null;
             this.avatars.filter(element =>{
                 if (element.toLowerCase().includes(this.searchAvatarString.toLowerCase())) {
                     this.filteredAvatarArray.push(element);
@@ -222,7 +229,7 @@ export default {
 
         selectAvatar: function (avatar) {
             this.searchAvatarString = avatar.match(/.*\/(.*)$/)[1];
-            this.projectForm.avatar = avatar;
+            this.projectForm.icon = avatar;
             this.openAvatarPopup = false;
         },
 
@@ -237,10 +244,13 @@ export default {
                 onSuccess: () => {
                     this.projectForm.reset();
                     this.projectForm.default_assignee_id = null;
+                    this.projectForm.icon = null;
                     this.searchString = null;
                     this.formAction = route('web.project.store');
                     this.buttonText = 'Create';
                     this.formMethod = 'post';
+                    this.openPopup = false;
+                    this.openAvatarPopup = false;
                 }
             });
         },

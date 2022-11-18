@@ -94,8 +94,6 @@ export default {
                 name: '',
                 uri: '',
             }),
-
-            deleteCredentialForm: useForm({}),
         }
     },
 

@@ -46,7 +46,7 @@
                         </SettingsLink>
                     </li>
                     <li class="">
-                        <SettingsLink :href="route('web.projects.index')"
+                        <SettingsLink :href="route('web.project.index')"
                                       method="get"
                                       :active="$page.component === 'Settings/Tabs/Projects'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">

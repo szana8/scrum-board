@@ -7,7 +7,6 @@
               method="delete"
               as="button"
               preserve-scroll
-              :only="['clientCredentials']"
               class="href text-red-600 font-semibold text-sm"
         >
             Delete

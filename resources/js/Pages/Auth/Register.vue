@@ -17,13 +17,23 @@
 
         <div class="md:w-1/2 md:flex items-center mt-12 md:mt-0">
             <div class="w-full px-24">
-                <div class="text-3xl font-bold text-gray-700">Sing in to Tassking.io</div>
+                <div class="text-3xl font-bold text-gray-700">Register into Tassking.io</div>
                 <div class="flex space-x-1 mt-1">
-                    <p class="text-gray-500">Don't have an account?</p>
-                    <Link :href="route('register.create')" class="href text-indigo-400 font-semibold">Sign up!</Link>
+                    <p class="text-gray-500">Already have an account?</p>
+                    <Link :href="route('login')" class="href text-indigo-400 font-semibold">Sign in!</Link>
                 </div>
 
                 <form class="mt-8" method="POST" @submit.prevent="submit">
+                    <div class="p-0.5 text-gray-500 font-semibold">Name</div>
+                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" width="24" height="24" stroke="currentColor" class="m-4 stroke-gray-300">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+
+                        <input class="w-11/12 bg-white py-3 px-4 border-0 focus:border-transparent focus:ring-0  placeholder:text-gray-400" type="text" placeholder="John Doe" v-model="form.name" />
+                    </div>
+                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="form.errors.name" v-text="form.errors.name"></p>
+
                     <div class="p-0.5 text-gray-500 font-semibold">E-mail</div>
                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" class="m-4 stroke-gray-300">
@@ -44,37 +54,23 @@
                     </div>
                     <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="form.errors.password" v-text="form.errors.password"></p>
 
-                    <div class="flex justify-between mt-4 md:px-2">
-                        <div class="flex items-center">
-                            <input id="remember-me" class="w-4 h-4 rounded border-gray-400 checked:bg-indigo-400 focus:bg-indigo-400" type="checkbox" name="remember">
-                            <label for="remember-me" class="ml-2 mt-0.5 text-sm font-bold text-indigo-400 hover:text-indigo-600 cursor-pointer">
-                                Remember me
-                            </label>
-                        </div>
-                        <div>
-                            <a href="#" class="font-semibold text-sm no-underline text-gray-400 hover:text-indigo-400">Forgot your password?</a>
-                        </div>
+                    <div class="p-0.5 text-gray-500 font-semibold mt-6">Password Confirmation</div>
+                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" class="m-4 stroke-gray-300">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+
+                        <input class="w-11/12 bg-white py-3 px-4 border-0 focus:border-transparent focus:ring-0 placeholder:text-gray-400" type="password" placeholder="Password confirmation" v-model="form.passwordConfirmation" />
+
                     </div>
+                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="form.errors.passwordConfirmation" v-text="form.errors.passwordConfirmation"></p>
 
                     <div class="mt-6">
                         <button type="submit" class="w-full py-6 px rounded-xl bg-indigo-400 shadow-md text-white uppercase font-bold hover:bg-indigo-600">
-                            Sign In
+                            Sign Up
                         </button>
                     </div>
                 </form>
-
-
-                <div class="flex justify-between mt-6 space-x-2">
-                    <a href="#" class="href w-1/3 border border-gray-300 py-2 rounded flex justify-center hover:border-indigo-400">
-                        <img src="storage/icons/google.svg" alt="" class="w-6 h-6 grayscale">
-                    </a>
-                    <a href="#" class="href w-1/3 border border-gray-300 py-2 rounded flex justify-center hover:border-indigo-400">
-                        <img src="storage/icons/facebook.svg" alt="" class="w-6 h-6 grayscale">
-                    </a>
-                    <a href="#" class="href w-1/3 border border-gray-300 py-2 rounded flex justify-center hover:border-indigo-400">
-                        <img src="storage/icons/github.svg" alt="" class="w-6 h-6 grayscale">
-                    </a>
-                </div>
 
             </div>
         </div>
@@ -94,8 +90,10 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3'
 
 let form = useForm({
-    email: '',
-    password: '',
+    name: null,
+    email: null,
+    password: null,
+    passwordConfirmation: null,
 });
 
 let submit = () => {
