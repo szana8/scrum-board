@@ -55,7 +55,7 @@ class TwoFactorAuthenticationController extends Controller
             })->all())),
         ])->save();
 
-        return back(303);
+        return back()->with('status', 'two-factor-authentication-enabled');
     }
 
     public function show()
@@ -67,8 +67,7 @@ class TwoFactorAuthenticationController extends Controller
         return response()->json([
             'svg' => $this->twoFactorQrCodeSvg(),
             'url' => $this->twoFactorQrCodeUrl(),
-            'secretKey' => decrypt(Auth::user()->two_factor_secret),
-            'recoveryCodes' => json_decode(decrypt(Auth::user()->two_factor_recovery_codes), true)
+            'setupKey' => decrypt(Auth::user()->two_factor_secret),
         ]);
     }
 

@@ -1923,14 +1923,6 @@ var map = {
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
 	],
-	"./Auth/Profile": [
-		"./resources/js/Pages/Auth/Profile.vue",
-		"resources_js_Pages_Auth_Profile_vue"
-	],
-	"./Auth/Profile.vue": [
-		"./resources/js/Pages/Auth/Profile.vue",
-		"resources_js_Pages_Auth_Profile_vue"
-	],
 	"./Auth/Register": [
 		"./resources/js/Pages/Auth/Register.vue",
 		"resources_js_Pages_Auth_Register_vue"
@@ -1954,6 +1946,22 @@ var map = {
 	"./Boards.vue": [
 		"./resources/js/Pages/Boards.vue",
 		"resources_js_Pages_Boards_vue"
+	],
+	"./Profile/Partials/TwoFactorAuthenticationForm": [
+		"./resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+		"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue"
+	],
+	"./Profile/Partials/TwoFactorAuthenticationForm.vue": [
+		"./resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+		"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue"
+	],
+	"./Profile/Profile": [
+		"./resources/js/Pages/Profile/Profile.vue",
+		"resources_js_Pages_Profile_Profile_vue"
+	],
+	"./Profile/Profile.vue": [
+		"./resources/js/Pages/Profile/Profile.vue",
+		"resources_js_Pages_Profile_Profile_vue"
 	],
 	"./Reports": [
 		"./resources/js/Pages/Reports.vue",
