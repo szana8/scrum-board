@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => Auth::user() ? [
                     'username' => Auth::user()->name,
+                    'email' => Auth::user()->email,
                     'avatar' => Auth::user()->avatar(),
                     'two_factor_enabled' => ! is_null(Auth::user()->two_factor_secret),
                 ] : null,

@@ -34,9 +34,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
     document.addEventListener('keydown', onEscape);
-    this.$once('hook:beforeDestroy', function () {
-      document.removeEventListener('keydown', onEscape);
-    });
   }
 });
 
@@ -734,6 +731,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["href", "active"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_side_link, {
     href: _ctx.route('logout'),
+    method: "post",
     "class": "flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -1915,6 +1913,22 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
+	"./Auth/EmailVerify": [
+		"./resources/js/Pages/Auth/EmailVerify.vue",
+		"resources_js_Pages_Auth_EmailVerify_vue"
+	],
+	"./Auth/EmailVerify.vue": [
+		"./resources/js/Pages/Auth/EmailVerify.vue",
+		"resources_js_Pages_Auth_EmailVerify_vue"
+	],
+	"./Auth/ForgotPassword": [
+		"./resources/js/Pages/Auth/ForgotPassword.vue",
+		"resources_js_Pages_Auth_ForgotPassword_vue"
+	],
+	"./Auth/ForgotPassword.vue": [
+		"./resources/js/Pages/Auth/ForgotPassword.vue",
+		"resources_js_Pages_Auth_ForgotPassword_vue"
+	],
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
@@ -1930,6 +1944,14 @@ var map = {
 	"./Auth/Register.vue": [
 		"./resources/js/Pages/Auth/Register.vue",
 		"resources_js_Pages_Auth_Register_vue"
+	],
+	"./Auth/ResetPassword": [
+		"./resources/js/Pages/Auth/ResetPassword.vue",
+		"resources_js_Pages_Auth_ResetPassword_vue"
+	],
+	"./Auth/ResetPassword.vue": [
+		"./resources/js/Pages/Auth/ResetPassword.vue",
+		"resources_js_Pages_Auth_ResetPassword_vue"
 	],
 	"./Backlog": [
 		"./resources/js/Pages/Backlog.vue",

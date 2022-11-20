@@ -46,9 +46,7 @@ export default {
             }
         }
         document.addEventListener('keydown', onEscape);
-        this.$once('hook:beforeDestroy', () => {
-            document.removeEventListener('keydown', onEscape)
-        })
+
     },
 };
 </script>

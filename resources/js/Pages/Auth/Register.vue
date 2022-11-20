@@ -63,7 +63,7 @@
                         <input class="w-11/12 bg-white py-3 px-4 border-0 focus:border-transparent focus:ring-0 placeholder:text-gray-400" type="password" placeholder="Password confirmation" v-model="form.passwordConfirmation" />
 
                     </div>
-                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="form.errors.passwordConfirmation" v-text="form.errors.passwordConfirmation"></p>
+                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="form.errors.password_confirmation" v-text="form.errors.password_confirmation"></p>
 
                     <div class="mt-6">
                         <button type="submit" class="w-full py-6 px rounded-xl bg-indigo-400 shadow-md text-white uppercase font-bold hover:bg-indigo-600">
@@ -93,10 +93,10 @@ let form = useForm({
     name: null,
     email: null,
     password: null,
-    passwordConfirmation: null,
+    password_confirmation: null,
 });
 
 let submit = () => {
-    form.post('/login');
+    form.post(route('register'));
 };
 </script>

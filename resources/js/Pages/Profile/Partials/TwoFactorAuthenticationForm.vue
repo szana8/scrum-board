@@ -123,6 +123,7 @@ const enableTwoFactorAuthentication = () => {
         preserveScroll: true,
         onSuccess: () => Promise.all([
             showQrCode(),
+            //showSetupKey(),
             showRecoveryCodes(),
         ]),
         onFinish: () => {
@@ -133,14 +134,20 @@ const enableTwoFactorAuthentication = () => {
 };
 
 const showQrCode = () => {
-    return axios.get(route('two-factor-qr-code.index')).then(response => {
+    return axios.get(route('two-factor.qr-code')).then(response => {
         qrCode.value = response.data.svg;
         setupKey.value = response.data.setupKey;
     });
 };
 
+const showSetupKey = () => {
+    return axios.get(route('two-factor.secret-key')).then(response => {
+        setupKey.value = response.data.setupKey;
+    });
+};
+
 const showRecoveryCodes = () => {
-    return axios.get(route('two-factor-recovery-code.index')).then(response => {
+    return axios.get(route('two-factor.recovery-codes')).then(response => {
         console.log(response.data);
         recoveryCodes.value = response.data;
     });

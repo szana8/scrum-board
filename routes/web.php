@@ -6,7 +6,6 @@ use App\Http\Controllers\Settings\GitTokenController;
 use App\Http\Controllers\Settings\IssueTypeController;
 use App\Http\Controllers\Settings\IssueTypeSchemaController;
 use App\Http\Controllers\Settings\ProjectController;
-use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,7 +20,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::middleware(['auth:web', '2fa'])->group(function () {
+Route::middleware(['auth:web'])->group(function () {
     Route::redirect('/', '/roadmap');
     Route::get('/roadmap', [DashboardController::class, 'index'])->name('web.roadmap.index');
     Route::get('/board', [DashboardController::class, 'boards'])->name('web.boards.index');
