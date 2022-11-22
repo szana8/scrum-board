@@ -116,15 +116,13 @@
 </template>
 
 <script>
-import axios from "axios";
 import {useForm, usePage} from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3'
 import TwoFactorAuthenticationForm from "./Partials/TwoFactorAuthenticationForm"
 
 export default {
-
     props: {
-        clientCredentials: Array,
+        passwordConfirmed: false,
     },
 
     components: {
@@ -150,7 +148,7 @@ export default {
     methods: {
         updateProfileInformation: function () {
             this.profileForm.put(route('user-profile-information.update'));
-        }
+        },
     }
 }
 

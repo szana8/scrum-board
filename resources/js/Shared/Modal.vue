@@ -5,10 +5,9 @@ const { show, close, redirect } = useModal()
 </script>
 
 
-
 <template>
     <TransitionRoot appear as="template" :show="show">
-        <Dialog as="div" class="relative z-10">
+        <Dialog as="div" class="relative z-10" @close="close">
             <TransitionChild
                 @after-leave="redirect"
                 as="template"

@@ -1953,6 +1953,14 @@ var map = {
 		"./resources/js/Pages/Auth/ResetPassword.vue",
 		"resources_js_Pages_Auth_ResetPassword_vue"
 	],
+	"./Auth/TwoFactorChallengeView": [
+		"./resources/js/Pages/Auth/TwoFactorChallengeView.vue",
+		"resources_js_Pages_Auth_TwoFactorChallengeView_vue"
+	],
+	"./Auth/TwoFactorChallengeView.vue": [
+		"./resources/js/Pages/Auth/TwoFactorChallengeView.vue",
+		"resources_js_Pages_Auth_TwoFactorChallengeView_vue"
+	],
 	"./Backlog": [
 		"./resources/js/Pages/Backlog.vue",
 		"resources_js_Pages_Backlog_vue"

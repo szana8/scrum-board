@@ -130,7 +130,7 @@ return [
     | these features or you can even remove all of these if you need to.
     |
     */
-
+    // Ukvirxkrhu-Ymg2Q7Jt8q
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
@@ -138,7 +138,7 @@ return [
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([
-            'confirm' => true,
+            'confirm' => false,
             'confirmPassword' => false,
             // 'window' => 0,
         ]),
