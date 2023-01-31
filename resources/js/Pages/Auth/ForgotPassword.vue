@@ -45,7 +45,7 @@ export default {
 </script>
 
 <script setup>
-import {useForm, Head} from "@inertiajs/inertia-vue3";
+import {useForm, Head} from "@inertiajs/vue3";
 
 defineProps({
     status: String,

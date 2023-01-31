@@ -12,15 +12,16 @@ use Inertia\Inertia;
 
 class IssueTypeController extends Controller
 {
-    public function __construct(readonly private IssueTypeService $issueTypeService)
-    {
+    public function __construct(
+        private readonly IssueTypeService $issueTypeService
+    ) {
     }
 
     public function index()
     {
         return Inertia::render('Settings/Tabs/IssueTypes', [
             'icons' => Storage::allFiles('public/icons/issue_types'),
-            'issueTypes' => $this->issueTypeService->issueTypes(),
+            'issueTypes' => $this->issueTypeService->issueTypes()
         ]);
     }
 

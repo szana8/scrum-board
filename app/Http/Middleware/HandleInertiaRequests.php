@@ -44,20 +44,24 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => Auth::user() ? [
-                    'username' => Auth::user()->name,
-                    'email' => Auth::user()->email,
-                    'avatar' => Auth::user()->avatar(),
-                    'two_factor_enabled' => ! is_null(Auth::user()->two_factor_secret),
-                ] : null,
+                'user' => Auth::user()
+                    ? [
+                        'username' => Auth::user()->name,
+                        'email' => Auth::user()->email,
+                        'avatar' => Auth::user()->avatar,
+                        'two_factor_enabled' => !is_null(
+                            Auth::user()->two_factor_secret
+                        )
+                    ]
+                    : null
             ],
             'csrf_token' => csrf_token(),
             'sidebar' => function () {
                 return [
-                    'projects' => Inertia::lazy(fn () => Project::all()),
+                    'projects' => Inertia::lazy(fn() => Project::all())
                 ];
             },
-            'flash' => $request->session()->get('flash', []),
+            'flash' => $request->session()->get('flash', [])
         ]);
     }
 }

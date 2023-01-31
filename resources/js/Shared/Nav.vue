@@ -77,19 +77,14 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import {computed} from "vue";
 import NavLink from "../Components/NavLink";
-import Logo from "../Components/Logo";
 import Dropdown from "../Components/Dropdown";
+import {usePage} from "@inertiajs/vue3";
 
-export default {
-    name: "Nav",
-    components: { NavLink, Logo, Dropdown },
-    computed: {
-        avatar() {
-            return this.$page.props.auth.user.avatar;
-        },
-    }
-}
+const avatar = computed( ()=>{
+    return usePage().props.auth.user.avatar;
+})
 </script>
 

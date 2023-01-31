@@ -94,9 +94,8 @@
 </template>
 
 <script>
-import {useForm} from "@inertiajs/inertia-vue3";
 import Settings from "../Settings";
-import {Link} from "@inertiajs/inertia-vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import SearchableDropdown from "../../../Components/SearchableDropdown";
 
 export default {

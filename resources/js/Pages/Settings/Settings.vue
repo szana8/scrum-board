@@ -7,14 +7,12 @@
                     <li class="">
                         <SettingsLink :href="route('web.client-credential.index')"
                                       :active="$page.component === 'Settings/Tabs/ClientCredentials'"
-                                      method="get"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Client Credentials
                         </SettingsLink>
                     </li>
                     <li class="">
                         <SettingsLink :href="route('web.git-token.index')"
-                                      method="get"
                                       :active="$page.component === 'Settings/Tabs/GitIntegration'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Git Integration
@@ -22,7 +20,6 @@
                     </li>
                     <li class="">
                         <SettingsLink :href="route('web.issue-type.index')"
-                                      method="get"
                                       :active="$page.component === 'Settings/Tabs/IssueTypes'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Issue Types
@@ -31,7 +28,6 @@
                     </li>
                     <li class="">
                         <SettingsLink :href="route('web.issue-type-schema.index')"
-                                      method="get"
                                       :active="$page.component === 'Settings/Tabs/IssueTypeSchemes'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Issue Types Schemes
@@ -39,7 +35,6 @@
                     </li>
                     <li class="">
                         <SettingsLink :href="route('web.issue-type.index')"
-                                      method="get"
                                       :active="$page.component === 'Settings/Tabs/Teams'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Teams
@@ -47,7 +42,6 @@
                     </li>
                     <li class="">
                         <SettingsLink :href="route('web.project.index')"
-                                      method="get"
                                       :active="$page.component === 'Settings/Tabs/Projects'"
                                       class="px-3 py-2 rounded border border-gray-200 text-gray-600">
                             Projects
@@ -67,6 +61,7 @@
 
 <script>
 import SettingsLink from './Shared/SettingsLink';
+
 export default {
     name: "Settings",
     components: { SettingsLink },

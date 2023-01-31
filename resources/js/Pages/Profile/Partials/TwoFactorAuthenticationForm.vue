@@ -123,11 +123,9 @@
 </template>
 
 <script setup>
-import { useForm, usePage } from '@inertiajs/inertia-vue3';
-import { ref, computed, watch } from 'vue';
+import {Link, router, useForm, usePage} from '@inertiajs/vue3';
+import {computed, ref, watch} from 'vue';
 import axios from "axios";
-import { Link } from '@inertiajs/inertia-vue3'
-import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
     requiresConfirmation: true,
@@ -157,7 +155,7 @@ watch(twoFactorEnabled, () => {
 
 const enableTwoFactorAuthentication = () => {
     enabling.value = true;
-    Inertia.post(route('two-factor.enable'), {}, {
+    router.post(route('two-factor.enable'), {}, {
         preserveScroll: true,
         onSuccess: () => Promise.all([
             showQrCode(),

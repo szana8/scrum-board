@@ -20,23 +20,14 @@
     <Modal />
 </template>
 
-<script>
-import {Head} from "@inertiajs/inertia-vue3";
-import Sidebar from "./Sidebar";
-import Nav from "./Nav";
-
-export default {
-    name: "Layout",
-    components: {Sidebar, Head, Nav },
-
-    computed: {
-        username() {
-            return this.$page.props.auth.user.username;
-        }
-    },
-}
-</script>
-
 <script setup>
-import { Modal } from 'momentum-modal'
+import Nav from "./Nav";
+import {computed} from "vue";
+import Sidebar from "./Sidebar";
+import {Modal} from 'momentum-modal'
+import {Head, usePage} from "@inertiajs/vue3";
+
+const username = computed( ()=>{
+    return usePage().props.auth.user.username;
+})
 </script>

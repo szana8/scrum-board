@@ -116,8 +116,7 @@
 </template>
 
 <script>
-import {useForm, usePage} from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3'
+import {Link, useForm} from "@inertiajs/vue3";
 import TwoFactorAuthenticationForm from "./Partials/TwoFactorAuthenticationForm"
 
 export default {
