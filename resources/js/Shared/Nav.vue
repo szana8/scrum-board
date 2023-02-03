@@ -74,6 +74,8 @@
             </ul>
 
         </nav>
+
+        <create-issue-modal />
     </div>
 </template>
 
@@ -82,6 +84,7 @@ import {computed} from "vue";
 import NavLink from "../Components/NavLink";
 import Dropdown from "../Components/Dropdown";
 import {usePage} from "@inertiajs/vue3";
+import CreateIssueModal from "../Components/CreateIssueModal.vue";
 
 const avatar = computed( ()=>{
     return usePage().props.auth.user.avatar;

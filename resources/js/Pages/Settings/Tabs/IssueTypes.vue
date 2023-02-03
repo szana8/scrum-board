@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="w-2/3">
-                                    <SearchableDropdown :label="'Icon'" :items="icons" @select="selectIcon" v-slot="iconProps" :searchString="this.searchString" ref="searchComponent">
+                                    <SearchableDropdown :label="'Icon'" :items="icons" @select="selectIcon" v-slot="iconProps" ref="searchComponent">
                                         <div class="flex w-full items-center text p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                             <div class="w-6 flex flex-col items-center">
                                                 <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
@@ -39,7 +39,7 @@
                                                 </div>
                                             </div>
                                             <div class="w-full items-center flex">
-                                                <div class="mx-2 -mt-1  "> {{ iconProps.item.match(/.*\/(.*)$/)[1] }}</div>
+                                                <div class="mx-2 -mt-1  ">{{ iconProps.item.match(/.*\/(.*)$/)[1] }}</div>
                                             </div>
                                         </div>
                                     </SearchableDropdown>
@@ -132,7 +132,7 @@ export default {
         selectIcon: function (icon) {
             this.issueTypeForm.icon = icon.replace('public', 'storage');
             this.searchString = icon.match(/.*\/(.*)$/)[1];
-            this.$refs.searchComponent.searchString = this.searchString;
+            this.$refs.searchComponent.refreshSearchItem(this.searchString);
         },
 
         submit: function () {
@@ -141,7 +141,7 @@ export default {
                     this.issueTypeForm.reset();
                     this.issueTypeForm.icon = null;
                     this.searchString = '';
-                    this.$refs.searchComponent.searchString = this.searchString;
+                    this.$refs.searchComponent.refreshSearchItem('');
                     this.formAction = route('web.issue-type.store');
                     this.buttonText = 'Create';
                     this.formMethod = 'post';
@@ -157,7 +157,7 @@ export default {
             this.formAction = route('web.issue-type.update', issueType.id);
             this.buttonText = 'Update';
             this.formMethod = 'put';
-            this.$refs.searchComponent.searchString = this.searchString;
+            this.$refs.searchComponent.refreshSearchItem(this.searchString);
         }
     }
 }

@@ -12,6 +12,10 @@ createInertiaApp({
             page.layout = Layout;
         }
 
+        if (page.floating === undefined) {
+            page.floating = false;
+        }
+
         return page;
     },
     setup({ el, App, props, plugin }) {

@@ -27,7 +27,7 @@ import Sidebar from "./Sidebar";
 import {Modal} from 'momentum-modal'
 import {Head, usePage} from "@inertiajs/vue3";
 
-const username = computed( ()=>{
+const username = computed( ()=> {
     return usePage().props.auth.user.username;
 })
 </script>
