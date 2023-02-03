@@ -67,8 +67,7 @@
 </template>
 
 <script>
-import {useForm} from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3'
+import {Link, useForm} from "@inertiajs/vue3";
 import Settings from "../Settings";
 import NewClientCredential from "../Shared/NewClientCredential";
 import ListOfItems from "../../../Components/ListOfItems";

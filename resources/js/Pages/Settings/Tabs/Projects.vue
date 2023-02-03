@@ -154,8 +154,7 @@
 
 <script>
 import Settings from "../Settings";
-import { Link } from '@inertiajs/inertia-vue3'
-import {useForm} from "@inertiajs/inertia-vue3";
+import {Link, useForm} from '@inertiajs/vue3'
 import ListOfItems from "../../../Components/ListOfItems";
 import ListOfItem from "../../../Components/ListOfItem";
 

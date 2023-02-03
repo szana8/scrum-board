@@ -26,12 +26,10 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: "ListOfItems",
+<script setup>
 
-    props: {
-        items: Array,
-    }
-}
+defineProps({
+    items: Array,
+})
+
 </script>

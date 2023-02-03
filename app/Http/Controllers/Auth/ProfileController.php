@@ -22,7 +22,8 @@ class ProfileController extends Controller
     public function index()
     {
         return Inertia::render('Profile/Profile', [
-            'requiresConfirmation' => true
+            'requiresConfirmation' => true,
+            'passwordConfirmed' => false,
         ]);
     }
 

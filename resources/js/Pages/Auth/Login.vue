@@ -20,7 +20,7 @@
                 <div class="text-3xl font-bold text-gray-700">Sing in to Tassking.io</div>
                 <div class="flex space-x-1 mt-1">
                     <p class="text-gray-500">Don't have an account?</p>
-                    <Link :href="route('register.create')" class="href text-indigo-400 font-semibold">Sign up!</Link>
+                    <Link :href="route('register')" class="href text-indigo-400 font-semibold">Sign up!</Link>
                 </div>
 
                 <form class="mt-8" method="POST" @submit.prevent="submit">
@@ -52,7 +52,7 @@
                             </label>
                         </div>
                         <div>
-                            <a href="#" class="font-semibold text-sm no-underline text-gray-400 hover:text-indigo-400">Forgot your password?</a>
+                            <a href="/forgot-password" class="font-semibold text-sm no-underline text-gray-400 hover:text-indigo-400">Forgot your password?</a>
                         </div>
                     </div>
 
@@ -90,8 +90,7 @@ export default {
 </script>
 
 <script setup>
-import {useForm} from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3'
+import {Link, useForm} from "@inertiajs/vue3";
 
 let form = useForm({
     email: '',
@@ -99,6 +98,6 @@ let form = useForm({
 });
 
 let submit = () => {
-    form.post('/login');
+    form.post(route('login'));
 };
 </script>

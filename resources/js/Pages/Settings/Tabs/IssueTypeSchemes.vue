@@ -52,49 +52,6 @@
                                             </div>
                                         </div>
                                     </SearchableDropdown>
-
-
-                                    <!-- <div class="flex flex-col items-center">
-                                        <div class="w-full flex flex-col items-center">
-                                            <div class="w-full">
-                                                <div class="flex flex-col items-center relative">
-                                                    <div class="w-full">
-                                                        <div class="p-0.5 text-gray-500 font-semibold">
-                                                            Icons
-                                                        </div>
-                                                        <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
-                                                            <div class="flex flex-auto flex-wrap"></div>
-                                                            <input placeholder="Search by name" class="p-1 px-2 appearance-none outline-none w-full text-gray-800" v-model="searchString" v-on:keyup="this.searchStringInArray()">
-                                                            <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
-                                                                <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none" type="button" @click="this.openPopup = !this.openPopup">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
-                                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="this.openPopup">
-                                                        <div class="flex flex-col w-full py-3">
-                                                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b" v-for="issueType in this.filteredArray" :class="calculateActiveClass(issueType.id)" @click="selectIcon(issueType)">
-                                                                <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                                                                    <div class="w-6 flex flex-col items-center">
-                                                                        <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
-                                                                            <img class="" alt="" :src="'../'+issueType.icon">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="w-full items-center flex">
-                                                                        <div class="mx-2 -mt-1  "> {{ issueType.name }}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
 
@@ -145,9 +102,8 @@
 </template>
 
 <script>
-import {useForm} from "@inertiajs/inertia-vue3";
 import Settings from "../Settings";
-import {Link} from "@inertiajs/inertia-vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import SearchableDropdown from "../../../Components/SearchableDropdown";
 
 export default {
@@ -174,7 +130,6 @@ export default {
                 description: '',
                 issueTypes: []
             }),
-            openPopup: false,
         }
     },
 
@@ -204,14 +159,14 @@ export default {
                 this.issueTypeSchemaForm.issueTypes.splice(index, 1);
             }
 
-            this.$refs.searchComponent.selectedItems = this.issueTypeSchemaForm.issueTypes;
+            this.$refs.searchComponent.refreshSelectedItems(this.issueTypeSchemaForm.issueTypes);
         },
 
         edit: function (issueTypeSchema) {
             this.issueTypeSchemaForm.name = issueTypeSchema.name;
             this.issueTypeSchemaForm.description = issueTypeSchema.description;
             this.issueTypeSchemaForm.issueTypes = issueTypeSchema.type_ids;
-            this.$emit.selectedItems = this.issueTypeSchemaForm.issueTypes;
+            this.$refs.searchComponent.refreshSelectedItems(this.issueTypeSchemaForm.issueTypes);
             this.formAction = route('web.issue-type-schema.update', issueTypeSchema.id);
             this.buttonText = 'Update';
             this.formMethod = 'put';
@@ -222,25 +177,14 @@ export default {
                 onSuccess: () => {
                     this.issueTypeSchemaForm.reset();
                     this.searchString = null;
-                    this.openPopup = false;
                     this.formAction = route('web.issue-type-schema.store');
                     this.buttonText = 'Create';
                     this.formMethod = 'post';
-                    this.$emit.selectedItems = [];
-                    this.$emit.openPopup = false;
+                    this.$refs.searchComponent.refreshSelectedItems([]);
+                    this.$refs.searchComponent.closeDropdown();
                 }
             })
         },
-
-        calculateActiveClass: function(issueType) {
-            const index = this.issueTypeSchemaForm.issueTypes.indexOf(issueType);
-
-            if (index === -1) {
-                return 'bg-white hover:bg-teal-100';
-            } else {
-                return 'bg-blue-300 hover:bg-blue-100';
-            }
-        }
     }
 }
 </script>

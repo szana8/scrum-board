@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="w-2/3">
-                        <form class="mt-8" method="POST" @submit.prevent="this.submit">
+                        <form class="mt-8" method="POST" @submit.prevent="this.updateProfileInformation">
                             <div class="border border-gray-100 shadow-xl rounded-xl">
                                 <div class="p-12 space-y-5">
                                     <div>
@@ -83,7 +83,7 @@
                                     </div>
 
                                     <div>
-                                        <div class="p-0.5 text-gray-500 font-semibold">New Password</div>
+                                        <div class="p-0.5 text-gray-500 font-semibold">Confirm Password</div>
                                         <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
                                             <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400"
                                                    type="password"
@@ -116,15 +116,12 @@
 </template>
 
 <script>
-import axios from "axios";
-import {useForm, usePage} from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3'
+import {Link, useForm} from "@inertiajs/vue3";
 import TwoFactorAuthenticationForm from "./Partials/TwoFactorAuthenticationForm"
 
 export default {
-
     props: {
-        clientCredentials: Array,
+        passwordConfirmed: false,
     },
 
     components: {
@@ -135,8 +132,8 @@ export default {
     data() {
         return {
             profileForm: useForm({
-                name: null,
-                email: null,
+                name: this.$page.props.auth.user.username,
+                email: this.$page.props.auth.user.email,
             }),
 
             passwordChangeForm: useForm({
@@ -148,7 +145,9 @@ export default {
     },
 
     methods: {
-
+        updateProfileInformation: function () {
+            this.profileForm.put(route('user-profile-information.update'));
+        },
     }
 }
 
