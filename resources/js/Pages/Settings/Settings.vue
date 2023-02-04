@@ -3,7 +3,7 @@
         <h2 class="text-gray-800 text-4xl font-semibold">Settings</h2>
         <div class="divide-y">
             <div class="py-12">
-                <ul class="space-x-2 flex text-xs font-bold">
+                <ul class="space-x-2 flex text-sm font-bold">
                     <li class="">
                         <SettingsLink :href="route('web.client-credential.index')"
                                       :active="$page.component === 'Settings/Tabs/ClientCredentials'"

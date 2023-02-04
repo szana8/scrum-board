@@ -3,40 +3,42 @@
         <div class="space-y-28 divide-y">
             <div class="flex">
                 <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Create Oauth Client Credentials</h4>
-                    <p class="text-gray-400 text-sm mt-4">
-                        Oauth client credentials allow to services or other applications to identify themself and access the data from outside.
-                    </p>
+                    <settings-description
+                        :title="'Create Oauth Client Credentials'"
+                        :description="'Oauth client credentials allow to services or other applications to identify themself and access the data from outside.'"
+                    />
                 </div>
 
                 <div class="w-2/3">
                     <form class="mt-8" method="POST" @submit.prevent="submit()">
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
-                                <NewClientCredential class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200" v-if="this.$page.props.flash.success"
+                                <new-client-credential class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200" v-if="this.$page.props.flash.success"
                                                      :client-id="this.$page.props.flash.success.clientId"
                                                      :client-secret="this.$page.props.flash.success.clientSecret"
                                 />
 
-                                <div>
-                                    <div class="p-0.5 text-gray-500 font-semibold">What should we name the client?</div>
-                                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Client Name" v-model="state.clientCredentialForm.name" />
-                                    </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.clientCredentialForm.errors.name" v-text="state.clientCredentialForm.errors.name"></p>
-                                </div>
+                                <standard-input-field
+                                    v-model="state.clientCredentialForm.name"
+                                    :error="state.clientCredentialForm.errors.name"
+                                    :label="'What should we name the client?'"
+                                    :placeholder="'Client Name'"
+                                />
 
-                                <div>
-                                    <div class="p-0.5 text-gray-500 font-semibold">Where should we redirect the request after authorization?</div>
-                                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="http://localhost/auth/callback" v-model="state.clientCredentialForm.uri" />
-                                    </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.clientCredentialForm.errors.uri" v-text="state.clientCredentialForm.errors.uri"></p>
-                                </div>
+                                <standard-input-field
+                                    v-model="state.clientCredentialForm.uri"
+                                    :error="state.clientCredentialForm.errors.uri"
+                                    :label="'Where should we redirect the request after authorization?'"
+                                    :placeholder="'http://localhost/auth/callback'"
+
+                                />
+
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">Create</button>
+                                <standard-button
+                                    :text="'Create'"
+                                />
                             </div>
                         </div>
                     </form>
@@ -44,12 +46,16 @@
             </div>
 
             <div class="flex py-12">
-                <ListOfItems :items="this.clientCredentials">
-                    <template #header>Manage Client Credentials</template>
-                    <template #description>You may delete any of your existing client credentials if they are no longer needed</template>
+                <list-of-items :items="this.clientCredentials">
+                    <template #description>
+                        <settings-description
+                            :title="'Manage Client Credentials'"
+                            :description="'You may delete any of your existing client credentials if they are no longer needed'"
+                        />
+                    </template>
                     <template #emptyListDescription>There is no Client Credential(s) created yet for your user.</template>
 
-                    <ListOfItem v-for="clientCredential in this.clientCredentials"
+                    <list-of-item v-for="clientCredential in this.clientCredentials"
                                 :id="clientCredential.id"
                                 class="w-full flex justify-between space-y-2"
                                 :delete-link="route('web.client-credential.destroy', [clientCredential.id])"
@@ -58,9 +64,9 @@
                             <div>{{ clientCredential.name }}</div>
                             <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
                         </div>
-                    </ListOfItem>
+                    </list-of-item>
 
-                </ListOfItems>
+                </list-of-items>
             </div>
         </div>
     </settings>
@@ -72,6 +78,9 @@ import Settings from "../Settings";
 import NewClientCredential from "../Shared/NewClientCredential";
 import ListOfItems from "../../../Components/ListOfItems";
 import ListOfItem from "../../../Components/ListOfItem";
+import StandardInputField from "../../../Components/StanardInputField.vue"
+import StandardButton from "../../../Components/StandardButton.vue"
+import SettingsDescription from "../Shared/SettingDescription.vue"
 import {reactive} from "vue";
 
 defineProps({

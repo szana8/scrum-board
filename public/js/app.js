@@ -2277,6 +2277,14 @@ var map = {
 		"./resources/js/Pages/Settings/Shared/NewClientCredential.vue",
 		"resources_js_Pages_Settings_Shared_NewClientCredential_vue"
 	],
+	"./Settings/Shared/SettingDescription": [
+		"./resources/js/Pages/Settings/Shared/SettingDescription.vue",
+		"resources_js_Pages_Settings_Shared_SettingDescription_vue"
+	],
+	"./Settings/Shared/SettingDescription.vue": [
+		"./resources/js/Pages/Settings/Shared/SettingDescription.vue",
+		"resources_js_Pages_Settings_Shared_SettingDescription_vue"
+	],
 	"./Settings/Shared/SettingsLink": [
 		"./resources/js/Pages/Settings/Shared/SettingsLink.vue",
 		"resources_js_Pages_Settings_Shared_SettingsLink_vue"
