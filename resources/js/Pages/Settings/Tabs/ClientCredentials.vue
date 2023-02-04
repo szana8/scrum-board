@@ -30,9 +30,7 @@
                                     :error="state.clientCredentialForm.errors.uri"
                                     :label="'Where should we redirect the request after authorization?'"
                                     :placeholder="'http://localhost/auth/callback'"
-
                                 />
-
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
