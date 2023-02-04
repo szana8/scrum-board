@@ -17,21 +17,20 @@
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Name</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="issueTypeForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="state.issueTypeForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeForm.errors.name" v-text="issueTypeForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.issueTypeForm.errors.name" v-text="state.issueTypeForm.errors.name"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Description</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="issueTypeForm.description"></textarea>
+                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="state.issueTypeForm.description"></textarea>
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeForm.errors.description" v-text="issueTypeForm.errors.description"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.issueTypeForm.errors.description" v-text="state.issueTypeForm.errors.description"></p>
                                 </div>
-
                                 <div class="w-2/3">
-                                    <SearchableDropdown :label="'Icon'" :items="icons" @select="selectIcon" v-slot="iconProps" ref="searchComponent">
+                                    <SearchableDropdown :label="'Icon'" :items="props.icons" @select="selectIcon" v-slot="iconProps" ref="searchComponent">
                                         <div class="flex w-full items-center text p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                             <div class="w-6 flex flex-col items-center">
                                                 <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
@@ -47,7 +46,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{this.buttonText}}</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{state.buttonText}}</button>
                             </div>
                         </div>
                     </form>
@@ -66,8 +65,8 @@
                 <div class="w-2/3">
                     <div class="border border-gray-100 shadow-xl rounded-xl">
                         <div class="p-12">
-                            <ul class="list-inside" v-if="this.issueTypes.length">
-                                <li v-for="issueType in this.issueTypes" :id="issueType.id" class="w-full flex justify-between space-y-2">
+                            <ul class="list-inside" v-if="props.issueTypes.length">
+                                <li v-for="issueType in props.issueTypes" :id="issueType.id" class="w-full flex justify-between space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <img :src="'../'+issueType.icon" alt="" class="w-4 h-4">
                                         <div>{{ issueType.name }}</div>
@@ -93,72 +92,61 @@
     </settings>
 </template>
 
-<script>
+<script setup>
 import Settings from "../Settings";
 import {Link, useForm} from "@inertiajs/vue3";
 import SearchableDropdown from "../../../Components/SearchableDropdown";
+import {reactive, ref} from "vue";
 
-export default {
-    props: {
-        icons: Array,
-        issueTypes: Array,
-    },
+const searchComponent = ref();
 
-    components: {
-        SearchableDropdown,
-        Settings,
-        Link,
-    },
+const props = defineProps({
+    icons: Array,
+    issueTypes: Array,
+})
 
-    data() {
-        return {
-            formAction: route('web.issue-type.store'),
-            formMethod: 'post',
-            buttonText: 'Create',
-            searchString: '',
-            issueTypeForm: useForm({
-                name: '',
-                description: '',
-                icon: null,
-            }),
-        }
-    },
+const state = reactive({
+    formAction: route('web.issue-type.store'),
+    formMethod: 'post',
+    buttonText: 'Create',
+    searchString: '',
+    issueTypeForm: useForm({
+        name: '',
+        description: '',
+        icon: null,
+    }),
+})
 
-    mounted() {
-        //
-    },
-
-    methods: {
-        selectIcon: function (icon) {
-            this.issueTypeForm.icon = icon.replace('public', 'storage');
-            this.searchString = icon.match(/.*\/(.*)$/)[1];
-            this.$refs.searchComponent.refreshSearchItem(this.searchString);
-        },
-
-        submit: function () {
-            this.issueTypeForm.submit(this.formMethod, this.formAction, {
-                onSuccess: () => {
-                    this.issueTypeForm.reset();
-                    this.issueTypeForm.icon = null;
-                    this.searchString = '';
-                    this.$refs.searchComponent.refreshSearchItem('');
-                    this.formAction = route('web.issue-type.store');
-                    this.buttonText = 'Create';
-                    this.formMethod = 'post';
-                }
-            });
-        },
-
-        edit(issueType) {
-            this.issueTypeForm.name = issueType.name;
-            this.issueTypeForm.description = issueType.description;
-            this.issueTypeForm.icon = issueType.icon.replace('public', 'storage');
-            this.searchString = issueType.icon.match(/.*\/(.*)$/)[1];
-            this.formAction = route('web.issue-type.update', issueType.id);
-            this.buttonText = 'Update';
-            this.formMethod = 'put';
-            this.$refs.searchComponent.refreshSearchItem(this.searchString);
-        }
-    }
+function selectIcon (icon) {
+    state.issueTypeForm.icon = icon.replace('public', 'storage');
+    state.searchString = icon.match(/.*\/(.*)$/)[1];
+    searchComponent.value.refreshSearchItem(state.searchString)
 }
+
+function submit () {
+    state.issueTypeForm.submit(state.formMethod, state.formAction, {
+        preserveScroll: true,
+        onSuccess: () => {
+            state.issueTypeForm.reset();
+            state.issueTypeForm.icon = null;
+            state.searchString = '';
+            searchComponent.value.refreshSearchItem('');
+            state.formAction = route('web.issue-type.store');
+            state.buttonText = 'Create';
+            state.formMethod = 'post';
+        }
+    });
+}
+
+function edit(issueType) {
+    state.issueTypeForm.name = issueType.name;
+    state.issueTypeForm.description = issueType.description;
+    state.issueTypeForm.icon = issueType.icon.replace('public', 'storage');
+    state.searchString = issueType.icon.match(/.*\/(.*)$/)[1];
+    state.formAction = route('web.issue-type.update', issueType.id);
+    state.buttonText = 'Update';
+    state.formMethod = 'put';
+    searchComponent.value.refreshSearchItem(state.searchString);
+}
+
 </script>

@@ -18,25 +18,25 @@
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Name</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="issueTypeSchemaForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the issue type" v-model="state.issueTypeSchemaForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeSchemaForm.errors.name" v-text="issueTypeSchemaForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.issueTypeSchemaForm.errors.name" v-text="state.issueTypeSchemaForm.errors.name"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Description</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="issueTypeSchemaForm.description"></textarea>
+                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the issue type" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="state.issueTypeSchemaForm.description"></textarea>
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="issueTypeSchemaForm.errors.description" v-text="issueTypeSchemaForm.errors.description"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.issueTypeSchemaForm.errors.description" v-text="state.issueTypeSchemaForm.errors.description"></p>
                                 </div>
 
                                 <div class="w-2/3">
                                     <SearchableDropdown :label="'Issue Types'"
-                                                        :items="issueTypes"
+                                                        :items="props.issueTypes"
                                                         @select="selectIcon"
                                                         v-slot="iconProps"
-                                                        :searchString="this.searchString"
+                                                        :searchString="state.searchString"
                                                         :multiple-select="true"
                                                         ref="searchComponent"
                                     >
@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{ this.buttonText }}</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{ state.buttonText }}</button>
                             </div>
                         </div>
                     </form>
@@ -75,8 +75,8 @@
                 <div class="w-2/3">
                     <div class="border border-gray-100 shadow-xl rounded-xl">
                         <div class="p-12">
-                            <ul class="list-inside" v-if="this.issueTypeSchemes.length">
-                                <li v-for="issueTypeSchema in this.issueTypeSchemes" :id="issueTypeSchema.id" class="w-full flex justify-between space-y-2">
+                            <ul class="list-inside" v-if="props.issueTypeSchemes.length">
+                                <li v-for="issueTypeSchema in props.issueTypeSchemes" :id="issueTypeSchema.id" class="w-full flex justify-between space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <div>{{ issueTypeSchema.name }}</div>
                                         <div class="text-xs text-gray-400">{{issueTypeSchema.description}}</div>
@@ -101,90 +101,67 @@
     </settings>
 </template>
 
-<script>
+<script setup>
 import Settings from "../Settings";
 import {Link, useForm} from "@inertiajs/vue3";
 import SearchableDropdown from "../../../Components/SearchableDropdown";
+import {reactive, ref} from "vue";
 
-export default {
-    props: {
-        issueTypes: Array,
-        issueTypeSchemes: Array,
-    },
+const searchComponent = ref();
 
-    components: {
-        Settings,
-        Link,
-        SearchableDropdown,
-    },
+const props = defineProps({
+    issueTypes: Array,
+    issueTypeSchemes: Array,
+});
 
-    data() {
-        return {
-            filteredArray: [],
-            searchString: null,
-            formAction: route('web.issue-type-schema.store'),
-            formMethod: 'post',
-            buttonText: 'Create',
-            issueTypeSchemaForm: useForm({
-                name: '',
-                description: '',
-                issueTypes: []
-            }),
-        }
-    },
+const state = reactive({
+    filteredArray: [],
+    searchString: null,
+    formAction: route('web.issue-type-schema.store'),
+    formMethod: 'post',
+    buttonText: 'Create',
+    issueTypeSchemaForm: useForm({
+        name: '',
+        description: '',
+        issueTypes: []
+    }),
+})
 
-    mounted() {
-        this.filteredArray = this.issueTypes;
-        this.searchString = null;
-    },
+function selectIcon (issueType) {
+    state.searchString = null
+    const index = state.issueTypeSchemaForm.issueTypes.indexOf(issueType.id);
 
-    methods: {
-        searchStringInArray: function () {
-            this.filteredArray = [];
-            this.issueTypes.filter(element =>{
-                if (element.name.toLowerCase().includes(this.searchString.toLowerCase())) {
-                    this.filteredArray.push(element);
-                    return true;
-                }
-            });
-        },
-
-        selectIcon: function (issueType) {
-            this.searchString = null
-            const index = this.issueTypeSchemaForm.issueTypes.indexOf(issueType.id);
-
-            if (index === -1) {
-                this.issueTypeSchemaForm.issueTypes.push(issueType.id);
-            } else {
-                this.issueTypeSchemaForm.issueTypes.splice(index, 1);
-            }
-
-            this.$refs.searchComponent.refreshSelectedItems(this.issueTypeSchemaForm.issueTypes);
-        },
-
-        edit: function (issueTypeSchema) {
-            this.issueTypeSchemaForm.name = issueTypeSchema.name;
-            this.issueTypeSchemaForm.description = issueTypeSchema.description;
-            this.issueTypeSchemaForm.issueTypes = issueTypeSchema.type_ids;
-            this.$refs.searchComponent.refreshSelectedItems(this.issueTypeSchemaForm.issueTypes);
-            this.formAction = route('web.issue-type-schema.update', issueTypeSchema.id);
-            this.buttonText = 'Update';
-            this.formMethod = 'put';
-        },
-
-        submit: function () {
-            this.issueTypeSchemaForm.submit(this.formMethod, this.formAction, {
-                onSuccess: () => {
-                    this.issueTypeSchemaForm.reset();
-                    this.searchString = null;
-                    this.formAction = route('web.issue-type-schema.store');
-                    this.buttonText = 'Create';
-                    this.formMethod = 'post';
-                    this.$refs.searchComponent.refreshSelectedItems([]);
-                    this.$refs.searchComponent.closeDropdown();
-                }
-            })
-        },
+    if (index === -1) {
+        state.issueTypeSchemaForm.issueTypes.push(issueType.id);
+    } else {
+        state.issueTypeSchemaForm.issueTypes.splice(index, 1);
     }
+
+    searchComponent.value.refreshSelectedItems(state.issueTypeSchemaForm.issueTypes);
+}
+
+function edit (issueTypeSchema) {
+    state.issueTypeSchemaForm.name = issueTypeSchema.name;
+    state.issueTypeSchemaForm.description = issueTypeSchema.description;
+    state.issueTypeSchemaForm.issueTypes = issueTypeSchema.type_ids;
+    searchComponent.value.refreshSelectedItems(state.issueTypeSchemaForm.issueTypes);
+    state.formAction = route('web.issue-type-schema.update', issueTypeSchema.id);
+    state.buttonText = 'Update';
+    state.formMethod = 'put';
+}
+
+function submit () {
+    state.issueTypeSchemaForm.submit(state.formMethod, state.formAction, {
+        preserveScroll: true,
+        onSuccess: () => {
+            state.issueTypeSchemaForm.reset();
+            state.searchString = null;
+            state.formAction = route('web.issue-type-schema.store');
+            state.buttonText = 'Create';
+            state.formMethod = 'post';
+            searchComponent.value.refreshSelectedItems([]);
+            searchComponent.value.closeDropdown();
+        }
+    })
 }
 </script>

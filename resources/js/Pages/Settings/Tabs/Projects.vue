@@ -16,113 +16,62 @@
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Name</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the project" v-model="projectForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name of the project" v-model="state.projectForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="projectForm.errors.name" v-text="projectForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.projectForm.errors.name" v-text="state.projectForm.errors.name"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Key</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Key" v-model="projectForm.key" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Key" v-model="state.projectForm.key" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="projectForm.errors.key" v-text="projectForm.errors.key"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.projectForm.errors.key" v-text="state.projectForm.errors.key"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Description</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the project" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="projectForm.description"></textarea>
+                                        <textarea name="description" id="description" rows="3" placeholder="Short description of the project" class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" v-model="state.projectForm.description"></textarea>
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="projectForm.errors.description" v-text="projectForm.errors.description"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.projectForm.errors.description" v-text="state.projectForm.errors.description"></p>
                                 </div>
 
                                 <div class="w-2/3">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-full flex flex-col items-center">
-                                            <div class="w-full">
-                                                <div class="flex flex-col items-center relative">
-                                                    <div class="w-full">
-                                                        <div class="p-0.5 text-gray-500 font-semibold">Avatar</div>
-                                                        <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
-                                                            <div class="flex flex-auto flex-wrap"></div>
-                                                            <input placeholder="Select an image..." class="p-1 px-2 appearance-none outline-none w-full text-gray-800" v-model="searchAvatarString" v-on:keyup="this.searchAvatarInArray()">
-                                                            <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
-                                                                <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none" type="button" @click="this.openAvatarPopup = !this.openAvatarPopup">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
-                                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="(this.searchAvatarString && !projectForm.icon) || this.openAvatarPopup">
-                                                        <div class="flex flex-col w-full">
-                                                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100" v-for="avatar in this.filteredAvatarArray" @click="selectAvatar(avatar)">
-                                                                <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                                                                    <div class="w-6 flex flex-col items-center">
-                                                                        <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
-                                                                            <img class="rounded-full" alt="A" :src="avatar.replace('public', '../storage')">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="w-full items-center flex">
-                                                                        <div class="mx-2 -mt-1  "> {{ avatar.match(/.*\/(.*)$/)[1] }}</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <SearchableDropdown :label="'Avatar'" :items="props.avatars" @select="selectAvatar" v-slot="iconProps" ref="searchAvatarComponent">
+                                        <div class="flex w-full items-center text p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                            <div class="w-6 flex flex-col items-center">
+                                                <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
+                                                    <img class="rounded-full" :alt="iconProps.item.match(/.*\/(.*)$/)[1]" :src="iconProps.item.replace('public', '../storage')">
                                                 </div>
                                             </div>
+                                            <div class="w-full items-center flex">
+                                                <div class="mx-2 -mt-1  ">{{ iconProps.item.match(/.*\/(.*)$/)[1] }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </SearchableDropdown>
                                 </div>
 
                                 <div class="w-2/3">
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-full flex flex-col items-center">
-                                            <div class="w-full">
-                                                <div class="flex flex-col items-center relative">
-                                                    <div class="w-full">
-                                                        <div class="p-0.5 text-gray-500 font-semibold">Default Assignee</div>
-                                                        <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
-                                                            <div class="flex flex-auto flex-wrap"></div>
-                                                            <input placeholder="Unassigned" class="p-1 px-2 appearance-none outline-none w-full text-gray-800" v-model="searchString" v-on:keyup="this.searchUserInArray()">
-                                                            <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200">
-                                                                <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none" type="button" @click="this.openPopup = !this.openPopup">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-up w-4 h-4">
-                                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="absolute mt-20 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj" v-show="(this.searchString && !projectForm.default_assignee_id) || this.openPopup">
-                                                        <div class="flex flex-col w-full">
-                                                            <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100" v-for="user in this.filteredArray" @click="selectUser(user)">
-                                                                <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
-                                                                    <div class="w-6 flex flex-col items-center">
-                                                                        <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
-                                                                            <img class="rounded-full" alt="A" :src="user.avatar">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="w-full items-center flex">
-                                                                        <div class="mx-2 -mt-1  "> {{ user.name }}</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <SearchableDropdown :label="'Default Assignee'" :items="props.users" @select="selectUser" v-slot="iconProps" ref="searchUserComponent">
+                                        <div class="flex w-full items-center text p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                            <div class="w-6 flex flex-col items-center">
+                                                <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
+                                                    <img class="rounded-full" :src="iconProps.item.avatar.replace('public', '../storage')">
                                                 </div>
                                             </div>
+                                            <div class="w-full items-center flex">
+                                                <div class="mx-2 -mt-1  ">{{ iconProps.item.name }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </SearchableDropdown>
+
                                 </div>
 
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{this.buttonText}}</button>
+                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{state.buttonText}}</button>
                             </div>
                         </div>
                     </form>
@@ -130,12 +79,12 @@
             </div>
 
             <div class="flex py-12">
-                <ListOfItems :items="this.projects">
+                <ListOfItems :items="props.projects">
                     <template #header>Manage Projects</template>
                     <template #description>You may delete any of your existing projects if they are no longer needed</template>
                     <template #emptyListDescription>There is no Project(s) created yet for your user.</template>
 
-                    <ListOfItem v-for="project in this.projects"
+                    <ListOfItem v-for="project in props.projects"
                                 :id="project.id"
                                 class="w-full flex justify-between space-y-2"
                                 :delete-link="route('web.project.destroy', [project.id])"
@@ -152,111 +101,71 @@
     </settings>
 </template>
 
-<script>
+<script setup>
 import Settings from "../Settings";
-import {Link, useForm} from '@inertiajs/vue3'
+import {useForm} from '@inertiajs/vue3'
 import ListOfItems from "../../../Components/ListOfItems";
 import ListOfItem from "../../../Components/ListOfItem";
+import {onMounted, reactive, ref} from "vue";
+import SearchableDropdown from "../../../Components/SearchableDropdown.vue";
 
-export default {
+const searchAvatarComponent = ref();
+const searchUserComponent = ref();
 
-    props: {
-        users: Array,
-        avatars: Array,
-        projects: Array,
-    },
+const props = defineProps({
+    users: Array,
+    avatars: Array,
+    projects: Array,
+});
 
-    components: {
-        Settings,
-        Link,
-        ListOfItem,
-        ListOfItems,
-    },
+const state = reactive({
+    filteredArray: [],
+    filteredAvatarArray: [],
+    formAction: route('web.project.store'),
+    formMethod: 'post',
+    projectForm: useForm({
+        name: null,
+        key: null,
+        description: null,
+        type: 'SOFTWARE',
+        default_assignee_id: null,
+        icon: null,
+    }),
+    buttonText: 'Create',
+});
 
-    data() {
-        return {
-            filteredArray: [],
-            filteredAvatarArray: [],
-            searchString: null,
-            searchAvatarString: null,
-            formAction: route('web.project.store'),
-            formMethod: 'post',
-            projectForm: useForm({
-                name: null,
-                key: null,
-                description: null,
-                type: 'SOFTWARE',
-                default_assignee_id: null,
-                icon: null,
-            }),
-            buttonText: 'Create',
-            openPopup: false,
-            openAvatarPopup: false,
+onMounted(() =>{
+    state.filteredArray = props.users;
+    state.filteredAvatarArray = props.avatars;
+    state.projectForm.default_assignee_id = null;
+});
+
+
+function selectAvatar (avatar) {
+    state.projectForm.icon = avatar;
+    searchAvatarComponent.value.refreshSearchItem(avatar.match(/.*\/(.*)$/)[1])
+}
+
+function selectUser (user) {
+    state.projectForm.default_assignee_id = user.id;
+    searchUserComponent.value.refreshSearchItem(user.name)
+}
+
+function submit () {
+    state.projectForm.submit(state.formMethod, state.formAction, {
+        preserveScroll: true,
+        onSuccess: () => {
+            state.projectForm.reset();
+            state.projectForm.default_assignee_id = null;
+            state.projectForm.icon = null;
+            state.formAction = route('web.project.store');
+            state.buttonText = 'Create';
+            state.formMethod = 'post';
         }
-    },
+    });
+}
 
-    mounted() {
-        this.filteredArray = this.users;
-        this.filteredAvatarArray = this.avatars;
-        this.projectForm.default_assignee_id = null;
-        this.searchString = null;
-        this.searchAvatarString = null;
-    },
-
-    methods: {
-        searchUserInArray: function () {
-            this.filteredArray = [];
-            this.projectForm.default_assignee_id = null;
-            this.users.filter(element =>{
-                if (element.name.toLowerCase().includes(this.searchString.toLowerCase())) {
-                    this.filteredArray.push(element);
-                    return true;
-                }
-            });
-        },
-
-        searchAvatarInArray: function () {
-            this.filteredAvatarArray = [];
-            this.projectForm.icon = null;
-            this.avatars.filter(element =>{
-                if (element.toLowerCase().includes(this.searchAvatarString.toLowerCase())) {
-                    this.filteredAvatarArray.push(element);
-                    return true;
-                }
-            });
-        },
-
-        selectAvatar: function (avatar) {
-            this.searchAvatarString = avatar.match(/.*\/(.*)$/)[1];
-            this.projectForm.icon = avatar;
-            this.openAvatarPopup = false;
-        },
-
-        selectUser: function (user) {
-            this.searchString = user.name;
-            this.projectForm.default_assignee_id = user.id;
-            this.openPopup = false;
-        },
-
-        submit: function () {
-            this.projectForm.submit(this.formMethod, this.formAction, {
-                onSuccess: () => {
-                    this.projectForm.reset();
-                    this.projectForm.default_assignee_id = null;
-                    this.projectForm.icon = null;
-                    this.searchString = null;
-                    this.formAction = route('web.project.store');
-                    this.buttonText = 'Create';
-                    this.formMethod = 'post';
-                    this.openPopup = false;
-                    this.openAvatarPopup = false;
-                }
-            });
-        },
-
-        edit: function (token) {
-            //
-        }
-    }
+function edit (token) {
+    //
 }
 </script>

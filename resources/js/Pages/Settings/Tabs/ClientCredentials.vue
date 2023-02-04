@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="w-2/3">
-                    <form class="mt-8" method="POST" @submit.prevent="this.submit">
+                    <form class="mt-8" method="POST" @submit.prevent="submit()">
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
                                 <NewClientCredential class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200" v-if="this.$page.props.flash.success"
@@ -21,17 +21,17 @@
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">What should we name the client?</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Client Name" v-model="this.clientCredentialForm.name" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Client Name" v-model="state.clientCredentialForm.name" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="this.clientCredentialForm.errors.name" v-text="this.clientCredentialForm.errors.name"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.clientCredentialForm.errors.name" v-text="state.clientCredentialForm.errors.name"></p>
                                 </div>
 
                                 <div>
                                     <div class="p-0.5 text-gray-500 font-semibold">Where should we redirect the request after authorization?</div>
                                     <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="http://localhost/auth/callback" v-model="clientCredentialForm.uri" />
+                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="http://localhost/auth/callback" v-model="state.clientCredentialForm.uri" />
                                     </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="this.clientCredentialForm.errors.uri" v-text="this.clientCredentialForm.errors.uri"></p>
+                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.clientCredentialForm.errors.uri" v-text="state.clientCredentialForm.errors.uri"></p>
                                 </div>
                             </div>
 
@@ -66,45 +66,32 @@
     </settings>
 </template>
 
-<script>
-import {Link, useForm} from "@inertiajs/vue3";
+<script setup>
+import {useForm} from "@inertiajs/vue3";
 import Settings from "../Settings";
 import NewClientCredential from "../Shared/NewClientCredential";
 import ListOfItems from "../../../Components/ListOfItems";
 import ListOfItem from "../../../Components/ListOfItem";
+import {reactive} from "vue";
 
-export default {
+defineProps({
+    clientCredentials: Array,
+})
 
-    props: {
-        clientCredentials: Array,
-    },
+const state = reactive({
+    clientCredentialForm: useForm({
+        name: '',
+        uri: '',
+    }),
+})
 
-    components: {
-        Settings,
-        Link,
-        NewClientCredential,
-        ListOfItems,
-        ListOfItem
-    },
-
-    data() {
-        return {
-            clientCredentialForm: useForm({
-                name: '',
-                uri: '',
-            }),
+function submit () {
+    state.clientCredentialForm.post(route('web.client-credential.store'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            state.clientCredentialForm.reset();
         }
-    },
-
-    methods: {
-        submit: function () {
-            this.clientCredentialForm.post(route('web.client-credential.store'), {
-                onSuccess: () => {
-                    this.clientCredentialForm.reset();
-                }
-            });
-        },
-    }
+    });
 }
 </script>
 

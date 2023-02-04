@@ -59,11 +59,5 @@
     </div>
 </template>
 
-<script>
-import SettingsLink from './Shared/SettingsLink';
-
-export default {
-    name: "Settings",
-    components: { SettingsLink },
-}
-</script>
+<script setup>
+import SettingsLink from './Shared/SettingsLink';</script>

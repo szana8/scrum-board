@@ -62,7 +62,7 @@ onMounted(() => {
 function searchStringInArray () {
     state.filteredItems = [];
     state.openPopup = true;
-    props.items.filter(element => {
+    props.items.filter(element=> {
         if (element.includes(state.searchString)) {
             state.filteredItems.push(element);
             return true;

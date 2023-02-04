@@ -7,23 +7,23 @@
         <div class="space-y-4">
             <div class="space-y-1">
                 <div class="text-blue-600 font-semibold text-sm">Client ID</div>
-                <div class="text-blue-600 font-semibold text-sm bg-blue-50 w-full px-4 py-2 rounded border border-blue-200">{{ clientId }}</div>
+                <div class="text-blue-600 font-semibold text-sm bg-blue-50 w-full px-4 py-2 rounded border border-blue-200">{{ props.clientId }}</div>
             </div>
 
             <div class="space-y-1">
                 <div class="text-blue-600 font-semibold text-sm">Client Secret</div>
-                <div class="text-blue-600 font-semibold text-sm bg-blue-50 w-full px-4 py-2 rounded border border-blue-200">{{ clientSecret }}</div>
+                <div class="text-blue-600 font-semibold text-sm bg-blue-50 w-full px-4 py-2 rounded border border-blue-200">{{ props.clientSecret }}</div>
             </div>
 
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        clientId: '',
-        clientSecret: '',
-    },
-}
+<script setup>
+
+const props = defineProps({
+    clientId: '',
+    clientSecret: '',
+})
+
 </script>
