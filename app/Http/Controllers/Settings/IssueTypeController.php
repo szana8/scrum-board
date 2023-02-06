@@ -21,7 +21,7 @@ class IssueTypeController extends Controller
     {
         return Inertia::render('Settings/Tabs/IssueTypes', [
             'icons' => Storage::allFiles('public/icons/issue_types'),
-            'issueTypes' => $this->issueTypeService->issueTypes()
+            'issueTypes' => $this->issueTypeService->issueTypes(),
         ]);
     }
 

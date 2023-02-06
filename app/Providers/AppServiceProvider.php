@@ -32,12 +32,18 @@ class AppServiceProvider extends ServiceProvider
 
         Scramble::extendOpenApi(function (OpenApi $openApi) {
             $openApi->secure(
-                SecurityScheme::oauth2()
-                    ->flow('clientCredentials', function (OAuthFlow $flow) {
-                        $flow
-                            ->authorizationUrl('http://scrum-board.test/oauth/token')
-                            ->addScope('plamce-orders', 'modify pets in your account');
-                    })
+                SecurityScheme::oauth2()->flow('clientCredentials', function (
+                    OAuthFlow $flow
+                ) {
+                    $flow
+                        ->authorizationUrl(
+                            'http://scrum-board.test/oauth/token'
+                        )
+                        ->addScope(
+                            'plamce-orders',
+                            'modify pets in your account'
+                        );
+                })
             );
         });
     }

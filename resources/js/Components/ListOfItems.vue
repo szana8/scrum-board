@@ -7,7 +7,10 @@
         <div class="w-2/3">
             <div class="border border-gray-100 shadow-xl rounded-xl">
                 <div class="p-12">
-                    <ul class="list-inside" v-if="this.items && this.items.length > 0">
+                    <ul
+                        class="list-inside"
+                        v-if="this.items && this.items.length > 0"
+                    >
                         <slot />
                     </ul>
                     <div v-else>
@@ -22,9 +25,7 @@
 </template>
 
 <script setup>
-
 defineProps({
     items: Array,
 })
-
 </script>

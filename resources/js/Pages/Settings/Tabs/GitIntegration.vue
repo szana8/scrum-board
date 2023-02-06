@@ -5,16 +5,18 @@
                 <div class="w-1/3">
                     <settings-description
                         :title="'Create Git Integration'"
-                        :description="'You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the\n'+
-'                        source code changes in the tickets.'"
+                        :description="'You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the\n' + '                        source code changes in the tickets.'"
                     />
                 </div>
 
                 <div class="w-2/3">
-                    <form class="mt-8" method="POST" @submit.prevent="submit()">
+                    <form
+                        class="mt-8"
+                        method="POST"
+                        @submit.prevent="submit()"
+                    >
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
-
                                 <standard-input-field
                                     v-model="state.gitForm.name"
                                     :error="state.gitForm.errors.name"
@@ -28,15 +30,10 @@
                                     :label="'Github token'"
                                     :placeholder="'Token'"
                                 />
-
                             </div>
 
-
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button
-                                    :text="state.buttonText"
-                                />
-
+                                <standard-button :text="state.buttonText" />
                             </div>
                         </div>
                     </form>
@@ -44,49 +41,43 @@
             </div>
 
             <div class="flex py-12">
-                <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Manage saved tokens</h4>
-                    <p class="text-gray-400 text-sm mt-4">
-                        You may delete any of your existing tokens if they are no longer needed
-                    </p>
-                </div>
+                <list-of-items :items="props.tokens">
+                    <template #description>
+                        <settings-description
+                            :title="'Manage saved tokens'"
+                            :description="'You may delete any of your existing client credentials if they are no longer needed'"
+                        />
+                    </template>
+                    <template #emptyListDescription>There is no token created yet for your user.</template>
 
-                <div class="w-2/3">
-                    <div class="border border-gray-100 shadow-xl rounded-xl">
-                        <div class="p-12">
-                            <ul class="list-inside" v-if="props.tokens.length > 0">
-                                <li v-for="token in props.tokens" :id="token.id" class="w-full flex justify-between space-y-2">
-                                    <div class="flex items-center space-x-2">
-                                        <div>{{ token.name }}</div>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <a href="#" class="href text-gray-400 font-semibold text-sm hover:text-gray-300" @click="edit(token)">Edit</a>
-                                        <Link :href="route('web.git-token.destroy', [token.id])" method="delete" as="button" preserve-scroll class="href text-red-600 font-semibold text-sm">Delete</Link>
-                                    </div>
-
-                                </li>
-                            </ul>
-                            <div v-else>
-                                <div class="bg-blue-100 text-blue-600 p-4 rounded border border-blue-200 font-semibold">
-                                    There is no token created yet for your user.
-                                </div>
-                            </div>
+                    <list-of-item
+                        v-for="token in props.tokens"
+                        :id="token.id"
+                        class=""
+                        :allow-edit="true"
+                        :edit-key="token"
+                        @edit="edit"
+                        :delete-link="route('web.git-token.destroy', [token.id])"
+                    >
+                        <div class="flex items-center space-x-2">
+                            <div>{{ token.name }}</div>
                         </div>
-                    </div>
-
-                </div>
+                    </list-of-item>
+                </list-of-items>
             </div>
         </div>
     </settings>
 </template>
 
 <script setup>
-import {reactive} from "vue";
-import Settings from "../Settings";
-import {Link, useForm} from '@inertiajs/vue3'
-import StandardButton from "../../../Components/StandardButton.vue"
-import SettingsDescription from "../Shared/SettingsDescription.vue";
-import StandardInputField from "../../../Components/StanardInputField.vue"
+import { reactive } from 'vue'
+import Settings from '../Settings'
+import { useForm } from '@inertiajs/vue3'
+import ListOfItem from '../../../Components/ListOfItem'
+import ListOfItems from '../../../Components/ListOfItems'
+import StandardButton from '../../../Components/StandardButton.vue'
+import SettingsDescription from '../Shared/SettingsDescription.vue'
+import StandardInputField from '../../../Components/StandardInputField.vue'
 
 const props = defineProps({
     tokens: Array,
@@ -100,25 +91,24 @@ const state = reactive({
         name: null,
         token: null,
     }),
-});
+})
 
-function submit () {
+function submit() {
     state.gitForm.submit(state.formMethod, state.formAction, {
         preserveScroll: true,
         onSuccess: () => {
-            state.gitForm.reset();
-            state.formAction = route('web.git-token.store');
-            state.buttonText = 'Create';
-            state.formMethod = 'post';
-        }
-    });
+            state.gitForm.reset()
+            state.formAction = route('web.git-token.store')
+            state.buttonText = 'Create'
+            state.formMethod = 'post'
+        },
+    })
 }
 
-function edit (token) {
+function edit(token) {
     state.gitForm.name = token.name
-    state.formAction = route('web.git-token.update', token.id);
-    state.buttonText = 'Update';
-    state.formMethod = 'put';
+    state.formAction = route('web.git-token.update', token.id)
+    state.buttonText = 'Update'
+    state.formMethod = 'put'
 }
-
 </script>

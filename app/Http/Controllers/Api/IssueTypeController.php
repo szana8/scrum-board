@@ -12,8 +12,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class IssueTypeController extends Controller
 {
-    public function __construct(readonly private IssueTypeService $issueTypeService)
-    {
+    public function __construct(
+        private readonly IssueTypeService $issueTypeService
+    ) {
     }
 
     /**
@@ -23,7 +24,9 @@ class IssueTypeController extends Controller
      */
     public function index()
     {
-        return IssueTypeResource::collection($this->issueTypeService->issueTypes());
+        return IssueTypeResource::collection(
+            $this->issueTypeService->issueTypes()
+        );
     }
 
     /**
@@ -34,7 +37,9 @@ class IssueTypeController extends Controller
      */
     public function store(CreateIssueType $request): IssueTypeResource
     {
-        return new IssueTypeResource($this->issueTypeService->create($request->validated()));
+        return new IssueTypeResource(
+            $this->issueTypeService->create($request->validated())
+        );
     }
 
     /**
@@ -57,7 +62,9 @@ class IssueTypeController extends Controller
      */
     public function update(UpdateIssueType $request, IssueType $issueType)
     {
-        return new IssueTypeResource($this->issueTypeService->update($issueType, $request->validated()));
+        return new IssueTypeResource(
+            $this->issueTypeService->update($issueType, $request->validated())
+        );
     }
 
     /**

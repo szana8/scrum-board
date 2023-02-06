@@ -9,7 +9,8 @@ class PasswordConfirmationController extends Controller
 {
     public function index()
     {
-        return Inertia::modal('Profile/Partials/PasswordConfirmationModal')
-            ->baseURL(route('profile.index'));
+        return Inertia::modal(
+            'Profile/Partials/PasswordConfirmationModal'
+        )->baseURL(route('profile.index'));
     }
 }

@@ -15,10 +15,7 @@ class ProjectService
     public function create(array $validatedRequest): Project
     {
         return Project::create(
-            array_merge(
-                $validatedRequest,
-                ['owner_id' => \Auth::user()->id]
-            )
+            array_merge($validatedRequest, ['owner_id' => \Auth::user()->id])
         );
     }
 

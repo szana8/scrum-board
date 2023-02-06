@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateClientCredential;
-use App\Http\Resources\Project\ProjectResource;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -22,10 +21,14 @@ class ClientCredentialController extends Controller
         ]);
     }
 
-    public function store(CreateClientCredential $request, ClientRepository $clientRepository)
-    {
+    public function store(
+        CreateClientCredential $request,
+        ClientRepository $clientRepository
+    ) {
         $client = $clientRepository->create(
-            Auth::id(), $request->name, $request->get('uri') ?? ''
+            Auth::id(),
+            $request->name,
+            $request->get('uri') ?? ''
         );
 
         return Redirect::route('web.client-credential.index')->with('flash', [

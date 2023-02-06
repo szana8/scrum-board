@@ -1,25 +1,26 @@
 <template>
-    <floating-button v-show="this.show" @click="showModal()"></floating-button>
+    <floating-button
+        v-show="this.show"
+        @click="showModal()"
+    ></floating-button>
 </template>
 
 <script>
-import FloatingButton from "./FloatingButton.vue";
+import FloatingButton from './FloatingButton.vue'
 
 export default {
-    name: "CreateIssueModal",
+    name: 'CreateIssueModal',
 
     components: {
-        FloatingButton
+        FloatingButton,
     },
 
     computed: {
         show() {
-            return !this.$page.component.startsWith('Settings');
-        }
+            return !this.$page.component.startsWith('Settings')
+        },
     },
 
-    methods: {
-
-    }
+    methods: {},
 }
 </script>

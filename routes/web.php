@@ -45,11 +45,11 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
             );
             Route::get('popup/{client}', [
                 ClientCredentialController::class,
-                'popup'
+                'popup',
             ])->name('web.client-credential.popup');
             Route::delete('/{client}', [
                 ClientCredentialController::class,
-                'destroy'
+                'destroy',
             ])->name('web.client-credential.destroy');
             Route::get('/close', function () {
                 return Inertia::location(\route('web.client-credential.index'));
@@ -68,7 +68,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
             );
             Route::delete('/{token}', [
                 GitTokenController::class,
-                'destroy'
+                'destroy',
             ])->name('web.git-token.destroy');
         });
 
@@ -81,11 +81,11 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
             );
             Route::put('/{issueType}', [
                 IssueTypeController::class,
-                'update'
+                'update',
             ])->name('web.issue-type.update');
             Route::delete('/{issueType}', [
                 IssueTypeController::class,
-                'destroy'
+                'destroy',
             ])->name('web.issue-type.destroy');
         });
 
@@ -98,11 +98,11 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
             );
             Route::put('/{issueTypeSchema}', [
                 IssueTypeSchemaController::class,
-                'update'
+                'update',
             ])->name('web.issue-type-schema.update');
             Route::delete('/{issueTypeSchema}', [
                 IssueTypeSchemaController::class,
-                'destroy'
+                'destroy',
             ])->name('web.issue-type-schema.destroy');
         });
 
@@ -115,7 +115,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
             );
             Route::delete('/{project}', [
                 ProjectController::class,
-                'destroy'
+                'destroy',
             ])->name('web.project.destroy');
         });
 
@@ -126,7 +126,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
         Route::prefix('issue')->group(function () {
             Route::get('issue-modal', [
                 \App\Http\Controllers\Issue\IssueModalController::class,
-                'create'
+                'create',
             ])->name('issue.create.modal');
         });
     });

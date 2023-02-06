@@ -11,7 +11,10 @@
             <div class="h-16 border-b border-gray-100 flex items-center sticky bg-white top-0 z-10">
                 <Nav></Nav>
             </div>
-            <div class="p-12 overflow-y-auto z-1" scroll-region>
+            <div
+                class="p-12 overflow-y-auto z-1"
+                scroll-region
+            >
                 <slot />
             </div>
         </section>
@@ -21,13 +24,13 @@
 </template>
 
 <script setup>
-import Nav from "./Nav";
-import {computed} from "vue";
-import Sidebar from "./Sidebar";
-import {Modal} from 'momentum-modal'
-import {Head, usePage} from "@inertiajs/vue3";
+import Nav from './Nav'
+import { computed } from 'vue'
+import Sidebar from './Sidebar'
+import { Modal } from 'momentum-modal'
+import { Head, usePage } from '@inertiajs/vue3'
 
-const username = computed( ()=> {
-    return usePage().props.auth.user.username;
+const username = computed(() => {
+    return usePage().props.auth.user.username
 })
 </script>

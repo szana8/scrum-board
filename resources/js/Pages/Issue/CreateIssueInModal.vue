@@ -5,5 +5,5 @@
 </template>
 
 <script setup>
-import Modal from "../../Shared/Modal.vue";</script>
-
+import Modal from '../../Shared/Modal.vue'
+</script>

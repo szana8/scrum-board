@@ -10,12 +10,18 @@
                 </div>
 
                 <div class="w-2/3">
-                    <form class="mt-8" method="POST" @submit.prevent="submit()">
+                    <form
+                        class="mt-8"
+                        method="POST"
+                        @submit.prevent="submit()"
+                    >
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
-                                <new-client-credential class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200" v-if="this.$page.props.flash.success"
-                                                     :client-id="this.$page.props.flash.success.clientId"
-                                                     :client-secret="this.$page.props.flash.success.clientSecret"
+                                <new-client-credential
+                                    class="w-2/3 bg-blue-50 p-4 rounded border border-blue-200"
+                                    v-if="this.$page.props.flash.success"
+                                    :client-id="this.$page.props.flash.success.clientId"
+                                    :client-secret="this.$page.props.flash.success.clientSecret"
                                 />
 
                                 <standard-input-field
@@ -34,9 +40,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button
-                                    :text="'Create'"
-                                />
+                                <standard-button :text="'Create'" />
                             </div>
                         </div>
                     </form>
@@ -53,17 +57,19 @@
                     </template>
                     <template #emptyListDescription>There is no Client Credential(s) created yet for your user.</template>
 
-                    <list-of-item v-for="clientCredential in this.clientCredentials"
-                                :id="clientCredential.id"
-                                class="w-full flex justify-between space-y-2"
-                                :delete-link="route('web.client-credential.destroy', [clientCredential.id])"
+                    <list-of-item
+                        v-for="clientCredential in this.clientCredentials"
+                        :id="clientCredential.id"
+                        class="w-full flex justify-between space-y-2"
+                        :delete-link="route('web.client-credential.destroy', [clientCredential.id])"
                     >
                         <div class="flex items-center space-x-2">
                             <div>{{ clientCredential.name }}</div>
-                            <div class="text-xs text-gray-400">{{clientCredential.id}}</div>
+                            <div class="text-xs text-gray-400">
+                                {{ clientCredential.id }}
+                            </div>
                         </div>
                     </list-of-item>
-
                 </list-of-items>
             </div>
         </div>
@@ -71,15 +77,15 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
-import Settings from "../Settings";
-import {useForm} from "@inertiajs/vue3";
-import ListOfItem from "../../../Components/ListOfItem";
-import ListOfItems from "../../../Components/ListOfItems";
-import NewClientCredential from "../Shared/NewClientCredential";
-import StandardButton from "../../../Components/StandardButton.vue"
-import SettingsDescription from "../Shared/SettingsDescription.vue"
-import StandardInputField from "../../../Components/StanardInputField.vue"
+import { reactive } from 'vue'
+import Settings from '../Settings'
+import { useForm } from '@inertiajs/vue3'
+import ListOfItem from '../../../Components/ListOfItem'
+import ListOfItems from '../../../Components/ListOfItems'
+import NewClientCredential from '../Shared/NewClientCredential'
+import StandardButton from '../../../Components/StandardButton.vue'
+import SettingsDescription from '../Shared/SettingsDescription.vue'
+import StandardInputField from '../../../Components/StandardInputField.vue'
 
 defineProps({
     clientCredentials: Array,
@@ -92,11 +98,10 @@ const state = reactive({
     }),
 })
 
-function submit () {
+function submit() {
     state.clientCredentialForm.post(route('web.client-credential.store'), {
         preserveScroll: true,
-        onSuccess: () => state.clientCredentialForm.reset()
-    });
+        onSuccess: () => state.clientCredentialForm.reset(),
+    })
 }
 </script>
-
