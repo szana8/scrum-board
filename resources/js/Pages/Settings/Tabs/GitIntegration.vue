@@ -3,38 +3,40 @@
         <div class="space-y-28 divide-y">
             <div class="flex">
                 <div class="w-1/3">
-                    <h4 class="text-xl antialiased capitalized">Create Git Integration</h4>
-                    <p class="text-gray-400 text-sm mt-4">
-                        You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the
-                        source code changes in the tickets.
-                    </p>
+                    <settings-description
+                        :title="'Create Git Integration'"
+                        :description="'You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the\n'+
+'                        source code changes in the tickets.'"
+                    />
                 </div>
 
                 <div class="w-2/3">
                     <form class="mt-8" method="POST" @submit.prevent="submit()">
                         <div class="border border-gray-100 shadow-xl rounded-xl">
                             <div class="p-12 space-y-5">
-                                <div>
-                                    <div class="p-0.5 text-gray-500 font-semibold">Name</div>
-                                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Name" v-model="state.gitForm.name" />
-                                    </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.gitForm.errors.name" v-text="state.gitForm.errors.name"></p>
-                                </div>
 
-                                <div>
-                                    <div class="p-0.5 text-gray-500 font-semibold">Github token</div>
-                                    <div class="rounded-xl p-0.5 border-2 border-gray-300 flex w-2/3">
-                                        <input class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400" type="text" placeholder="Token" v-model="state.gitForm.token" />
-                                    </div>
-                                    <p class="mt-2 ml-2 text-red-400 text-xs font-semibold italic" v-if="state.gitForm.errors.token" v-text="state.gitForm.errors.token"></p>
-                                </div>
+                                <standard-input-field
+                                    v-model="state.gitForm.name"
+                                    :error="state.gitForm.errors.name"
+                                    :label="'Name'"
+                                    :placeholder="'Name'"
+                                />
+
+                                <standard-input-field
+                                    v-model="state.gitForm.token"
+                                    :error="state.gitForm.errors.token"
+                                    :label="'Github token'"
+                                    :placeholder="'Token'"
+                                />
 
                             </div>
 
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <button type="submit" class="bg-slate-800 text-white rounded px-3 py-1 uppercase antialiased">{{state.buttonText}}</button>
+                                <standard-button
+                                    :text="state.buttonText"
+                                />
+
                             </div>
                         </div>
                     </form>
@@ -79,9 +81,12 @@
 </template>
 
 <script setup>
+import {reactive} from "vue";
 import Settings from "../Settings";
 import {Link, useForm} from '@inertiajs/vue3'
-import {reactive} from "vue";
+import StandardButton from "../../../Components/StandardButton.vue"
+import SettingsDescription from "../Shared/SettingsDescription.vue";
+import StandardInputField from "../../../Components/StanardInputField.vue"
 
 const props = defineProps({
     tokens: Array,

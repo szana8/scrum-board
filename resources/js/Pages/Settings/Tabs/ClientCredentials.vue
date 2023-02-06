@@ -71,15 +71,15 @@
 </template>
 
 <script setup>
-import {useForm} from "@inertiajs/vue3";
-import Settings from "../Settings";
-import NewClientCredential from "../Shared/NewClientCredential";
-import ListOfItems from "../../../Components/ListOfItems";
-import ListOfItem from "../../../Components/ListOfItem";
-import StandardInputField from "../../../Components/StanardInputField.vue"
-import StandardButton from "../../../Components/StandardButton.vue"
-import SettingsDescription from "../Shared/SettingDescription.vue"
 import {reactive} from "vue";
+import Settings from "../Settings";
+import {useForm} from "@inertiajs/vue3";
+import ListOfItem from "../../../Components/ListOfItem";
+import ListOfItems from "../../../Components/ListOfItems";
+import NewClientCredential from "../Shared/NewClientCredential";
+import StandardButton from "../../../Components/StandardButton.vue"
+import SettingsDescription from "../Shared/SettingsDescription.vue"
+import StandardInputField from "../../../Components/StanardInputField.vue"
 
 defineProps({
     clientCredentials: Array,
@@ -95,9 +95,7 @@ const state = reactive({
 function submit () {
     state.clientCredentialForm.post(route('web.client-credential.store'), {
         preserveScroll: true,
-        onSuccess: () => {
-            state.clientCredentialForm.reset();
-        }
+        onSuccess: () => state.clientCredentialForm.reset()
     });
 }
 </script>
