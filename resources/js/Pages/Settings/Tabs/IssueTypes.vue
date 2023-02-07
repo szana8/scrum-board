@@ -38,7 +38,6 @@
                                         @select="selectIcon"
                                         v-slot="iconProps"
                                         ref="searchComponent"
-                                        class="w-2/3"
                                     >
                                         <div class="flex w-full items-center text p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                                             <div class="w-6 flex flex-col items-center">
@@ -108,15 +107,15 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import {reactive, ref} from 'vue'
 import Settings from '../Settings'
-import { useForm } from '@inertiajs/vue3'
+import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
 import StandardButton from '../../../Components/StandardButton.vue'
-import SearchableDropdown from '../../../Components/SearchableDropdown'
 import StandardInputField from '../../../Components/StandardInputField.vue'
+import SearchableDropdown from "../../../Components/SearchableDropdown.vue";
 import StandardTextareaField from '../../../Components/StandardTextareaField.vue'
 
 const searchComponent = ref()
