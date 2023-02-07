@@ -20,20 +20,13 @@
 </template>
 
 <script setup>
-import {reactive} from 'vue'
-import TwoFactorAuthenticationForm from './Partials/TwoFactorAuthenticationForm'
 import UserPasswordForm from "./Partials/UserPasswordForm.vue";
+import TwoFactorAuthenticationForm from './Partials/TwoFactorAuthenticationForm'
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
 import {usePage} from "@inertiajs/vue3";
 
 const props = defineProps({
     passwordConfirmed: false,
 })
-
-const state = reactive({
-
-
-})
-
 
 </script>
