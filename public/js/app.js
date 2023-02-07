@@ -480,7 +480,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 })], -1 /* HOISTED */);
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "w-full items-center text-gray-500 text-normal font-sans font-bold mt-0.5 ml-2"
-}, " Tassking.io ", -1 /* HOISTED */);
+}, "Tassking.io", -1 /* HOISTED */);
 var _hoisted_4 = [_hoisted_2, _hoisted_3];
 function render(_ctx, _cache) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_4);
@@ -797,7 +797,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "flex justify-between mt-3"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
   "class": "uppercase text-gray-400 text-xs font-bold"
-}, " Workspace ")], -1 /* HOISTED */);
+}, "Workspace")], -1 /* HOISTED */);
 var _hoisted_16 = {
   "class": "flex justify-between px-6 pb-12"
 };
@@ -2236,6 +2236,22 @@ var map = {
 	"./Profile/Partials/TwoFactorAuthenticationForm.vue": [
 		"./resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
 		"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue"
+	],
+	"./Profile/Partials/UpdateProfileInformationForm": [
+		"./resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
+		"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue"
+	],
+	"./Profile/Partials/UpdateProfileInformationForm.vue": [
+		"./resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
+		"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue"
+	],
+	"./Profile/Partials/UserPasswordForm": [
+		"./resources/js/Pages/Profile/Partials/UserPasswordForm.vue",
+		"resources_js_Pages_Profile_Partials_UserPasswordForm_vue"
+	],
+	"./Profile/Partials/UserPasswordForm.vue": [
+		"./resources/js/Pages/Profile/Partials/UserPasswordForm.vue",
+		"resources_js_Pages_Profile_Partials_UserPasswordForm_vue"
 	],
 	"./Profile/Profile": [
 		"./resources/js/Pages/Profile/Profile.vue",

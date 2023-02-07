@@ -1,7 +1,7 @@
 {
     "singleQuote": true,
     "singleAttributePerLine": true,
-    "printWidth": 600,
+    "printWidth": 400,
     "trailingCommaPHP": false,
     "semi": false
 }

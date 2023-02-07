@@ -5,7 +5,7 @@
                 <div class="w-1/3">
                     <settings-description
                         :title="'Create Git Integration'"
-                        :description="'You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the\n' + '                        source code changes in the tickets.'"
+                        :description="'You can integrate your personal or team GitHub account to <b>Tassking.io</b> to be able to link/manage the source code changes in the tickets.'"
                     />
                 </div>
 
@@ -70,9 +70,9 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import {reactive} from 'vue'
 import Settings from '../Settings'
-import { useForm } from '@inertiajs/vue3'
+import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import StandardButton from '../../../Components/StandardButton.vue'

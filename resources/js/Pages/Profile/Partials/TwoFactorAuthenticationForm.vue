@@ -1,8 +1,10 @@
 <template>
     <div class="w-full flex">
         <div class="w-1/3">
-            <h4 class="text-xl antialiased capitalized">Two Factor Authentication</h4>
-            <p class="text-gray-400 text-sm mt-4">Add additional security to your account using two factor authentication.</p>
+            <settings-description
+                :title="'Two Factor Authentication'"
+                :description="'Add additional security to your account using two factor authentication.'"
+            />
         </div>
 
         <div class="w-2/3">
@@ -137,9 +139,10 @@
 </template>
 
 <script setup>
-import { Link, router, useForm, usePage } from '@inertiajs/vue3'
-import { computed, ref, watch } from 'vue'
 import axios from 'axios'
+import {computed, ref, watch} from 'vue'
+import {Link, router, useForm, usePage} from '@inertiajs/vue3'
+import SettingsDescription from "../../Settings/Shared/SettingsDescription.vue";
 
 const props = defineProps({
     requiresConfirmation: true,
@@ -156,7 +159,7 @@ const confirmationForm = useForm({
     code: '',
 })
 
-const twoFactorEnabled = computed(() => !enabling.value && usePage().props.value.auth.user?.two_factor_enabled)
+const twoFactorEnabled = computed(() => !enabling.value && usePage().props.auth.user?.two_factor_enabled)
 
 watch(twoFactorEnabled, () => {
     if (!twoFactorEnabled.value) {
@@ -213,7 +216,7 @@ const regenerateRecoveryCodes = () => {
 
 const disableTwoFactorAuthentication = () => {
     disabling.value = true
-    Inertia.delete('/user/two-factor-authentication', {
+    router.delete('/user/two-factor-authentication', {
         preserveScroll: true,
         onSuccess: () => {
             disabling.value = false
