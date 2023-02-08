@@ -38,7 +38,7 @@
                                     :placeholder="'Description'"
                                 />
 
-                                <div class="w-2/3">
+                                <div class="md:w-4/5 w-2/3">
                                     <SearchableDropdown
                                         :label="'Avatar'"
                                         :items="props.avatars"
@@ -65,7 +65,7 @@
                                     </SearchableDropdown>
                                 </div>
 
-                                <div class="w-2/3">
+                                <div class="md:w-4/5 w-2/3">
                                     <SearchableDropdown
                                         :label="'Default Assignee'"
                                         :items="props.users"
