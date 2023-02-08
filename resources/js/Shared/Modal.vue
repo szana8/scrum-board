@@ -33,10 +33,10 @@
                         leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95"
                     >
-                        <DialogPanel class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                        <DialogPanel class="w-1/3 transform overflow-hidden pb-6 rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
                             <DialogTitle
-                                as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900"
+                                as="h2"
+                                class="text-xl font-semibold antialased leading-6 text-gray-700 border-b border-gray-300 px-6 pt-6 bg-gray-50 pb-3"
                             >
                                 <slot name="title" />
                             </DialogTitle>
@@ -50,8 +50,8 @@
 </template>
 
 <script setup>
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { useModal } from 'momentum-modal'
+import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
+import {useModal} from 'momentum-modal'
 
 const { show, close, redirect } = useModal()
 </script>
