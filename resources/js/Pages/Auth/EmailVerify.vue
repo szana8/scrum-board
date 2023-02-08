@@ -5,10 +5,7 @@
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <div class="mb-4 text-sm text-gray-600">Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.</div>
 
-            <div
-                v-if="verificationLinkSent"
-                class="mb-4 font-medium text-sm text-green-600"
-            >
+            <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600">
                 A new verification link has been sent to the email address you provided in your profile settings.
             </div>
 

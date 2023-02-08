@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, ref} from 'vue'
 
 const open = ref(false)
 
@@ -51,7 +51,9 @@ defineProps({
 onMounted(() => {
     const onEscape = (e) => {
         if (e.key === 'Esc' || e.key === 'Escape') {
-            this.open = false
+            if (open) {
+                //toggleDropdown()
+            }
         }
     }
     document.addEventListener('keydown', onEscape)

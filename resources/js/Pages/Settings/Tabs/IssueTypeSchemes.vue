@@ -31,7 +31,7 @@
                                     :placeholder="'Description'"
                                 />
 
-                                <div class="w-2/3">
+                                <div class="md:w-4/5 w-2/3">
                                     <SearchableDropdown
                                         :label="'Issue Types'"
                                         :items="props.issueTypes"
@@ -104,9 +104,9 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import {reactive, ref} from 'vue'
 import Settings from '../Settings'
-import { useForm } from '@inertiajs/vue3'
+import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import SearchableDropdown from '../../../Components/SearchableDropdown'

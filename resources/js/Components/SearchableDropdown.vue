@@ -2,6 +2,14 @@
     <div class="flex flex-col items-center">
         <div class="w-full flex flex-col items-center">
             <div class="w-full">
+                <button
+                    class="fixed inset-0 h-full w-full cursor-default focus:outline-none"
+                    v-if="isOpen()"
+                    @click="closeDropdown()"
+                    tabindex="-1"
+                    type="button"
+                ></button>
+
                 <div class="flex flex-col items-center relative">
                     <div class="w-full">
                         <div
@@ -20,21 +28,14 @@
                                 <button
                                     class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none"
                                     type="button"
-                                    @click="state.openPopup = !state.openPopup"
+                                    @click="toggleDropdown()"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="100%"
-                                        height="100%"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-chevron-up w-4 h-4"
-                                    >
-                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" v-if="isOpen()">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                    </svg>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" v-else>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </button>
                             </div>
@@ -42,7 +43,7 @@
                     </div>
                     <div
                         class="absolute md:mt-20 mt-12 shadow bg-white top-100 z-40 w-full lef-0 rounded max-h-32 overflow-y-auto svelte-5uyqqj"
-                        v-show="state.openPopup"
+                        v-show="isOpen()"
                     >
                         <div class="flex flex-col w-full">
                             <div
@@ -62,7 +63,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import {onMounted, reactive} from 'vue'
 
 const props = defineProps({
     label: null,
@@ -99,7 +100,7 @@ function searchStringInArray() {
 function select(item) {
     emit('select', item)
     if (!props.multipleSelect) {
-        state.openPopup = false
+        closeDropdown()
     }
 }
 
@@ -111,8 +112,16 @@ function refreshSelectedItems(selectedItems) {
     state.selectedItems = selectedItems
 }
 
+function isOpen() {
+    return state.openPopup;
+}
+
 function closeDropdown() {
     state.openPopup = false
+}
+
+function toggleDropdown() {
+    state.openPopup = !state.openPopup;
 }
 
 function calculateActiveClass(item) {

@@ -21,16 +21,8 @@
     </Link>
 </template>
 
-<script>
-import { Link } from '@inertiajs/vue3'
+<script setup>
+import {Link} from '@inertiajs/vue3'
 
-export default {
-    name: 'FloatingButton',
-
-    components: {
-        Link,
-    },
-
-    emits: ['click'],
-}
+defineEmits(['click']);
 </script>

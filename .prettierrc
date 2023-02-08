@@ -1,6 +1,6 @@
 {
     "singleQuote": true,
-    "singleAttributePerLine": true,
+    "singleAttributePerLine": false,
     "printWidth": 400,
     "trailingCommaPHP": false,
     "semi": false
