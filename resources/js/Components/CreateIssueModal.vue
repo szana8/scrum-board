@@ -1,25 +1,16 @@
 <template>
-    <floating-button v-show="this.show" @click="showModal()"></floating-button>
+    <floating-button
+        v-show="show"
+        @click="showModal()"
+    ></floating-button>
 </template>
 
-<script>
-import FloatingButton from "./FloatingButton.vue";
+<script setup>
+import {computed} from "vue";
+import {usePage} from "@inertiajs/vue3";
+import FloatingButton from './FloatingButton.vue'
 
-export default {
-    name: "CreateIssueModal",
-
-    components: {
-        FloatingButton
-    },
-
-    computed: {
-        show() {
-            return !this.$page.component.startsWith('Settings');
-        }
-    },
-
-    methods: {
-
-    }
-}
+const show = computed(() => {
+    return !usePage().component.startsWith('Settings');
+})
 </script>

@@ -1,74 +1,74 @@
 version: '3.5'
 
 services:
-  #PHP Service
-  workspace:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    image: digitalocean.com/php
-    container_name: ${APP_NAME}-workspace
-    tty: true
-    working_dir: /var/www
-    volumes:
-      - ./:/var/www
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-      - ./docker/php/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-    networks:
-      - app-network
+    #PHP Service
+    workspace:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        image: digitalocean.com/php
+        container_name: ${APP_NAME}-workspace
+        tty: true
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./docker/php/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+        networks:
+            - app-network
 
-  #Nginx Service
-  nginx:
-    image: nginx:alpine
-    container_name: ${APP_NAME}-nginx
-    tty: true
-    ports:
-        - "8091:80"
-    volumes:
-      - ./:/var/www
-      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-    environment:
-        - APP_URL=${APP_NAME}.test
-        - APP_WORKSPACE=${APP_NAME}-workspace
-    networks:
-      - app-network
+    #Nginx Service
+    nginx:
+        image: nginx:alpine
+        container_name: ${APP_NAME}-nginx
+        tty: true
+        ports:
+            - '8091:80'
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+        environment:
+            - APP_URL=${APP_NAME}.test
+            - APP_WORKSPACE=${APP_NAME}-workspace
+        networks:
+            - app-network
 
-  #MySQL Service
-  mysql:
-    image: mysql:latest
-    container_name: ${APP_NAME}-db
-    tty: true
-    environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - '~/.${APP_NAME}/data/mysql:/var/lib/mysql'
-    ports:
-      - "3306:3306"
-    networks:
-      - app-network
+    #MySQL Service
+    mysql:
+        image: mysql:latest
+        container_name: ${APP_NAME}-db
+        tty: true
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=root
+        volumes:
+            - '~/.${APP_NAME}/data/mysql:/var/lib/mysql'
+        ports:
+            - '3306:3306'
+        networks:
+            - app-network
 
-  # Redis service
-  redis:
-    image: "redis:alpine"
-    container_name: ${APP_NAME}-redis
-    command: redis-server --requirepass ${REDIS_PASSWORD}
-    tty: true
-    ports:
-      - "6380:6380"
-    networks:
-      - app-network
+    # Redis service
+    redis:
+        image: 'redis:alpine'
+        container_name: ${APP_NAME}-redis
+        command: redis-server --requirepass ${REDIS_PASSWORD}
+        tty: true
+        ports:
+            - '6380:6380'
+        networks:
+            - app-network
 
 #Docker Networks
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge
 
 #Volumes
 volumes:
-  dbdata:
-    driver: local
+    dbdata:
+        driver: local

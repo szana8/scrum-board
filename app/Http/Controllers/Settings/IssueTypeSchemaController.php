@@ -12,8 +12,8 @@ use Inertia\Inertia;
 class IssueTypeSchemaController extends Controller
 {
     public function __construct(
-        readonly private IssueTypeService $issueTypeService,
-        readonly private IssueTypeSchemaService $issueTypeSchemaService,
+        private readonly IssueTypeService $issueTypeService,
+        private readonly IssueTypeSchemaService $issueTypeSchemaService
     ) {
     }
 
@@ -32,9 +32,14 @@ class IssueTypeSchemaController extends Controller
         return back(303);
     }
 
-    public function update(CreateIssueTypeSchema $request, IssueTypeSchema $issueTypeSchema)
-    {
-        $this->issueTypeSchemaService->update($request->validated(), $issueTypeSchema);
+    public function update(
+        CreateIssueTypeSchema $request,
+        IssueTypeSchema $issueTypeSchema
+    ) {
+        $this->issueTypeSchemaService->update(
+            $request->validated(),
+            $issueTypeSchema
+        );
 
         return back(303);
     }

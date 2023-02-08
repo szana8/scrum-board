@@ -8,13 +8,11 @@ use App\Http\Requests\Project\UpdateProject;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use App\Services\ProjectService;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Validation\ValidationException;
 
 class ProjectController extends Controller
 {
-    public function __construct(readonly private ProjectService $projectService)
+    public function __construct(private readonly ProjectService $projectService)
     {
     }
 
@@ -36,7 +34,9 @@ class ProjectController extends Controller
      */
     public function store(CreateProject $request)
     {
-        return new ProjectResource($this->projectService->create($request->validated()));
+        return new ProjectResource(
+            $this->projectService->create($request->validated())
+        );
     }
 
     /**
@@ -59,7 +59,9 @@ class ProjectController extends Controller
      */
     public function update(UpdateProject $request, Project $project)
     {
-        return new ProjectResource($this->projectService->update($project, $request->validated()));
+        return new ProjectResource(
+            $this->projectService->update($project, $request->validated())
+        );
     }
 
     /**

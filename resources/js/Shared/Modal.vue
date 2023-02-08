@@ -1,6 +1,14 @@
 <template>
-    <TransitionRoot appear as="template" :show="show">
-        <Dialog as="div" class="relative z-10" @close="close">
+    <TransitionRoot
+        appear
+        as="template"
+        :show="show"
+    >
+        <Dialog
+            as="div"
+            class="relative z-10"
+            @close="close"
+        >
             <TransitionChild
                 @after-leave="redirect"
                 as="template"
@@ -9,7 +17,8 @@
                 enter-to="opacity-100"
                 leave="duration-200 ease-in"
                 leave-from="opacity-100"
-                leave-to="opacity-0">
+                leave-to="opacity-0"
+            >
                 <div class="fixed inset-0 bg-black/75 transition-opacity" />
             </TransitionChild>
 
@@ -22,9 +31,13 @@
                         enter-to="opacity-100 scale-100"
                         leave="duration-200 ease-in"
                         leave-from="opacity-100 scale-100"
-                        leave-to="opacity-0 scale-95">
+                        leave-to="opacity-0 scale-95"
+                    >
                         <DialogPanel class="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                            <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
+                            <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900"
+                            >
                                 <slot name="title" />
                             </DialogTitle>
                             <slot />
@@ -37,8 +50,8 @@
 </template>
 
 <script setup>
-import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from "@headlessui/vue"
-import {useModal} from "momentum-modal"
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { useModal } from 'momentum-modal'
 
 const { show, close, redirect } = useModal()
 </script>

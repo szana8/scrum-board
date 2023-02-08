@@ -18,7 +18,9 @@ class ProjectFactory extends Factory
     public function definition()
     {
         $name = $this->faker->unique()->words(2, true);
-        $type = $this->faker->randomElement(array_map(fn ($type) => $type->name, \App\Enums\ProjectType::cases()));
+        $type = $this->faker->randomElement(
+            array_map(fn ($type) => $type->name, \App\Enums\ProjectType::cases())
+        );
 
         return [
             'name' => $name,
@@ -26,7 +28,9 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph,
             'type' => $type,
             'icon' => function () use ($type) {
-                return \Illuminate\Support\Facades\Storage::url('public/icons/project/'.$type.'.svg');
+                return \Illuminate\Support\Facades\Storage::url(
+                    'public/icons/project/'.$type.'.svg'
+                );
             },
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;

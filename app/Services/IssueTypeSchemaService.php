@@ -17,11 +17,15 @@ class IssueTypeSchemaService
         return IssueTypeSchema::create([
             'name' => $validatedRequest['name'],
             'description' => $validatedRequest['description'],
-        ])->types()->sync($validatedRequest['issueTypes']);
+        ])
+            ->types()
+            ->sync($validatedRequest['issueTypes']);
     }
 
-    public function update(array $validatedRequest, IssueTypeSchema $issueTypeSchema): IssueTypeSchema
-    {
+    public function update(
+        array $validatedRequest,
+        IssueTypeSchema $issueTypeSchema
+    ): IssueTypeSchema {
         $issueTypeSchema->update([
             'name' => $validatedRequest['name'],
             'description' => $validatedRequest['description'],

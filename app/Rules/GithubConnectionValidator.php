@@ -33,7 +33,9 @@ class GithubConnectionValidator implements Rule
 
         try {
             \Config::set('github.connections.main.token', $value);
-            GitHub::connection('main')->me()->show();
+            GitHub::connection('main')
+                ->me()
+                ->show();
 
             return true;
         } catch (\Exception $e) {

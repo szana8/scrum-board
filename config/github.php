@@ -12,7 +12,6 @@ declare(strict_types=1);
  */
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Connection Name
@@ -39,7 +38,6 @@ return [
     */
 
     'connections' => [
-
         'main' => [
             'method' => 'token',
             'token' => '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',
@@ -87,7 +85,6 @@ return [
             // 'version'    => 'v3',
             // 'enterprise' => false,
         ],
-
     ],
 
     /*
@@ -102,7 +99,6 @@ return [
     */
 
     'cache' => [
-
         'main' => [
             'driver' => 'illuminate',
             'connector' => null, // null means use default driver
@@ -116,7 +112,5 @@ return [
             // 'min'       => 43200,
             // 'max'       => 172800
         ],
-
     ],
-
 ];

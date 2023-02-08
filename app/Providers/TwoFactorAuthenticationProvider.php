@@ -10,12 +10,14 @@ class TwoFactorAuthenticationProvider
     /**
      * Create a new two-factor authentication provider instance.
      *
-     * @param Google2FA $engine
+     * @param  Google2FA  $engine
      * @param  Repository|null  $cache
      * @return void
      */
-    public function __construct(private Google2FA $engine, private ?Repository $cache = null)
-    {
+    public function __construct(
+        private Google2FA $engine,
+        private ?Repository $cache = null
+    ) {
         $this->engine = $engine;
         $this->cache = $cache;
     }
@@ -40,7 +42,11 @@ class TwoFactorAuthenticationProvider
      */
     public function qrCodeUrl($companyName, $companyEmail, $secret)
     {
-        return $this->engine->getQRCodeUrl($companyName, $companyEmail, $secret);
+        return $this->engine->getQRCodeUrl(
+            $companyName,
+            $companyEmail,
+            $secret
+        );
     }
 
     /**
@@ -52,12 +58,22 @@ class TwoFactorAuthenticationProvider
      */
     public function verify($secret, $code)
     {
-        if (is_int($customWindow = config('fortify-options.two-factor-authentication.window'))) {
+        if (
+            is_int(
+                $customWindow = config(
+                    'fortify-options.two-factor-authentication.window'
+                )
+            )
+        ) {
             $this->engine->setWindow($customWindow);
         }
 
         $timestamp = $this->engine->verifyKeyNewer(
-            $secret, $code, optional($this->cache)->get($key = 'fortify.2fa_codes.'.md5($code))
+            $secret,
+            $code,
+            optional($this->cache)->get(
+                $key = 'fortify.2fa_codes.'.md5($code)
+            )
         );
 
         if ($timestamp !== false) {
@@ -65,7 +81,11 @@ class TwoFactorAuthenticationProvider
                 $timestamp = $this->engine->getTimestamp();
             }
 
-            optional($this->cache)->put($key, $timestamp, ($this->engine->getWindow() ?: 1) * 60);
+            optional($this->cache)->put(
+                $key,
+                $timestamp,
+                ($this->engine->getWindow() ?: 1) * 60
+            );
 
             return true;
         }

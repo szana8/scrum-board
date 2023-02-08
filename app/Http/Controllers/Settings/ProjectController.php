@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\CreateProject;
-use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use App\Models\User;
 use App\Services\ProjectService;
@@ -12,11 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Momentum\Modal\Modal;
 
 class ProjectController extends Controller
 {
-    public function __construct(readonly private ProjectService $projectService)
+    public function __construct(private readonly ProjectService $projectService)
     {
     }
 
@@ -82,7 +80,6 @@ class ProjectController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      */
     public function destroy(Project $project)
     {

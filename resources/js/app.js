@@ -1,22 +1,22 @@
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import Layout from './Shared/Layout';
-import { modal } from 'momentum-modal';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/vue3'
+import Layout from './Shared/Layout'
+import { modal } from 'momentum-modal'
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 
 createInertiaApp({
     resolve: async (name) => {
-        let page = (await import(`./Pages/${name}`)).default;
+        let page = (await import(`./Pages/${name}`)).default
 
         if (page.layout === undefined) {
-            page.layout = Layout;
+            page.layout = Layout
         }
 
         if (page.floating === undefined) {
-            page.floating = false;
+            page.floating = false
         }
 
-        return page;
+        return page
     },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
@@ -25,7 +25,7 @@ createInertiaApp({
             })
             .use(plugin)
             .use(ZiggyVue)
-            .mount(el);
+            .mount(el)
     },
     progress: {
         // The delay after which the progress bar will appear
@@ -41,4 +41,4 @@ createInertiaApp({
         // Whether the NProgress spinner will be shown.
         showSpinner: false,
     },
-});
+})

@@ -1,29 +1,43 @@
 <template>
-    <li>
-        <slot />
-        <a href="#" v-if="editLink" class="href text-gray-400 font-semibold text-sm hover:text-gray-300" @click="edit(editProp)">Edit</a>
-        <Link v-if="deleteLink"
-              :href="deleteLink"
-              method="delete"
-              as="button"
-              preserve-scroll
-              class="href text-red-600 font-semibold text-sm"
-        >
-            Delete
-        </Link>
+    <li class="w-full flex justify-between space-y-2">
+        <slot class="lex items-center space-x-2" />
+        <div class="flex space-x-2">
+            <a
+                href="#"
+                v-if="allowEdit"
+                class="href text-gray-400 font-semibold text-sm hover:text-gray-300"
+                @click="edit(editKey)"
+                >Edit</a
+            >
+            <Link
+                v-if="deleteLink"
+                :href="deleteLink"
+                method="delete"
+                as="button"
+                preserve-scroll
+                class="href text-red-600 font-semibold text-sm"
+            >
+                Delete
+            </Link>
+        </div>
     </li>
 </template>
 
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 
 defineProps({
-    deleteLink: null,
-    editLink: null,
-    editProp: null,
-});
+    deleteLink: String,
+    allowEdit: {
+        type: Boolean,
+        default: false,
+    },
+    editKey: Object,
+})
+
+const emit = defineEmits(['edit'])
 
 function edit(props) {
-    this.$emit.edit(props);
+    emit('edit', props)
 }
 </script>

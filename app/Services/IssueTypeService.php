@@ -17,8 +17,10 @@ class IssueTypeService
         return IssueType::create($validatedRequest);
     }
 
-    public function update(IssueType $issueType, array $validatedRequest): IssueType
-    {
+    public function update(
+        IssueType $issueType,
+        array $validatedRequest
+    ): IssueType {
         $issueType->update($validatedRequest);
 
         return $issueType->refresh();
