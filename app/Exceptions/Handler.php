@@ -23,11 +23,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['current_password', 'password', 'password_confirmation'];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -43,5 +39,22 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        $response = parent::render($request, $e);
+
+        if ($response->status() === 403) {
+            return redirect()
+                ->back()
+                ->with('notification', [
+                    'color' => 'red',
+                    'title' => 'Error',
+                    'message' => $e->getMessage()
+                ]);
+        }
+
+        return $response;
     }
 }

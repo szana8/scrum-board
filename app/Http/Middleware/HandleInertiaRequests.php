@@ -49,19 +49,17 @@ class HandleInertiaRequests extends Middleware
                         'username' => Auth::user()->name,
                         'email' => Auth::user()->email,
                         'avatar' => Auth::user()->avatar,
-                        'two_factor_enabled' => ! is_null(
-                            Auth::user()->two_factor_secret
-                        ),
+                        'two_factor_enabled' => !is_null(Auth::user()->two_factor_secret)
                     ]
-                    : null,
+                    : null
             ],
             'csrf_token' => csrf_token(),
             'sidebar' => function () {
                 return [
-                    'projects' => Inertia::lazy(fn () => Project::all()),
+                    'projects' => Inertia::lazy(fn() => Project::all())
                 ];
             },
-            'flash' => $request->session()->get('flash', []),
+            'flash' => $request->session()->get('flash', [])
         ]);
     }
 }

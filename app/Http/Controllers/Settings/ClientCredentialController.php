@@ -17,25 +17,20 @@ class ClientCredentialController extends Controller
         $clients = $clientRepository->forUser(Auth::id());
 
         return Inertia::render('Settings/Tabs/ClientCredentials', [
-            'clientCredentials' => $clients,
+            'clientCredentials' => $clients
         ]);
     }
 
-    public function store(
-        CreateClientCredential $request,
-        ClientRepository $clientRepository
-    ) {
-        $client = $clientRepository->create(
-            Auth::id(),
-            $request->name,
-            $request->get('uri') ?? ''
-        );
+    public function store(CreateClientCredential $request, ClientRepository $clientRepository)
+    {
+        $client = $clientRepository->create(Auth::id(), $request->name, $request->get('uri') ?? '');
 
         return Redirect::route('web.client-credential.index')->with('flash', [
             'success' => [
                 'clientId' => $client->getAttribute('id'),
-                'clientSecret' => $client->getAttribute('secret'),
+                'clientSecret' => $client->getAttribute('secret')
             ],
+            'message' => 'Client Credential has been created.'
         ]);
     }
 
@@ -43,6 +38,8 @@ class ClientCredentialController extends Controller
     {
         $client->delete();
 
-        return back(303);
+        return back(303)->with('flash', [
+            'message' => 'Client Credential has been deleted.'
+        ]);
     }
 }
