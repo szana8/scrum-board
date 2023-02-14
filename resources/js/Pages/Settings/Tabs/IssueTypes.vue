@@ -44,14 +44,14 @@
                                                 <div class="flex relative w-5 h-5 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full">
                                                     <img
                                                         class="rounded-full"
-                                                        :alt="iconProps.item.match(/.*\/(.*)$/)[1]"
-                                                        :src="iconProps.item.replace('public', '../storage')"
+                                                        :alt="iconProps.item.name"
+                                                        :src="iconProps.item.icon.replace('public', '../storage')"
                                                     />
                                                 </div>
                                             </div>
                                             <div class="w-full items-center flex">
                                                 <div class="mx-2 -mt-1">
-                                                    {{ iconProps.item.match(/.*\/(.*)$/)[1] }}
+                                                    {{ iconProps.item.name }}
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button :text="state.buttonText" />
+                                <create-button :text="state.buttonText" />
                             </div>
                         </div>
                     </form>
@@ -113,10 +113,10 @@ import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
-import StandardButton from '../../../Components/StandardButton.vue'
 import StandardInputField from '../../../Components/StandardInputField.vue'
 import SearchableDropdown from "../../../Components/SearchableDropdown.vue";
 import StandardTextareaField from '../../../Components/StandardTextareaField.vue'
+import CreateButton from "../../../Components/CreateButton.vue";
 
 const searchComponent = ref()
 
@@ -138,8 +138,8 @@ const state = reactive({
 })
 
 function selectIcon(icon) {
-    state.issueTypeForm.icon = icon.replace('public', 'storage')
-    state.searchString = icon.match(/.*\/(.*)$/)[1]
+    state.issueTypeForm.icon = icon.icon.replace('public', 'storage')
+    state.searchString = icon.name
     searchComponent.value.refreshSearchItem(state.searchString)
 }
 

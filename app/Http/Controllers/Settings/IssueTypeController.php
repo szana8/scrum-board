@@ -8,20 +8,27 @@ use App\Http\Requests\IssueType\UpdateIssueType;
 use App\Models\IssueType;
 use App\Services\IssueTypeService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class IssueTypeController extends Controller
 {
-    public function __construct(
-        private readonly IssueTypeService $issueTypeService
-    ) {
+    public function __construct(private readonly IssueTypeService $issueTypeService)
+    {
     }
 
     public function index()
     {
+        $icons = collect(Storage::allFiles('public/icons/issue_types'))->map(function ($item) {
+            return [
+                'name' => Str::substr(basename($item), 0, -4),
+                'icon' => $item
+            ];
+        });
+
         return Inertia::render('Settings/Tabs/IssueTypes', [
-            'icons' => Storage::allFiles('public/icons/issue_types'),
-            'issueTypes' => $this->issueTypeService->issueTypes(),
+            'icons' => $icons,
+            'issueTypes' => $this->issueTypeService->issueTypes()
         ]);
     }
 

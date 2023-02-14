@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button :text="state.buttonText" />
+                                <create-button :text="state.buttonText" />
                             </div>
                         </div>
                     </form>
@@ -127,15 +127,15 @@
 
 <script setup>
 import Settings from '../Settings'
-import { useForm } from '@inertiajs/vue3'
-import { onMounted, reactive, ref } from 'vue'
+import {useForm} from '@inertiajs/vue3'
+import {onMounted, reactive, ref} from 'vue'
 import ListOfItems from '../../../Components/ListOfItems'
 import ListOfItem from '../../../Components/ListOfItem'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
-import StandardButton from '../../../Components/StandardButton.vue'
 import SearchableDropdown from '../../../Components/SearchableDropdown'
 import StandardInputField from '../../../Components/StandardInputField.vue'
 import StandardTextareaField from '../../../Components/StandardTextareaField.vue'
+import CreateButton from "../../../Components/CreateButton.vue";
 
 const searchAvatarComponent = ref()
 const searchUserComponent = ref()

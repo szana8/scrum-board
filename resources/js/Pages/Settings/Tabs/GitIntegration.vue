@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button :text="state.buttonText" />
+                                <create-button :text="state.buttonText" />
                             </div>
                         </div>
                     </form>
@@ -75,9 +75,9 @@ import Settings from '../Settings'
 import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
-import StandardButton from '../../../Components/StandardButton.vue'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
 import StandardInputField from '../../../Components/StandardInputField.vue'
+import CreateButton from "../../../Components/CreateButton.vue";
 
 const props = defineProps({
     tokens: Array,

@@ -1,18 +1,15 @@
 <template>
     <div>
-        <div class="p-0.5 text-gray-500 font-semibold">{{ props.label }}</div>
-        <div class="rounded-xl p-0.5 border-2 border-gray-300 flex md:w-4/5 w-2/3">
-            <textarea
-                name="description"
-                id="description"
-                rows="3"
-                placeholder="Short description of the issue type"
-                class="bg-white border-0 focus:border-transparent focus:ring-0 w-11/12 placeholder:text-gray-400"
-                :placeholder="placeholder"
-                :value="modelValue"
-                @input="updateValue"
-            />
-        </div>
+        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ props.label }}</div>
+        <textarea
+            name="description"
+            id="description"
+            rows="3"
+            class="rounded bg-white border-2 border-gray-200 flex w-full focus:border-purple-400 focus:ring-0 placeholder:text-gray-400 resize-none"
+            :placeholder="placeholder"
+            :value="modelValue"
+            @input="updateValue"
+        />
         <p
             class="mt-2 ml-2 text-red-400 text-xs font-semibold italic"
             v-if="props.error"

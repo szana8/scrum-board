@@ -7,7 +7,7 @@
         <Dialog
             as="div"
             class="relative z-10"
-            @close="close"
+            @close="closeModal"
         >
             <TransitionChild
                 @after-leave="redirect"
@@ -34,13 +34,21 @@
                         leave-to="opacity-0 scale-95"
                     >
                         <DialogPanel class="w-1/3 transform overflow-hidden pb-6 rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
-                            <DialogTitle
-                                as="h2"
-                                class="text-xl font-semibold antialased leading-6 text-gray-700 border-b border-gray-300 px-6 pt-6 bg-gray-50 pb-3"
-                            >
-                                <slot name="title" />
-                            </DialogTitle>
-                            <slot />
+                            <div>
+                                <div class="absolute -right-10 top-16 -z-50 rotate-12 opacity-5 space-y-1">
+                                    <div class="bg-purple-500 rounded w-72 h-6 ml-24"></div>
+                                    <div class="bg-purple-400 rounded w-96 h-6"></div>
+                                    <div class="bg-purple-300 rounded w-56 h-6 ml-44"></div>
+                                </div>
+                                <DialogTitle
+                                    as="h2"
+                                    class="px-6 pt-6 pb-3 z-10"
+                                >
+                                    <slot name="title" />
+                                </DialogTitle>
+                                <slot class="z-10 bg" />
+                            </div>
+
                         </DialogPanel>
                     </TransitionChild>
                 </div>
@@ -54,4 +62,17 @@ import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from 
 import {useModal} from 'momentum-modal'
 
 const { show, close, redirect } = useModal()
+
+const props = defineProps({
+    onlyWithButton: {
+        type: Boolean,
+        default: false,
+    },
+})
+
+function closeModal() {
+    if (!props.onlyWithButton) {
+        close()
+    }
+}
 </script>

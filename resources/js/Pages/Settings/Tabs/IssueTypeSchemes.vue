@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button :text="state.buttonText" />
+                                <create-button :text="state.buttonText" />
                             </div>
                         </div>
                     </form>
@@ -111,9 +111,9 @@ import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import SearchableDropdown from '../../../Components/SearchableDropdown'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
-import StandardButton from '../../../Components/StandardButton.vue'
 import StandardInputField from '../../../Components/StandardInputField.vue'
 import StandardTextareaField from '../../../Components/StandardTextareaField.vue'
+import CreateButton from "../../../Components/CreateButton.vue";
 
 const searchComponent = ref()
 

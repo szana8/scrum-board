@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="px-12 w-full bg-gray-50 py-6 justify-end flex">
-                                <standard-button :text="'Create'" />
+                                <create-button :text="'Create'" />
                             </div>
                         </div>
                     </form>
@@ -77,15 +77,15 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import {reactive} from 'vue'
 import Settings from '../Settings'
-import { useForm } from '@inertiajs/vue3'
+import {useForm} from '@inertiajs/vue3'
 import ListOfItem from '../../../Components/ListOfItem'
 import ListOfItems from '../../../Components/ListOfItems'
 import NewClientCredential from '../Shared/NewClientCredential'
-import StandardButton from '../../../Components/StandardButton.vue'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
 import StandardInputField from '../../../Components/StandardInputField.vue'
+import CreateButton from "../../../Components/CreateButton.vue";
 
 defineProps({
     clientCredentials: Array,
