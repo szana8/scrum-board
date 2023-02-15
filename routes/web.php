@@ -21,8 +21,9 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['auth:web', 'verified'])->group(function () {
-    Route::redirect('/', '/roadmap');
-    Route::get('/roadmap', [DashboardController::class, 'index'])->name('web.roadmap.index');
+    Route::redirect('/', '/dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('web.dashboard.index');
+    Route::get('/roadmap', [DashboardController::class, 'roadmap'])->name('web.roadmap.index');
     Route::get('/board', [DashboardController::class, 'boards'])->name('web.boards.index');
     Route::get('/backlog', [DashboardController::class, 'backlog'])->name('web.backlog.index');
     Route::get('/reports', [DashboardController::class, 'reports'])->name('web.reports.index');

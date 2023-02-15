@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-    defineProps({
-        icon: String,
-        text: String,
-    })
+defineProps({
+    icon: String,
+    text: String,
+})
 </script>

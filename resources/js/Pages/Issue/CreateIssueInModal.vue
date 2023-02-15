@@ -34,6 +34,7 @@
                     v-slot="projectProps"
                     ref="projectSearchComponent"
                     class="w-full"
+                    :required="true"
                 >
                     <searchable-dropdown-with-icon-body
                         :text="projectProps.item.name"
@@ -55,10 +56,11 @@
                 </SearchableDropdown>
 
                 <standard-input-field
-                    :label="'Summary *'"
+                    :label="'Summary'"
                     :placeholder="'Summary'"
                     class="text-sm"
                     v-model="state.issueForm.summary"
+                    :required="true"
                 />
 
                 <standard-textarea-field
@@ -106,7 +108,7 @@
 
                 <div class="w-full justify-between flex space-x-4 pt-8">
                     <standard-button :text="'Save as draft'" class="py-3 w-1/2 shadow hover:bg-gray-50" />
-                    <save-button :text="'Create Issue'" class="bg-purple-600 py-3 w-1/2 capitalize shadow hover:bg-purple-500" />
+                    <save-button :text="'Create Issue'" class="!bg-indigo-600 py-3 w-1/2 capitalize shadow hover:!bg-indigo-500" />
                 </div>
 
             </form>

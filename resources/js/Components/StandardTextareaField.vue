@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ props.label }}</div>
+        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ label }}<span v-if="required"> *</span></div>
         <textarea
             name="description"
             id="description"
@@ -12,18 +12,22 @@
         />
         <p
             class="mt-2 ml-2 text-red-400 text-xs font-semibold italic"
-            v-if="props.error"
-            v-text="props.error"
+            v-if="error"
+            v-text="error"
         ></p>
     </div>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
     label: String,
     placeholder: String,
     modelValue: String,
     error: String,
+    required: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])

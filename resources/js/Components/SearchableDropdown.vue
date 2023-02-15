@@ -12,10 +12,7 @@
 
                 <div class="flex flex-col items-center relative">
                     <div class="w-full">
-                        <div
-                            class="p-0.5 text-gray-500 font-semibold text-sm"
-                            v-html="props.label"
-                        />
+                        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{props.label}}<span v-if="required"> *</span></div>
                         <div class="p-1 bg-white flex border-2 border-gray-200 rounded">
                             <div class="flex flex-auto flex-wrap"></div>
                             <input
@@ -69,6 +66,10 @@ const props = defineProps({
     label: null,
     items: Array,
     multipleSelect: false,
+    required: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const emit = defineEmits(['select'])

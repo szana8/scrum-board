@@ -10,6 +10,19 @@
                     <ul class="space-y-4 list-inside text-sm">
                         <li>
                             <side-link
+                                :href="route('web.dashboard.index')"
+                                :active="$page.component === 'Dashboard'"
+                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                                </svg>
+
+                                <div>Dashboard</div>
+                            </side-link>
+                        </li>
+                        <li>
+                            <side-link
                                 :href="route('web.roadmap.index')"
                                 :active="$page.component === 'Roadmap'"
                                 class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
@@ -103,8 +116,24 @@
                     </ul>
                 </div>
 
-                <div class="flex justify-between mt-3">
+                <div class="justify-between mt-3">
                     <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
+                    {{ a.activeProject}}
+                    <div class="space-y-4 mt-8">
+                        <div v-for="project in projects" :key="project.id" @click="openProject(project.id)" class="w-full py-4 px-4 bg-white border border-gray-200 text-gray-600 rounded flex space-x-3 shadow text-sm font-semibold items-stretch grayscale hover:grayscale-0 hover:cursor-pointer hover:shadow-xl">
+                            <img :src="project.icon" alt="" class="w-6 h-6">
+                            <div class="self-center">{{ project.name }}</div>
+                            <ul v-if="Sidebar.activeProject === project.id">
+                                <li>Issues</li>
+                                <li>Issues</li>
+                                <li>Issues</li>
+                                <li>Issues</li>
+                                <li>Issues</li>
+                                <li>Issues</li>
+                            </ul>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,12 +195,27 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import {computed} from 'vue'
 import Logo from '../Components/Logo.vue'
 import SideLink from '../Components/SideLink.vue'
-import { usePage } from '@inertiajs/vue3'
+import {router, usePage, useRemember} from '@inertiajs/vue3'
+import Sidebar from "./Sidebar.vue";
 
 const username = computed(() => {
     return usePage().props.auth.user.username
 })
+
+const projects = computed(() => {
+    return usePage().props.sidebar.projects
+})
+
+const a = useRemember({
+    activeProject: 'sad',
+}, 'Sidebar');
+
+function openProject(project) {
+    a.activeProject = project;
+    router.remember(project, 'Sidebar.activeProject')
+}
+
 </script>

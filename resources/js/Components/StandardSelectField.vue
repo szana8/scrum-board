@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ label }}</div>
+        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ label }}<span v-if="required"> *</span></div>
         <select
             :value="modelValue"
             @input="updateValue"
@@ -24,6 +24,10 @@ defineProps({
     modelValue: String,
     error: String,
     values: Array,
+    required: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])

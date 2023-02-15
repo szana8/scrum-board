@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ label }}</div>
+        <div class="p-0.5 text-gray-500 font-semibold text-sm">{{ label }}<span v-if="required"> *</span></div>
         <input
             class="rounded bg-white px-3 py-2 border-2 border-gray-200 flex w-full focus:border-purple-400 focus:ring-0 placeholder:text-gray-400"
             :type="type"
@@ -30,6 +30,10 @@ defineProps({
     },
     min: null,
     max: null,
+    required: {
+        type: Boolean,
+        default: false
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])

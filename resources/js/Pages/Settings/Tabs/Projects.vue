@@ -102,8 +102,12 @@
 
             <div class="flex py-12">
                 <ListOfItems :items="props.projects">
-                    <template #header>Manage Projects</template>
-                    <template #description>You may delete any of your existing projects if they are no longer needed</template>
+                    <template #description>
+                        <settings-description
+                            :title="'Manage Projects'"
+                            :description="'You may delete any of your existing projects if they are no longer needed'"
+                        />
+                    </template>
                     <template #emptyListDescription>There is no Project(s) created yet for your user.</template>
 
                     <ListOfItem
@@ -169,7 +173,7 @@ onMounted(() => {
 })
 
 function selectAvatar(avatar) {
-    state.projectForm.icon = avatar
+    state.projectForm.icon = avatar.replace('public', '/storage')
     searchAvatarComponent.value.refreshSearchItem(avatar.match(/.*\/(.*)$/)[1])
 }
 
@@ -188,6 +192,8 @@ function submit() {
             state.formAction = route('web.project.store')
             state.buttonText = 'Create'
             state.formMethod = 'post'
+            searchAvatarComponent.value.refreshSearchItem('');
+            searchUserComponent.value.refreshSearchItem('')
         },
     })
 }

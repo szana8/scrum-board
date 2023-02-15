@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Project;
 use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -49,14 +48,14 @@ class HandleInertiaRequests extends Middleware
                         'username' => Auth::user()->name,
                         'email' => Auth::user()->email,
                         'avatar' => Auth::user()->avatar,
-                        'two_factor_enabled' => !is_null(Auth::user()->two_factor_secret)
+                        'two_factor_enabled' => !is_null(Auth::user()->two_factor_secret),
                     ]
                     : null
             ],
             'csrf_token' => csrf_token(),
             'sidebar' => function () {
                 return [
-                    'projects' => Inertia::lazy(fn() => Project::all())
+                    'projects' => Inertia::lazy(fn() => Auth::user()->projects)
                 ];
             },
             'flash' => $request->session()->get('flash', [])
