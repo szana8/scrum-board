@@ -15,7 +15,7 @@ const path = require('path'); mix.alias({ ziggy: path.resolve('vendor/tightenco/
 
 mix.js('resources/js/app.js', 'public/js')
     .extract()
-    .vue(3)
+    .vue({ version: 3 })
     .postCss('resources/css/app.css', 'public/css', [
         //
     ])
