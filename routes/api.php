@@ -21,10 +21,10 @@ Route::middleware(['client'])->prefix('v1')->group(function () {
     });
 
     Route::get('projects', [ProjectController::class, 'index'])->name('project.index');
-    Route::get('projects/{project:slug}', [ProjectController::class, 'show'])->name('project.show');
+    Route::get('projects/{project:key}', [ProjectController::class, 'show'])->name('project.show');
     Route::post('projects', [ProjectController::class, 'store'])->name('project.store');
-    Route::put('projects/{project:slug}', [ProjectController::class, 'update'])->name('project.update');
-    Route::delete('projects/{project:slug}', [ProjectController::class, 'destroy'])->name('project.destroy');
+    Route::put('projects/{project:key}', [ProjectController::class, 'update'])->name('project.update');
+    Route::delete('projects/{project:key}', [ProjectController::class, 'destroy'])->name('project.destroy');
 
     Route::get('issue-types', [IssueTypeController::class, 'index'])->name('issue-type.index');
     Route::get('issue-types/{issueType:slug}', [IssueTypeController::class, 'show'])->name('issue-type.show');

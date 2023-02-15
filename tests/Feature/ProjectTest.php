@@ -59,7 +59,7 @@ class ProjectTest extends TestCase
             ['check-status']
         );
 
-        $response = $this->getJson(route('project.show', $project->slug));
+        $response = $this->getJson(route('project.show', $project->key));
         $response->assertStatus(200);
     }
 
@@ -96,7 +96,7 @@ class ProjectTest extends TestCase
 
         $project->description = 'Modified description';
 
-        $response = $this->putJson(route('project.update', $project->slug), $project->getAttributes());
+        $response = $this->putJson(route('project.update', $project->key), $project->getAttributes());
         $response->assertStatus(200);
     }
 
@@ -112,7 +112,7 @@ class ProjectTest extends TestCase
             ['check-status']
         );
 
-        $response = $this->putJson(route('project.destroy', $project->slug));
+        $response = $this->putJson(route('project.destroy', $project->key));
         $response->assertStatus(200);
     }
 }
