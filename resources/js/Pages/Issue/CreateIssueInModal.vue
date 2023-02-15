@@ -100,7 +100,7 @@
                         :placeholder="'Due Date'"
                         :type="'date'"
                         class="text-sm"
-                        v-model="state.issueForm.duedate"
+                        v-model="state.issueForm.dueDate"
                     />
                 </div>
 
@@ -137,7 +137,7 @@ const state = reactive({
         description: null,
         priority: null,
         assignee: null,
-        duedate: null,
+        dueDate: null,
     })
 })
 

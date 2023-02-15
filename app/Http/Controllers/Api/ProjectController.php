@@ -12,8 +12,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProjectController extends Controller
 {
-    public function __construct(private readonly ProjectService $projectService)
-    {
+    public function __construct(
+        private readonly ProjectService $projectService
+    ) {
     }
 
     /**
@@ -21,7 +22,7 @@ class ProjectController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         return ProjectResource::collection($this->projectService->projects());
     }
@@ -32,7 +33,7 @@ class ProjectController extends Controller
      * @param  CreateProject  $request
      * @return ProjectResource
      */
-    public function store(CreateProject $request)
+    public function store(CreateProject $request): ProjectResource
     {
         return new ProjectResource(
             $this->projectService->create($request->validated())
@@ -45,7 +46,7 @@ class ProjectController extends Controller
      * @param  Project  $project
      * @return ProjectResource
      */
-    public function show(Project $project)
+    public function show(Project $project): ProjectResource
     {
         return new ProjectResource($project);
     }
@@ -57,7 +58,7 @@ class ProjectController extends Controller
      * @param  Project  $project
      * @return ProjectResource
      */
-    public function update(UpdateProject $request, Project $project)
+    public function update(UpdateProject $request, Project $project): ProjectResource
     {
         return new ProjectResource(
             $this->projectService->update($project, $request->validated())
@@ -70,7 +71,7 @@ class ProjectController extends Controller
      * @param  Project  $project
      * @return bool
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project): bool
     {
         return $this->projectService->delete($project);
     }

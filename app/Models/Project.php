@@ -10,8 +10,16 @@ class Project extends Model
 {
     use HasFactory;
 
+    /**
+     * Mass assignment protection.
+     */
     protected $guarded = [];
 
+    /**
+     * A project has to be an owner.
+     *
+     * @return HasOne
+     */
     public function owner(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'owner_id');

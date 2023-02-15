@@ -7,11 +7,17 @@ use Illuminate\Support\Collection;
 
 class ProjectService
 {
+    /**
+     * Get all the projects from the database.
+     */
     public function projects(): ?Collection
     {
         return Project::with('owner')->get();
     }
 
+    /**
+     * Create a new project instance in the database.
+     */
     public function create(array $validatedRequest): Project
     {
         return Project::create(
@@ -19,6 +25,9 @@ class ProjectService
         );
     }
 
+    /**
+     * Update an existing project instance in the database.
+     */
     public function update(Project $project, array $validatedRequest): Project
     {
         $project->update($validatedRequest);
@@ -26,6 +35,9 @@ class ProjectService
         return $project->refresh();
     }
 
+    /**
+     * Delete an existing project instance from the database.
+     */
     public function delete(Project $project): bool
     {
         return $project->delete();

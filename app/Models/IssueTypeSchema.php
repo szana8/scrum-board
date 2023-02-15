@@ -11,19 +11,18 @@ class IssueTypeSchema extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     */
     protected $fillable = ['name', 'description'];
 
     /**
      * The relationships to always eager-load.
-     *
-     * @var array
      */
     protected $with = ['types'];
 
     /**
      * Adding the appends value will call the accessor in the JSON response
-     *
-     * @var string[]
      */
     protected $appends = ['type_ids'];
 

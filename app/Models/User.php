@@ -15,22 +15,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
      */
     protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
      */
     protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast.
-     *
-     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -38,11 +32,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Adding the appends value will call the accessor in the JSON response
-     *
-     * @var string[]
      */
     protected $appends = ['avatar'];
 
+    /**
+     * Calculate the user avatar url based on the location.
+     *
+     * @return string
+     */
     public function getAvatarAttribute(): string
     {
         return asset("storage/avatars/$this->id/avatar.png");

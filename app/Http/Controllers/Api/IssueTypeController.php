@@ -22,7 +22,7 @@ class IssueTypeController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         return IssueTypeResource::collection(
             $this->issueTypeService->issueTypes()
@@ -60,7 +60,7 @@ class IssueTypeController extends Controller
      * @param  IssueType  $issueType
      * @return IssueTypeResource
      */
-    public function update(UpdateIssueType $request, IssueType $issueType)
+    public function update(UpdateIssueType $request, IssueType $issueType): IssueTypeResource
     {
         return new IssueTypeResource(
             $this->issueTypeService->update($issueType, $request->validated())
@@ -73,7 +73,7 @@ class IssueTypeController extends Controller
      * @param  IssueType  $issueType
      * @return bool
      */
-    public function destroy(IssueType $issueType)
+    public function destroy(IssueType $issueType): bool
     {
         return $this->issueTypeService->delete($issueType);
     }

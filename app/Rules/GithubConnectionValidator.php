@@ -48,7 +48,7 @@ class GithubConnectionValidator implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'Github connection failed with the given token.';
     }
