@@ -27,13 +27,7 @@ RUN apk add --no-cache \
   opcache \
   bcmath \
   gd \
-  sockets \
-  zip && \
-  pecl install amqp-1.11.0beta && docker-php-ext-enable amqp && \
-  pecl install ssh2-1.3.1 && docker-php-ext-enable ssh2 && \
-  apk del g++ \
-    $PHPIZE_DEPS && \
-  rm -rf /var/cache/apk/* /tmp/pear/* /usr/src/*
+  zip
 
 
 RUN apk add --no-cache \
