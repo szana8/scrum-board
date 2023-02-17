@@ -29,6 +29,7 @@
                                     :error="state.clientCredentialForm.errors.name"
                                     :label="'What should we name the client?'"
                                     :placeholder="'Client Name'"
+                                    class="w-2/3"
                                 />
 
                                 <standard-input-field
@@ -36,6 +37,7 @@
                                     :error="state.clientCredentialForm.errors.uri"
                                     :label="'Where should we redirect the request after authorization?'"
                                     :placeholder="'http://localhost/auth/callback'"
+                                    class="w-2/3"
                                 />
                             </div>
 

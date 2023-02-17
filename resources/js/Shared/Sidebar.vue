@@ -6,131 +6,16 @@
             </div>
 
             <div class="px-6">
-                <div class="py-6 border-b border-gray-100">
-                    <ul class="space-y-4 list-inside text-sm">
-                        <li>
-                            <side-link
-                                :href="route('web.dashboard.index')"
-                                :active="$page.component === 'Dashboard'"
-                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                                </svg>
-
-                                <div>Dashboard</div>
-                            </side-link>
-                        </li>
-                        <li>
-                            <side-link
-                                :href="route('web.roadmap.index')"
-                                :active="$page.component === 'Roadmap'"
-                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
-                                    />
-                                </svg>
-                                <div>Roadmap</div>
-                            </side-link>
-                        </li>
-                        <li>
-                            <side-link
-                                :href="route('web.backlog.index')"
-                                :active="$page.component === 'Backlog'"
-                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"
-                                    />
-                                </svg>
-                                <div>Backlog</div>
-                            </side-link>
-                        </li>
-                        <li>
-                            <side-link
-                                :href="route('web.boards.index')"
-                                :active="$page.component === 'Boards'"
-                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z"
-                                    />
-                                </svg>
-                                <div>Board</div>
-                            </side-link>
-                        </li>
-                        <li>
-                            <side-link
-                                :href="route('web.reports.index')"
-                                :active="$page.component === 'Reports'"
-                                class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    class="w-5 h-5"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                                    />
-                                </svg>
-                                <div>Reports</div>
-                            </side-link>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="justify-between mt-3">
-                    <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
-                    <div class="space-y-4 mt-8">
+                    <div class="space-y-3">
                         <div v-for="project in projects" :key="project.id" @click="openProject(project.id)" >
-                            <div class="w-full py-4 px-4 bg-white border border-gray-200 text-gray-600 rounded grayscale flex space-x-3 shadow text-sm font-semibold items-stretch hover:grayscale-0 hover:cursor-pointer hover:shadow-xl"
-                                 :class="[ state.openProjectId === project.id ? 'grayscale-0': 'grayscale']"
+                            <div class="w-full py-4 px-4 bg-white border border-gray-200 text-gray-600 rounded flex space-x-3 shadow text-sm font-semibold items-stretch hover:grayscale-0 hover:cursor-pointer hover:shadow-xl"
+                                 :class="[ state.openProjectId === project.id ? 'border-r-2 border-r-blue-400': '']"
                             >
                                 <img :src="project.icon" alt="" class="w-6 h-6">
                                 <div class="self-center">{{ project.name }}</div>
                             </div>
-                            <ul v-if="state.openProjectId === project.id" class="ml-8">
-                                <li>Issues</li>
-                                <li>Issues</li>
-                            </ul>
-
+                            <project-links v-if="state.openProjectId === project.id" />
                         </div>
                     </div>
                 </div>
@@ -146,20 +31,10 @@
                             :active="$page.component.startsWith('Settings')"
                             class="flex space-x-2 text-gray-400 font-semibold hover:text-gray-600"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-5 h-5"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
                             </svg>
+
                             <div>Settings</div>
                         </side-link>
                     </li>
@@ -194,11 +69,11 @@
 </template>
 
 <script setup>
-import {computed, onMounted, reactive} from 'vue'
+import {computed, reactive} from 'vue'
 import Logo from '../Components/Logo.vue'
 import SideLink from '../Components/SideLink.vue'
-import {router, usePage, useRemember} from '@inertiajs/vue3'
-import Sidebar from "./Sidebar.vue";
+import {usePage} from '@inertiajs/vue3'
+import ProjectLinks from "../Components/ProjectLinks.vue";
 
 const username = computed(() => {
     return usePage().props.auth.user.username
@@ -212,17 +87,9 @@ const state = reactive({
     openProjectId: null,
 });
 
-const a = useRemember({
-    activeProject: null,
-}, 'Sidebar');
-
-onMounted(() => {
-    state.openProjectId = a.activeProject;
-})
 
 function openProject(project) {
     state.openProjectId = project;
-    a.activeProject = project;
 }
 
 </script>

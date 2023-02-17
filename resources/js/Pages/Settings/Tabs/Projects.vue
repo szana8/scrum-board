@@ -22,6 +22,7 @@
                                     :error="state.projectForm.errors.name"
                                     :label="'Name'"
                                     :placeholder="'Name'"
+                                    class="w-2/3"
                                 />
 
                                 <standard-input-field
@@ -29,6 +30,7 @@
                                     :error="state.projectForm.errors.key"
                                     :label="'Key'"
                                     :placeholder="'SCRM'"
+                                    class="w-2/3"
                                 />
 
                                 <standard-textarea-field
@@ -36,9 +38,10 @@
                                     :error="state.projectForm.errors.description"
                                     :label="'Description'"
                                     :placeholder="'Description'"
+                                    class="w-2/3"
                                 />
 
-                                <div class="md:w-4/5 w-2/3">
+                                <div class="w-2/3">
                                     <SearchableDropdown
                                         :label="'Avatar'"
                                         :items="props.avatars"
@@ -65,7 +68,7 @@
                                     </SearchableDropdown>
                                 </div>
 
-                                <div class="md:w-4/5 w-2/3">
+                                <div class="w-2/3">
                                     <SearchableDropdown
                                         :label="'Default Assignee'"
                                         :items="props.users"
@@ -132,7 +135,7 @@
 <script setup>
 import Settings from '../Settings'
 import {useForm} from '@inertiajs/vue3'
-import {onMounted, reactive, ref} from 'vue'
+import {onMounted, reactive, ref, watch} from 'vue'
 import ListOfItems from '../../../Components/ListOfItems'
 import ListOfItem from '../../../Components/ListOfItem'
 import SettingsDescription from '../Shared/SettingsDescription.vue'
@@ -140,9 +143,12 @@ import SearchableDropdown from '../../../Components/SearchableDropdown'
 import StandardInputField from '../../../Components/StandardInputField.vue'
 import StandardTextareaField from '../../../Components/StandardTextareaField.vue'
 import CreateButton from "../../../Components/CreateButton.vue";
+import Slugify from "../../../helpers/Slugify";
 
 const searchAvatarComponent = ref()
 const searchUserComponent = ref()
+
+const slugify = new Slugify()
 
 const props = defineProps({
     users: Array,
@@ -156,7 +162,7 @@ const state = reactive({
     formAction: route('web.project.store'),
     formMethod: 'post',
     projectForm: useForm({
-        name: null,
+        name: '',
         key: null,
         description: null,
         type: 'SOFTWARE',
@@ -165,6 +171,11 @@ const state = reactive({
     }),
     buttonText: 'Create',
 })
+
+watch(() => state.projectForm.name, (name) => {
+    state.projectForm.key = slugify.generateKey(name)
+})
+
 
 onMounted(() => {
     state.filteredArray = props.users

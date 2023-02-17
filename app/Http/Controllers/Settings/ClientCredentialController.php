@@ -30,7 +30,8 @@ class ClientCredentialController extends Controller
                 'clientId' => $client->getAttribute('id'),
                 'clientSecret' => $client->getAttribute('secret')
             ],
-            'message' => 'Client Credential has been created.'
+            'message' => 'Client Credential has been created.',
+            'type' => 'success'
         ]);
     }
 
@@ -39,7 +40,8 @@ class ClientCredentialController extends Controller
         $client->delete();
 
         return back(303)->with('flash', [
-            'message' => 'Client Credential has been deleted.'
+            'message' => 'Client Credential has been deleted.',
+            'type' => 'removed'
         ]);
     }
 }

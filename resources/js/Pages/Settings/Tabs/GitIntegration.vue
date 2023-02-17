@@ -22,6 +22,7 @@
                                     :error="state.gitForm.errors.name"
                                     :label="'Name'"
                                     :placeholder="'Name'"
+                                    class="w-2/3"
                                 />
 
                                 <standard-input-field
@@ -29,6 +30,7 @@
                                     :error="state.gitForm.errors.token"
                                     :label="'Github token'"
                                     :placeholder="'Token'"
+                                    class="w-2/3"
                                 />
                             </div>
 

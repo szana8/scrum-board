@@ -2,14 +2,14 @@
     <div>
         <transition leave-active-class="transition ease-in duration-1000" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <div v-if="usePage().props.flash.message" class="fixed z-40 top-20 right-6">
-            <action-message :message="usePage().props.flash.message" />
+            <action-message :message="usePage().props.flash.message" :type="usePage().props.flash.type" />
         </div>
         </transition>
         <div class="bg-white from-custom-purple to-custom-blue min-h-screen flex">
             <Head>
                 <title>{{ $page.component }}</title>
             </Head>
-            <section class="w-1/6 bg-white border-r border-gray-100 h-screen sticky top-0">
+            <section class="w-1/6 bg-white h-screen sticky top-0">
                 <Sidebar />
             </section>
 

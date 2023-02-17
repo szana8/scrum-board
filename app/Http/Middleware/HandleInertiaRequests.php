@@ -55,7 +55,7 @@ class HandleInertiaRequests extends Middleware
             'csrf_token' => csrf_token(),
             'sidebar' => function () {
                 return [
-                    'projects' => Inertia::lazy(fn() => Auth::user()->projects)
+                    'projects' => Inertia::lazy(fn() => Auth::user()?->projects)
                 ];
             },
             'flash' => $request->session()->get('flash', [])

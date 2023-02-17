@@ -22,6 +22,7 @@
                                     :error="state.issueTypeSchemaForm.errors.name"
                                     :label="'Name'"
                                     :placeholder="'Name'"
+                                    class="w-2/3"
                                 />
 
                                 <standard-textarea-field
@@ -29,9 +30,10 @@
                                     :error="state.issueTypeSchemaForm.errors.description"
                                     :label="'Description'"
                                     :placeholder="'Description'"
+                                    class="w-2/3"
                                 />
 
-                                <div class="md:w-4/5 w-2/3">
+                                <div class="w-2/3">
                                     <SearchableDropdown
                                         :label="'Issue Types'"
                                         :items="props.issueTypes"
