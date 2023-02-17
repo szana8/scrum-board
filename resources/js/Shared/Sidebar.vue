@@ -118,16 +118,15 @@
 
                 <div class="justify-between mt-3">
                     <h4 class="uppercase text-gray-400 text-xs font-bold">Workspace</h4>
-                    {{ a.activeProject}}
                     <div class="space-y-4 mt-8">
-                        <div v-for="project in projects" :key="project.id" @click="openProject(project.id)" class="w-full py-4 px-4 bg-white border border-gray-200 text-gray-600 rounded flex space-x-3 shadow text-sm font-semibold items-stretch grayscale hover:grayscale-0 hover:cursor-pointer hover:shadow-xl">
-                            <img :src="project.icon" alt="" class="w-6 h-6">
-                            <div class="self-center">{{ project.name }}</div>
-                            <ul v-if="Sidebar.activeProject === project.id">
-                                <li>Issues</li>
-                                <li>Issues</li>
-                                <li>Issues</li>
-                                <li>Issues</li>
+                        <div v-for="project in projects" :key="project.id" @click="openProject(project.id)" >
+                            <div class="w-full py-4 px-4 bg-white border border-gray-200 text-gray-600 rounded grayscale flex space-x-3 shadow text-sm font-semibold items-stretch hover:grayscale-0 hover:cursor-pointer hover:shadow-xl"
+                                 :class="[ state.openProjectId === project.id ? 'grayscale-0': 'grayscale']"
+                            >
+                                <img :src="project.icon" alt="" class="w-6 h-6">
+                                <div class="self-center">{{ project.name }}</div>
+                            </div>
+                            <ul v-if="state.openProjectId === project.id" class="ml-8">
                                 <li>Issues</li>
                                 <li>Issues</li>
                             </ul>
@@ -195,7 +194,7 @@
 </template>
 
 <script setup>
-import {computed} from 'vue'
+import {computed, onMounted, reactive} from 'vue'
 import Logo from '../Components/Logo.vue'
 import SideLink from '../Components/SideLink.vue'
 import {router, usePage, useRemember} from '@inertiajs/vue3'
@@ -209,13 +208,21 @@ const projects = computed(() => {
     return usePage().props.sidebar.projects
 })
 
+const state = reactive({
+    openProjectId: null,
+});
+
 const a = useRemember({
-    activeProject: 'sad',
+    activeProject: null,
 }, 'Sidebar');
 
+onMounted(() => {
+    state.openProjectId = a.activeProject;
+})
+
 function openProject(project) {
+    state.openProjectId = project;
     a.activeProject = project;
-    router.remember(project, 'Sidebar.activeProject')
 }
 
 </script>

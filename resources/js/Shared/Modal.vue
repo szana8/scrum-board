@@ -33,7 +33,7 @@
                         leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95"
                     >
-                        <DialogPanel class="w-1/3 transform overflow-hidden pb-6 rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                        <DialogPanel class="w-3/6 transform overflow-hidden pb-6 rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
                             <div>
                                 <div class="absolute -right-10 top-16 -z-50 rotate-12 opacity-5 space-y-1">
                                     <div class="bg-purple-500 rounded w-72 h-6 ml-24"></div>
