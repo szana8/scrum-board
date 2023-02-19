@@ -65,6 +65,18 @@
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -95,7 +107,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Auth_EmailVerify_vue":1,"resources_js_Pages_Auth_ForgotPassword_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_ResetPassword_vue":1,"resources_js_Pages_Auth_TwoFactorChallengeView_vue":1,"resources_js_Pages_Backlog_vue":1,"resources_js_Pages_Boards_vue":1,"resources_js_Pages_Dashboard_vue":1,"resources_js_Pages_Issue_CreateIssueInModal_vue":1,"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue":1,"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue":1,"resources_js_Pages_Profile_Partials_UserPasswordForm_vue":1,"resources_js_Pages_Profile_Profile_vue":1,"resources_js_Pages_Reports_vue":1,"resources_js_Pages_Roadmap_vue":1,"resources_js_Pages_Settings_Settings_vue":1,"resources_js_Pages_Settings_Shared_NewClientCredential_vue":1,"resources_js_Pages_Settings_Shared_SettingsDescription_vue":1,"resources_js_Pages_Settings_Shared_SettingsLink_vue":1,"resources_js_Pages_Settings_Tabs_ClientCredentials_vue":1,"resources_js_Pages_Settings_Tabs_GitIntegration_vue":1,"resources_js_Pages_Settings_Tabs_IssueTypeSchemes_vue":1,"resources_js_Pages_Settings_Tabs_IssueTypes_vue":1,"resources_js_Pages_Settings_Tabs_Projects_vue":1,"resources_js_Pages_Workspace_Create_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Auth_EmailVerify_vue":1,"resources_js_Pages_Auth_ForgotPassword_vue":1,"resources_js_Pages_Auth_Login_vue":1,"resources_js_Pages_Auth_Register_vue":1,"resources_js_Pages_Auth_ResetPassword_vue":1,"resources_js_Pages_Auth_TwoFactorChallengeView_vue":1,"resources_js_Pages_Backlog_vue":1,"resources_js_Pages_Boards_vue":1,"resources_js_Pages_Dashboard_vue":1,"resources_js_Pages_Issue_Issue_vue":1,"resources_js_Pages_Issue_Modal_CreateIssueModal_vue":1,"resources_js_Pages_Issue_Shared_FilteredIssueCard_vue":1,"resources_js_Pages_Issue_Shared_FilteredIssues_vue":1,"resources_js_Pages_Profile_Partials_TwoFactorAuthenticationForm_vue":1,"resources_js_Pages_Profile_Partials_UpdateProfileInformationForm_vue":1,"resources_js_Pages_Profile_Partials_UserPasswordForm_vue":1,"resources_js_Pages_Profile_Profile_vue":1,"resources_js_Pages_Reports_vue":1,"resources_js_Pages_Roadmap_vue":1,"resources_js_Pages_Settings_Settings_vue":1,"resources_js_Pages_Settings_Shared_NewClientCredential_vue":1,"resources_js_Pages_Settings_Shared_SettingsDescription_vue":1,"resources_js_Pages_Settings_Shared_SettingsLink_vue":1,"resources_js_Pages_Settings_Tabs_ClientCredentials_vue":1,"resources_js_Pages_Settings_Tabs_GitIntegration_vue":1,"resources_js_Pages_Settings_Tabs_IssueTypeSchemes_vue":1,"resources_js_Pages_Settings_Tabs_IssueTypes_vue":1,"resources_js_Pages_Settings_Tabs_Projects_vue":1,"resources_js_Pages_Workspace_Create_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
@@ -286,6 +298,11 @@
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

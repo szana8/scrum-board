@@ -1,8 +1,10 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import {createApp, h} from 'vue'
+import {createInertiaApp} from '@inertiajs/vue3'
 import Layout from './Shared/Layout'
-import { modal } from 'momentum-modal'
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
+import {modal} from 'momentum-modal'
+import {ZiggyVue} from '../../vendor/tightenco/ziggy/dist/vue.m'
+import PerfectScrollbar from 'vue3-perfect-scrollbar'
+import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 
 createInertiaApp({
     resolve: async (name) => {
@@ -25,6 +27,7 @@ createInertiaApp({
             })
             .use(plugin)
             .use(ZiggyVue)
+            .use(PerfectScrollbar)
             .mount(el)
     },
     progress: {

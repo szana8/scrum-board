@@ -15,7 +15,7 @@
                                 <img :src="project.icon" alt="" class="w-6 h-6">
                                 <div class="self-center">{{ project.name }}</div>
                             </div>
-                            <project-links v-if="state.openProjectId === project.id" />
+                            <project-links v-if="state.openProjectId === project.id" :project="project" />
                         </div>
                     </div>
                 </div>

@@ -117,17 +117,17 @@
 </template>
 
 <script setup>
-import Modal from '../../Shared/Modal.vue'
-import StandardInputField from "../../Components/StandardInputField.vue";
-import StandardTextareaField from "../../Components/StandardTextareaField.vue";
-import SearchableDropdown from "../../Components/SearchableDropdown.vue";
-import StandardButton from "../../Components/StandardButton.vue";
-import StandardSelectField from "../../Components/StandardSelectField.vue";
+import Modal from '../../../Shared/Modal.vue'
+import StandardInputField from "../../../Components/StandardInputField.vue";
+import StandardTextareaField from "../../../Components/StandardTextareaField.vue";
+import SearchableDropdown from "../../../Components/SearchableDropdown.vue";
+import StandardButton from "../../../Components/StandardButton.vue";
+import StandardSelectField from "../../../Components/StandardSelectField.vue";
 import {reactive, ref} from "vue";
 import {useForm} from "@inertiajs/vue3";
 import {useModal} from 'momentum-modal'
-import SaveButton from "../../Components/SaveButton.vue";
-import SearchableDropdownWithIconBody from "../../Components/SearchableDropdownWithIconBody.vue";
+import SaveButton from "../../../Components/SaveButton.vue";
+import SearchableDropdownWithIconBody from "../../../Components/SearchableDropdownWithIconBody.vue";
 
 const { close } = useModal();
 

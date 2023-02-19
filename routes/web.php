@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Issue\IssueController;
+use App\Http\Controllers\Issue\IssueModalController;
 use App\Http\Controllers\Settings\ClientCredentialController;
 use App\Http\Controllers\Settings\GitTokenController;
 use App\Http\Controllers\Settings\IssueTypeController;
@@ -67,7 +69,8 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
         });
 
         Route::prefix('issue')->group(function () {
-            Route::get('issue-modal', [\App\Http\Controllers\Issue\IssueModalController::class, 'create'])->name('issue.create.modal');
+            Route::get('filter', [IssueController::class, 'index'])->name('issue.filter');
+            Route::get('issue-modal', [IssueModalController::class, 'create'])->name('issue.create.modal');
         });
     });
 

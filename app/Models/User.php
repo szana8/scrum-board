@@ -48,6 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function projects(): HasMany
     {
-        return $this->hasMany(Project::class, 'owner_id', 'id');
+        return $this->hasMany(Project::class, 'owner_id', 'id')->withCount(['issues']);
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <ul class="ml-8 mt-4 space-y-4">
             <li>
-                <a href="#" class="flex justify-between pr-6 text-sm font-semibold hover:text-blue-400">
+                <Link :href="route('issue.filter', {project: project.id})" class="flex justify-between pr-6 text-sm font-semibold hover:text-blue-400">
                     <div class="flex space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5" />
@@ -9,9 +9,9 @@
                         <div>Issues</div>
                     </div>
                     <div class="">
-                        <div class="text-xs bg-blue-600 leading-none transform text-white p-1.5 font-bold rounded-full">34</div>
+                        <div class="text-xs bg-blue-600 leading-none transform text-white p-1.5 font-bold rounded-full">{{ project.issues_count }}</div>
                     </div>
-                </a>
+                </Link>
             </li>
             <li>
                 <a href="#" class="flex text-sm space-x-2 font-semibold hover:text-blue-400">
@@ -80,12 +80,10 @@
         </ul>
 </template>
 
-<script>
-export default {
-    name: "ProjectLinks"
-}
+<script setup>
+import {Link} from "@inertiajs/vue3";
+
+defineProps({
+    project: null,
+})
 </script>
-
-<style scoped>
-
-</style>

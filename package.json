@@ -29,6 +29,7 @@
         "@inertiajs/vue3": "^1.0.0",
         "@prettier/plugin-php": "^0.19.3",
         "momentum-modal": "^0.2.0",
-        "vue": "^3.2.36"
+        "vue": "^3.2.36",
+        "vue3-perfect-scrollbar": "^1.6.1"
     }
 }

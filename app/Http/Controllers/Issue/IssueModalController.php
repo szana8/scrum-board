@@ -16,7 +16,7 @@ class IssueModalController extends Controller
 
     public function create()
     {
-        return Inertia::dialog('Issue/CreateIssueInModal')
+        return Inertia::dialog('Issue/Modal/CreateIssueModal')
             ->with([
                 'issueTypes' => $this->issueTypeService->issueTypes(),
                 'projects' => Project::all(),
